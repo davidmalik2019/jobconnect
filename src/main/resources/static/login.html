@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>JobConnect | Login</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+
+    <!-- NAVIGATION BAR -->
+
+    <header>
+
+        <nav class="navbar">
+
+            <div class="logo">
+                Job<span>Connect</span>
+            </div>
+
+
+            <ul class="nav-links">
+
+                <li>
+                    <a href="index.html">Home</a>
+                </li>
+
+                <li>
+                    <a href="#">Jobs</a>
+                </li>
+
+                <li>
+                    <a href="about.html">About</a>
+                </li>
+
+                <li>
+                    <a href="login.html">Login</a>
+                </li>
+
+                <li>
+                    <a href="register.html" class="register-btn">
+                        Register
+                    </a>
+                </li>
+
+            </ul>
+
+        </nav>
+
+    </header>
+
+
+
+    <!-- LOGIN SECTION -->
+
+    <section class="login-section">
+
+        <div class="login-container">
+
+
+			<div class="login-header">
+
+			    <h1 id="loginTitle">Welcome Back</h1>
+
+			    <p id="loginSubtitle">
+			        Login to your JobConnect account
+			    </p>
+
+			</div>
+
+
+            <!-- LOGIN FORM -->
+
+            <form id="loginForm">
+
+
+                <div class="form-group">
+
+                    <label for="username">
+                        Username
+                    </label>
+
+                    <input
+                        type="text"
+                        id="username"
+                        name="username"
+                        placeholder="Enter your username"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="password">
+                        Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="Enter your password"
+                        required
+                    >
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="login-btn">
+                    Login
+                </button>
+
+
+                <p id="loginMessage"></p>
+
+
+            </form>
+
+
+			<div class="login-footer">
+
+			    <p>
+			        Don't have an account?
+			        <a href="register.html" id="createAccountLink">
+			            Create Account
+			        </a>
+			    </p>
+
+			</div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <p>
+            © 2026 JobConnect. All Rights Reserved.
+        </p>
+
+    </footer>
+	<script>
+	    const urlParams =
+	        new URLSearchParams(window.location.search);
+
+	    const role =
+	        urlParams.get("role");
+
+	    const loginTitle =
+	        document.getElementById("loginTitle");
+
+	    const loginSubtitle =
+	        document.getElementById("loginSubtitle");
+
+	    const createAccountLink =
+	        document.getElementById("createAccountLink");
+
+
+	    if (role === "JOB_SEEKER") {
+
+	        loginTitle.textContent =
+	            "Job Seeker Login";
+
+	        loginSubtitle.textContent =
+	            "Login to your JobConnect job seeker account.";
+
+	        createAccountLink.href =
+	            "register.html";
+
+	    } else if (role === "EMPLOYER") {
+
+	        loginTitle.textContent =
+	            "Employer Login";
+
+	        loginSubtitle.textContent =
+	            "Login to your JobConnect employer account.";
+
+	        createAccountLink.href =
+	            "employer-register.html";
+	    }
+	</script>
+    <script src="js/app.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,159 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>JobConnect | Manage Jobs</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <!-- ==============================
+         HEADER
+    =============================== -->
+
+    <header>
+        <nav class="navbar">
+
+            <div class="logo">
+                Job<span>Connect</span>
+            </div>
+
+            <ul class="nav-links">
+
+                <li>
+                    <a href="employer-dashboard.html">
+                        Dashboard
+                    </a>
+                </li>
+
+                <li>
+                    <a href="jobs.html">
+                        Jobs
+                    </a>
+                </li>
+
+                <li>
+                    <a href="post-job.html">
+                        Post Job
+                    </a>
+                </li>
+
+                <li>
+                    <a href="applications-management.html">
+                        Applications
+                    </a>
+                </li>
+
+                <li>
+                    <a href="profile.html">
+                        Profile
+                    </a>
+                </li>
+
+                <li>
+                    <span id="welcomeUser"></span>
+                </li>
+
+                <li id="logoutLink" style="display: none;">
+                    <a href="#" id="logoutBtn">
+                        Logout
+                    </a>
+                </li>
+
+            </ul>
+
+        </nav>
+    </header>
+
+
+    <!-- ==============================
+         MANAGE JOBS SECTION
+    =============================== -->
+
+    <section class="manage-jobs-section">
+
+        <div class="manage-jobs-container">
+
+            <!-- Page Heading -->
+
+            <div class="manage-jobs-header">
+
+                <h1>
+                    Manage Your Jobs
+                </h1>
+
+                <p>
+                    View and manage the jobs you have posted on JobConnect.
+                </p>
+
+            </div>
+
+
+            <!-- Action Button -->
+
+            <div class="manage-jobs-actions">
+
+                <a href="post-job.html" class="post-job-btn">
+                    + Post New Job
+                </a>
+
+            </div>
+
+
+            <!-- Message -->
+
+            <div
+                id="jobsMessage"
+                class="job-message"
+                style="display: none;">
+            </div>
+
+
+            <!-- Jobs Container -->
+
+            <div
+                id="myJobsList"
+                class="my-jobs-list">
+
+                <!-- Jobs will be loaded here by JavaScript -->
+
+                <div class="loading-message">
+                    Loading your jobs...
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ==============================
+         FOOTER
+    =============================== -->
+
+    <footer>
+
+        <p>
+            © 2026 JobConnect. All Rights Reserved.
+        </p>
+
+    </footer>
+
+
+    <!-- ==============================
+         JAVASCRIPT
+    =============================== -->
+
+    <script src="js/app.js"></script>
+
+</body>
+
+</html>
+

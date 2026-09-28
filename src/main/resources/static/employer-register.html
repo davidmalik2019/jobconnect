@@ -1,0 +1,342 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>JobConnect | Employer Registration</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+    <!-- NAVIGATION BAR -->
+    <header>
+
+        <nav class="navbar">
+
+            <div class="logo">
+                Job<span>Connect</span>
+            </div>
+
+            <ul class="nav-links">
+
+                <li>
+                    <a href="index.html">Home</a>
+                </li>
+
+                <li>
+                    <a href="login.html">Login</a>
+                </li>
+
+            </ul>
+
+        </nav>
+
+    </header>
+
+
+    <!-- EMPLOYER REGISTRATION SECTION -->
+
+    <section class="login-section">
+
+        <div class="login-container">
+
+            <h1>Employer Registration</h1>
+
+            <p>Create an employer account to post jobs and manage applications.</p>
+
+
+            <form id="employerRegisterForm">
+
+                <!-- FULL NAME -->
+
+                <div class="form-group">
+
+                    <label for="fullName">
+                        Full Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="fullName"
+                        placeholder="Enter your full name"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- USERNAME -->
+
+                <div class="form-group">
+
+                    <label for="username">
+                        Username
+                    </label>
+
+                    <input
+                        type="text"
+                        id="username"
+                        placeholder="Choose a username"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- EMAIL -->
+
+                <div class="form-group">
+
+                    <label for="email">
+                        Email
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        placeholder="Enter your email"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- PHONE -->
+
+                <div class="form-group">
+
+                    <label for="phone">
+                        Phone
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="phone"
+                        placeholder="Enter your phone number"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- PASSWORD -->
+
+                <div class="form-group">
+
+                    <label for="password">
+                        Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="password"
+                        placeholder="Create a password"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- CONFIRM PASSWORD -->
+
+                <div class="form-group">
+
+                    <label for="confirmPassword">
+                        Confirm Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="confirmPassword"
+                        placeholder="Confirm your password"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- MESSAGE -->
+
+                <p id="registerMessage"></p>
+
+
+                <!-- REGISTER BUTTON -->
+
+				<button type="submit" class="employer-register-btn">
+				    Register as Employer
+				</button>
+            </form>
+
+
+            <p class="register-link">
+
+                Already have an employer account?
+
+                <a href="login.html">
+                    Login here
+                </a>
+
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <p>
+            &copy; 2026 JobConnect. All rights reserved.
+        </p>
+
+    </footer>
+
+
+    <!-- JAVASCRIPT -->
+
+    <script>
+
+        const employerRegisterForm =
+            document.getElementById("employerRegisterForm");
+
+        const registerMessage =
+            document.getElementById("registerMessage");
+
+
+        employerRegisterForm.addEventListener("submit", async function(event) {
+
+            event.preventDefault();
+
+
+            const fullName =
+                document.getElementById("fullName").value.trim();
+
+            const username =
+                document.getElementById("username").value.trim();
+
+            const email =
+                document.getElementById("email").value.trim();
+
+            const phone =
+                document.getElementById("phone").value.trim();
+
+            const password =
+                document.getElementById("password").value;
+
+            const confirmPassword =
+                document.getElementById("confirmPassword").value;
+
+
+            // Check passwords
+
+            if (password !== confirmPassword) {
+
+                registerMessage.textContent =
+                    "Passwords do not match.";
+
+                return;
+            }
+
+
+            // Prepare registration data
+
+            const employerData = {
+
+                fullName: fullName,
+
+                username: username,
+
+                email: email,
+
+                phone: phone,
+
+                password: password
+
+            };
+
+
+            try {
+
+                registerMessage.textContent =
+                    "Creating employer account...";
+
+
+                const response = await fetch(
+                    "http://localhost:8080/users/register-employer",
+                    {
+
+                        method: "POST",
+
+                        headers: {
+
+                            "Content-Type":
+                                "application/json"
+
+                        },
+
+                        body:
+                            JSON.stringify(employerData)
+
+                    }
+                );
+
+
+                const result =
+                    await response.json();
+
+
+                if (response.ok) {
+
+                    registerMessage.textContent =
+                        "Employer account created successfully! Redirecting to login...";
+
+
+                    employerRegisterForm.reset();
+
+
+                    setTimeout(function() {
+
+                        window.location.href =
+                            "login.html";
+
+                    }, 2000);
+
+                } else {
+
+                    registerMessage.textContent =
+                        result.message || result;
+
+                }
+
+
+            } catch (error) {
+
+                console.error(
+                    "Registration error:",
+                    error
+                );
+
+                registerMessage.textContent =
+                    "Unable to connect to the server.";
+
+            }
+
+        });
+
+    </script>
+
+</body>
+
+</html>
+

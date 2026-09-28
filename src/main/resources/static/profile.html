@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>JobConnect | My Profile</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+    <!-- NAVIGATION BAR -->
+
+    <header>
+
+        <nav class="navbar">
+
+            <div class="logo">
+
+                Job<span>Connect</span>
+
+            </div>
+
+            <ul class="nav-links">
+
+                <li>
+                    <a href="index.html">Home</a>
+                </li>
+
+                <li>
+                    <a href="jobs.html">Jobs</a>
+                </li>
+
+                <li>
+                    <a href="about.html">About</a>
+                </li>
+
+                <li>
+                    <span id="welcomeUser"></span>
+                </li>
+
+                <li>
+                    <a href="profile.html">Profile</a>
+                </li>
+				<li id="applicationsLink" style="display: none;">
+
+				    <a href="my-applications.html">My Applications</a>
+
+				</li>
+				
+                <li>
+                    <a href="#" id="logoutBtn">Logout</a>
+                </li>
+
+            </ul>
+
+        </nav>
+
+    </header>
+
+
+    <!-- PROFILE SECTION -->
+
+    <section class="profile-section">
+
+        <div class="profile-container">
+
+            <div class="profile-header">
+
+                <div class="profile-icon">
+                    👤
+                </div>
+
+                <h1>My Profile</h1>
+
+                <p>View your JobConnect account information</p>
+
+            </div>
+
+
+            <!-- USER INFORMATION -->
+
+            <div class="profile-info">
+				<!-- EDIT PROFILE BUTTON -->
+
+				<div class="profile-actions">
+
+				    <a href="edit-profile.html" class="edit-profile-btn">
+				        ✏️ Edit Profile
+				    </a>
+
+				    <a href="change-password.html" class="change-password-profile-btn">
+				        🔐 Change Password
+				    </a>
+
+				</div>
+                <div class="profile-item">
+
+                    <strong>Username</strong>
+
+                    <span id="profileUsername">
+                        Loading...
+                    </span>
+
+                </div>
+
+
+                <div class="profile-item">
+
+                    <strong>Email</strong>
+
+                    <span id="profileEmail">
+                        Coming soon...
+                    </span>
+
+                </div>
+
+
+                <div class="profile-item">
+
+                    <strong>Phone</strong>
+
+                    <span id="profilePhone">
+                        Coming soon...
+                    </span>
+
+                </div>
+
+
+                <div class="profile-item">
+
+                    <strong>Role</strong>
+
+                    <span id="profileRole">
+                        Job Seeker
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <p>
+            © 2026 JobConnect. All Rights Reserved.
+        </p>
+
+    </footer>
+
+
+    <script src="js/app.js"></script>
+
+</body>
+
+</html>

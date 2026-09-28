@@ -1,0 +1,706 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>JobConnect | Edit Job</title>
+
+  <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+
+<body>
+
+    <!-- =========================================
+         HEADER
+    ========================================== -->
+
+    <header>
+
+        <nav class="navbar">
+
+            <div class="logo">
+                Job<span>Connect</span>
+            </div>
+
+
+            <ul class="nav-links">
+
+                <li>
+                    <a href="employer-dashboard.html">
+                        Dashboard
+                    </a>
+                </li>
+
+                <li>
+                    <a href="jobs.html">
+                        Jobs
+                    </a>
+                </li>
+
+                <li>
+                    <a href="post-job.html">
+                        Post Job
+                    </a>
+                </li>
+
+                <li>
+                    <a href="manage-jobs.html">
+                        Manage Jobs
+                    </a>
+                </li>
+
+                <li>
+                    <a href="applications-management.html">
+                        Applications
+                    </a>
+                </li>
+
+                <li>
+                    <a href="profile.html">
+                        Profile
+                    </a>
+                </li>
+
+                <li>
+                    <span id="welcomeUser"></span>
+                </li>
+
+                <li id="logoutLink"
+                    style="display: none;">
+
+                    <a href="#"
+                       id="logoutBtn">
+
+                        Logout
+
+                    </a>
+
+                </li>
+
+            </ul>
+
+        </nav>
+
+    </header>
+
+
+    <!-- =========================================
+         EDIT JOB SECTION
+    ========================================== -->
+
+    <section class="edit-job-section">
+
+        <div class="edit-job-container">
+
+
+            <!-- PAGE HEADING -->
+
+            <div class="edit-job-header">
+
+                <h1>
+                    Edit Job
+                </h1>
+
+                <p>
+                    Update the information for your job posting.
+                </p>
+
+            </div>
+
+
+            <!-- EDIT FORM -->
+
+            <div class="edit-job-card">
+
+                <form id="editJobForm">
+
+
+                    <!-- JOB TITLE -->
+
+                    <div class="form-group">
+
+                        <label for="jobTitle">
+                            Job Title
+                        </label>
+
+                        <input
+                            type="text"
+                            id="jobTitle"
+                            name="jobTitle"
+                            placeholder="Enter job title"
+                            required>
+
+                    </div>
+
+
+                    <!-- COMPANY -->
+
+                    <div class="form-group">
+
+                        <label for="company">
+                            Company
+                        </label>
+
+                        <input
+                            type="text"
+                            id="company"
+                            name="company"
+                            placeholder="Enter company name"
+                            required>
+
+                    </div>
+
+
+                    <!-- LOCATION -->
+
+                    <div class="form-group">
+
+                        <label for="location">
+                            Location
+                        </label>
+
+                        <input
+                            type="text"
+                            id="location"
+                            name="location"
+                            placeholder="e.g. Abuja"
+                            required>
+
+                    </div>
+
+
+                    <!-- JOB TYPE -->
+
+                    <div class="form-group">
+
+                        <label for="jobType">
+                            Job Type
+                        </label>
+
+                        <select
+                            id="jobType"
+                            name="jobType"
+                            required>
+
+                            <option value="">
+                                Select job type
+                            </option>
+
+                            <option value="Full-time">
+                                Full-time
+                            </option>
+
+                            <option value="Part-time">
+                                Part-time
+                            </option>
+
+                            <option value="Contract">
+                                Contract
+                            </option>
+
+                            <option value="Internship">
+                                Internship
+                            </option>
+
+                            <option value="Remote">
+                                Remote
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- SALARY -->
+
+                    <div class="form-group">
+
+                        <label for="salary">
+                            Salary
+                        </label>
+
+                        <input
+                            type="text"
+                            id="salary"
+                            name="salary"
+                            placeholder="e.g. ₦150,000 - ₦250,000"
+                            required>
+
+                    </div>
+
+
+                    <!-- DESCRIPTION -->
+
+                    <div class="form-group">
+
+                        <label for="description">
+                            Job Description
+                        </label>
+
+                        <textarea
+                            id="description"
+                            name="description"
+                            rows="6"
+                            placeholder="Enter job description"
+                            required></textarea>
+
+                    </div>
+
+
+                    <!-- REQUIREMENTS -->
+
+                    <div class="form-group">
+
+                        <label for="requirements">
+                            Requirements
+                        </label>
+
+                        <textarea
+                            id="requirements"
+                            name="requirements"
+                            rows="6"
+                            placeholder="Enter job requirements"
+                            required></textarea>
+
+                    </div>
+
+
+                    <!-- MESSAGE -->
+
+                    <div
+                        id="editJobMessage"
+                        class="job-message"
+                        style="display: none;">
+                    </div>
+
+
+                    <!-- BUTTONS -->
+
+                    <div class="edit-job-buttons">
+
+                        <a
+                            href="manage-jobs.html"
+                            class="cancel-btn">
+
+                            Cancel
+
+                        </a>
+
+
+                        <button
+                            type="submit"
+                            class="post-job-btn">
+
+                            Save Changes
+
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================================
+         FOOTER
+    ========================================== -->
+
+    <footer>
+
+        <p>
+            © 2026 JobConnect. All Rights Reserved.
+        </p>
+
+    </footer>
+
+
+    <!-- =========================================
+         JAVASCRIPT
+    ========================================== -->
+
+    <script src="js/app.js"></script>
+
+
+    <!-- =========================================
+         EDIT JOB JAVASCRIPT
+    ========================================== -->
+
+    <script>
+
+        // =========================================
+        // GET JOB ID FROM URL
+        // =========================================
+
+        const urlParams =
+            new URLSearchParams(
+                window.location.search
+            );
+
+        const jobId =
+            urlParams.get("id");
+
+
+        // =========================================
+        // FORM ELEMENTS
+        // =========================================
+
+        const editJobForm =
+            document.getElementById(
+                "editJobForm"
+            );
+
+        const editJobMessage =
+            document.getElementById(
+                "editJobMessage"
+            );
+
+
+        // =========================================
+        // CHECK LOGIN
+        // =========================================
+
+        const token =
+            localStorage.getItem("token");
+
+        const role =
+            localStorage.getItem("role");
+
+
+        if (!token) {
+
+            window.location.href =
+                "login.html";
+
+        }
+
+
+        // =========================================
+        // CHECK EMPLOYER ROLE
+        // =========================================
+
+        if (role !== "EMPLOYER") {
+
+            if (editJobMessage) {
+
+                editJobMessage.style.display =
+                    "block";
+
+                editJobMessage.style.color =
+                    "red";
+
+                editJobMessage.textContent =
+                    "You are not authorized to edit jobs.";
+
+            }
+
+            if (editJobForm) {
+
+                editJobForm.style.display =
+                    "none";
+
+            }
+
+        }
+
+
+        // =========================================
+        // CHECK JOB ID
+        // =========================================
+
+        if (!jobId) {
+
+            if (editJobMessage) {
+
+                editJobMessage.style.display =
+                    "block";
+
+                editJobMessage.style.color =
+                    "red";
+
+                editJobMessage.textContent =
+                    "No job was selected.";
+
+            }
+
+            if (editJobForm) {
+
+                editJobForm.style.display =
+                    "none";
+
+            }
+
+        }
+
+
+        // =========================================
+        // LOAD JOB DETAILS
+        // =========================================
+
+        if (
+            token &&
+            role === "EMPLOYER" &&
+            jobId
+        ) {
+
+            fetch(`/jobs/${jobId}`, {
+
+                method: "GET"
+
+            })
+
+            .then(response => {
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        "Unable to load job."
+                    );
+
+                }
+
+                return response.json();
+
+            })
+
+            .then(job => {
+
+                // Fill form
+
+                document.getElementById(
+                    "jobTitle"
+                ).value =
+                    job.jobTitle || "";
+
+
+                document.getElementById(
+                    "company"
+                ).value =
+                    job.company || "";
+
+
+                document.getElementById(
+                    "location"
+                ).value =
+                    job.location || "";
+
+
+                document.getElementById(
+                    "jobType"
+                ).value =
+                    job.jobType || "";
+
+
+                document.getElementById(
+                    "salary"
+                ).value =
+                    job.salary || "";
+
+
+                document.getElementById(
+                    "description"
+                ).value =
+                    job.description || "";
+
+
+                document.getElementById(
+                    "requirements"
+                ).value =
+                    job.requirements || "";
+
+            })
+
+            .catch(error => {
+
+                console.error(
+                    "Load job error:",
+                    error
+                );
+
+                editJobMessage.style.display =
+                    "block";
+
+                editJobMessage.style.color =
+                    "red";
+
+                editJobMessage.textContent =
+                    "Unable to load job details.";
+
+            });
+
+        }
+
+
+        // =========================================
+        // SUBMIT EDIT FORM
+        // =========================================
+
+        if (
+            editJobForm &&
+            token &&
+            role === "EMPLOYER" &&
+            jobId
+        ) {
+
+            editJobForm.addEventListener(
+                "submit",
+                async function(event) {
+
+                    event.preventDefault();
+
+
+                    // Get updated values
+
+                    const updatedJob = {
+
+                        jobTitle:
+                            document.getElementById(
+                                "jobTitle"
+                            ).value.trim(),
+
+                        company:
+                            document.getElementById(
+                                "company"
+                            ).value.trim(),
+
+                        location:
+                            document.getElementById(
+                                "location"
+                            ).value.trim(),
+
+                        jobType:
+                            document.getElementById(
+                                "jobType"
+                            ).value,
+
+                        salary:
+                            document.getElementById(
+                                "salary"
+                            ).value.trim(),
+
+                        description:
+                            document.getElementById(
+                                "description"
+                            ).value.trim(),
+
+                        requirements:
+                            document.getElementById(
+                                "requirements"
+                            ).value.trim()
+
+                    };
+
+
+                    try {
+
+                        const response =
+                            await fetch(
+                                `/jobs/${jobId}`,
+                                {
+
+                                    method: "PUT",
+
+                                    headers: {
+
+                                        "Content-Type":
+                                            "application/json",
+
+                                        "Authorization":
+                                            "Bearer " +
+                                            token
+
+                                    },
+
+                                    body:
+                                        JSON.stringify(
+                                            updatedJob
+                                        )
+
+                                }
+                            );
+
+
+                        const responseText =
+                            await response.text();
+
+
+                        if (response.ok) {
+
+                            editJobMessage.style.display =
+                                "block";
+
+                            editJobMessage.style.color =
+                                "green";
+
+                            editJobMessage.textContent =
+                                "Job updated successfully!";
+
+
+                            // Return to Manage Jobs
+
+                            setTimeout(
+                                function() {
+
+                                    window.location.href =
+                                        "manage-jobs.html";
+
+                                },
+                                1200
+                            );
+
+                        } else {
+
+                            editJobMessage.style.display =
+                                "block";
+
+                            editJobMessage.style.color =
+                                "red";
+
+                            editJobMessage.textContent =
+                                responseText ||
+                                "Unable to update job.";
+
+                        }
+
+                    }
+
+                    catch (error) {
+
+                        console.error(
+                            "Edit job error:",
+                            error
+                        );
+
+                        editJobMessage.style.display =
+                            "block";
+
+                        editJobMessage.style.color =
+                            "red";
+
+                        editJobMessage.textContent =
+                            "Unable to connect to the server.";
+
+                    }
+
+                }
+            );
+
+        }
+
+    </script>
+
+</body>
+
+</html>

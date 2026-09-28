@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>JobConnect | Apply for Job</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+    <!-- NAVIGATION BAR -->
+
+    <header>
+
+        <nav class="navbar">
+
+            <div class="logo">
+
+                Job<span>Connect</span>
+
+            </div>
+
+            <ul class="nav-links">
+
+                <li>
+                    <a href="index.html">Home</a>
+                </li>
+
+                <li>
+                    <a href="jobs.html">Jobs</a>
+                </li>
+
+                <li>
+                    <a href="about.html">About</a>
+                </li>
+
+                <li>
+                    <span id="welcomeUser"></span>
+                </li>
+
+                <li id="profileLink" style="display: none;">
+                    <a href="profile.html">Profile</a>
+                </li>
+				<li id="applicationsLink" style="display: none;">
+
+				    <a href="my-applications.html">My Applications</a>
+
+				</li>
+
+                <li id="logoutLink" style="display: none;">
+                    <a href="#" id="logoutBtn">Logout</a>
+                </li>
+
+                <li id="loginLink">
+                    <a href="login.html">Login</a>
+                </li>
+
+                <li id="registerLink">
+                    <a href="register.html" class="register-btn">
+                        Register
+                    </a>
+                </li>
+
+            </ul>
+
+        </nav>
+
+    </header>
+
+
+    <!-- APPLICATION SECTION -->
+
+    <section class="application-section">
+
+        <div class="application-container">
+
+            <div class="application-header">
+
+                <h1>Job Application</h1>
+
+                <p>
+                    Complete the form below to apply for this position.
+                </p>
+
+            </div>
+
+
+            <!-- SELECTED JOB -->
+
+            <div class="selected-job">
+
+                <strong>Applying For:</strong>
+
+                <span id="selectedJob">
+                    Loading...
+                </span>
+
+            </div>
+
+
+            <!-- APPLICATION FORM -->
+
+            <form id="applicationForm">
+
+                <div class="form-group">
+
+                    <label for="fullName">
+                        Full Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="fullName"
+                        placeholder="Enter your full name"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="email">
+                        Email Address
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        placeholder="Enter your email address"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="phone">
+                        Phone Number
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="phone"
+                        placeholder="Enter your phone number"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="coverLetter">
+                        Cover Letter
+                    </label>
+
+                    <textarea
+                        id="coverLetter"
+                        rows="6"
+                        placeholder="Write a short cover letter..."
+                        required
+                    ></textarea>
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="login-btn"
+                >
+                    Submit Application
+                </button>
+
+            </form>
+
+
+            <p id="applicationMessage"></p>
+
+        </div>
+
+    </section>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <p>
+            © 2026 JobConnect. All Rights Reserved.
+        </p>
+
+    </footer>
+
+
+    <script src="js/app.js"></script>
+
+</body>
+
+</html>

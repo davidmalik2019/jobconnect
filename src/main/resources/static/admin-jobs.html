@@ -1,0 +1,1747 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>JobConnect | Job Management</title>
+
+    <style>
+
+        /* =========================================
+           RESET
+        ========================================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f4f7fb;
+            color: #1e293b;
+        }
+
+
+        /* =========================================
+           HEADER
+        ========================================= */
+
+        .admin-header {
+
+            background: #0b1f3a;
+
+            color: white;
+
+            padding: 18px 35px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.15);
+
+        }
+
+
+        .logo {
+
+            font-size: 24px;
+
+            font-weight: 700;
+
+            letter-spacing: 0.5px;
+
+        }
+
+
+        .logo span {
+
+            color: #60a5fa;
+
+        }
+
+
+        .back-btn {
+
+            background: #2563eb;
+
+            color: white;
+
+            text-decoration: none;
+
+            padding: 10px 18px;
+
+            border-radius: 7px;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+            transition: 0.2s;
+
+        }
+
+
+        .back-btn:hover {
+
+            background: #1d4ed8;
+
+        }
+
+
+        /* =========================================
+           MAIN CONTAINER
+        ========================================= */
+
+        .container {
+
+            max-width: 1400px;
+
+            margin: 35px auto;
+
+            padding: 0 25px;
+
+        }
+
+
+        /* =========================================
+           PAGE HEADER
+        ========================================= */
+
+        .page-header {
+
+            margin-bottom: 25px;
+
+        }
+
+
+        .page-header h1 {
+
+            color: #0b1f3a;
+
+            font-size: 30px;
+
+            margin-bottom: 8px;
+
+        }
+
+
+        .page-header p {
+
+            color: #64748b;
+
+            font-size: 15px;
+
+        }
+
+
+        /* =========================================
+           TOOLBAR
+        ========================================= */
+
+        .toolbar {
+
+            background: white;
+
+            padding: 18px;
+
+            border-radius: 12px;
+
+            margin-bottom: 20px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 15px;
+
+            box-shadow: 0 3px 12px rgba(15, 23, 42, 0.07);
+
+        }
+
+
+        .search-box {
+
+            flex: 1;
+
+            position: relative;
+
+        }
+
+
+        .search-box input {
+
+            width: 100%;
+
+            padding: 12px 15px;
+
+            border: 1px solid #cbd5e1;
+
+            border-radius: 8px;
+
+            outline: none;
+
+            font-size: 14px;
+
+        }
+
+
+        .search-box input:focus {
+
+            border-color: #2563eb;
+
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.10);
+
+        }
+
+
+        .job-count {
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+            color: #334155;
+
+            background: #f1f5f9;
+
+            padding: 8px 13px;
+
+            border-radius: 20px;
+
+            white-space: nowrap;
+
+        }
+
+
+        /* =========================================
+           TABLE CARD
+        ========================================= */
+
+        .table-card {
+
+            background: white;
+
+            border-radius: 12px;
+
+            overflow: hidden;
+
+            box-shadow: 0 3px 15px rgba(15, 23, 42, 0.08);
+
+        }
+
+
+        .table-header {
+
+            padding: 20px 22px;
+
+            border-bottom: 1px solid #e2e8f0;
+
+        }
+
+
+        .table-header h3 {
+
+            color: #0b1f3a;
+
+            font-size: 20px;
+
+            font-weight: 700;
+
+        }
+
+
+        .table-wrapper {
+
+            width: 100%;
+
+            overflow-x: auto;
+
+        }
+
+
+        table {
+
+            width: 100%;
+
+            border-collapse: collapse;
+
+            min-width: 950px;
+
+        }
+
+
+        th {
+
+            background: #f8fafc;
+
+            color: #475569;
+
+            font-size: 13px;
+
+            font-weight: 700;
+
+            text-align: left;
+
+            padding: 15px;
+
+            border-bottom: 1px solid #e2e8f0;
+
+            white-space: nowrap;
+
+        }
+
+
+        td {
+
+            padding: 15px;
+
+            border-bottom: 1px solid #edf2f7;
+
+            font-size: 14px;
+
+            color: #334155;
+
+            vertical-align: middle;
+
+        }
+
+
+        tbody tr:hover {
+
+            background: #f8fafc;
+
+        }
+
+
+        tbody tr:last-child td {
+
+            border-bottom: none;
+
+        }
+
+
+        .job-title {
+
+            font-weight: 700;
+
+            color: #0b1f3a;
+
+        }
+
+
+        .company {
+
+            font-weight: 600;
+
+            color: #334155;
+
+        }
+
+
+        .employer {
+
+            color: #64748b;
+
+            font-size: 13px;
+
+        }
+
+
+        /* =========================================
+           JOB TYPE BADGE
+        ========================================= */
+
+        .job-type {
+
+            display: inline-block;
+
+            padding: 6px 10px;
+
+            border-radius: 20px;
+
+            background: #eff6ff;
+
+            color: #2563eb;
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+        }
+
+
+        /* =========================================
+           ACTION BUTTONS
+        ========================================= */
+
+        .actions {
+
+            display: flex;
+
+            gap: 8px;
+
+        }
+
+
+        .view-btn,
+        .delete-btn {
+
+            border: none;
+
+            padding: 8px 12px;
+
+            border-radius: 6px;
+
+            cursor: pointer;
+
+            font-size: 12px;
+
+            font-weight: 600;
+
+            transition: 0.2s;
+
+        }
+
+
+        .view-btn {
+
+            background: #e0f2fe;
+
+            color: #0369a1;
+
+        }
+
+
+        .view-btn:hover {
+
+            background: #bae6fd;
+
+        }
+
+
+        .delete-btn {
+
+            background: #fee2e2;
+
+            color: #dc2626;
+
+        }
+
+
+        .delete-btn:hover {
+
+            background: #fecaca;
+
+        }
+
+
+        /* =========================================
+           MODAL
+        ========================================= */
+
+        .modal {
+
+            display: none;
+
+            position: fixed;
+
+            z-index: 1000;
+
+            inset: 0;
+
+            background: rgba(15, 23, 42, 0.55);
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 20px;
+
+        }
+
+
+        .modal-content {
+
+            background: white;
+
+            width: 100%;
+
+            max-width: 650px;
+
+            max-height: 90vh;
+
+            overflow-y: auto;
+
+            border-radius: 14px;
+
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.20);
+
+            animation: modalOpen 0.2s ease;
+
+        }
+
+
+        @keyframes modalOpen {
+
+            from {
+
+                opacity: 0;
+
+                transform: translateY(-10px);
+
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform: translateY(0);
+
+            }
+
+        }
+
+
+        .modal-header {
+
+            background: #0b1f3a;
+
+            color: white;
+
+            padding: 20px 22px;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+        }
+
+
+        .modal-header h2 {
+
+            font-size: 20px;
+
+        }
+
+
+        .close-btn {
+
+            background: transparent;
+
+            border: none;
+
+            color: white;
+
+            font-size: 25px;
+
+            cursor: pointer;
+
+            line-height: 1;
+
+        }
+
+
+        .modal-body {
+
+            padding: 25px;
+
+        }
+
+
+        .detail {
+
+            margin-bottom: 18px;
+
+        }
+
+
+        .detail label {
+
+            display: block;
+
+            color: #64748b;
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+            text-transform: uppercase;
+
+            margin-bottom: 5px;
+
+        }
+
+
+        .detail p {
+
+            color: #1e293b;
+
+            font-size: 15px;
+
+            line-height: 1.6;
+
+            white-space: pre-line;
+
+        }
+
+
+        .modal-actions {
+
+            padding: 18px 25px;
+
+            border-top: 1px solid #e2e8f0;
+
+            display: flex;
+
+            justify-content: flex-end;
+
+            gap: 10px;
+
+        }
+
+
+        .cancel-btn {
+
+            border: none;
+
+            background: #e2e8f0;
+
+            color: #334155;
+
+            padding: 10px 18px;
+
+            border-radius: 7px;
+
+            cursor: pointer;
+
+            font-weight: 600;
+
+        }
+
+
+        .confirm-delete {
+
+            border: none;
+
+            background: #dc2626;
+
+            color: white;
+
+            padding: 10px 18px;
+
+            border-radius: 7px;
+
+            cursor: pointer;
+
+            font-weight: 600;
+
+        }
+
+
+        .confirm-delete:hover {
+
+            background: #b91c1c;
+
+        }
+
+
+        /* =========================================
+           EMPTY STATE
+        ========================================= */
+
+        .empty-state {
+
+            text-align: center;
+
+            padding: 45px 20px;
+
+            color: #64748b;
+
+        }
+
+
+        .empty-state h3 {
+
+            color: #334155;
+
+            margin-bottom: 7px;
+
+        }
+
+
+        /* =========================================
+           MOBILE
+        ========================================= */
+
+        @media (max-width: 700px) {
+
+            .admin-header {
+
+                padding: 15px 18px;
+
+            }
+
+
+            .logo {
+
+                font-size: 20px;
+
+            }
+
+
+            .container {
+
+                margin: 25px auto;
+
+                padding: 0 15px;
+
+            }
+
+
+            .page-header h1 {
+
+                font-size: 25px;
+
+            }
+
+
+            .toolbar {
+
+                flex-direction: column;
+
+                align-items: stretch;
+
+            }
+
+
+            .job-count {
+
+                text-align: center;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================================
+         HEADER
+    ========================================== -->
+
+    <header class="admin-header">
+
+        <div class="logo">
+
+            Job<span>Connect</span>
+
+        </div>
+
+        <a href="admin-dashboard.html"
+           class="back-btn">
+
+            ← Admin Dashboard
+
+        </a>
+
+    </header>
+
+
+
+    <!-- =========================================
+         MAIN CONTENT
+    ========================================== -->
+
+    <main class="container">
+
+
+        <div class="page-header">
+
+            <h1>Job Management</h1>
+
+            <p>
+                Manage and monitor all jobs posted on JobConnect.
+            </p>
+
+        </div>
+
+
+
+        <!-- TOOLBAR -->
+
+        <div class="toolbar">
+
+            <div class="search-box">
+
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="Search by job title, company, location or employer..."
+                >
+
+            </div>
+
+
+            <div class="job-count"
+                 id="jobCount">
+
+                0 Jobs
+
+            </div>
+
+        </div>
+
+
+
+        <!-- TABLE -->
+
+        <div class="table-card">
+
+            <div class="table-header">
+
+                <h3>Registered Jobs</h3>
+
+            </div>
+
+
+            <div class="table-wrapper">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Job Title</th>
+
+                            <th>Company</th>
+
+                            <th>Location</th>
+
+                            <th>Job Type</th>
+
+                            <th>Employer</th>
+
+                            <th>Posted</th>
+
+                            <th>Actions</th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="jobsTableBody">
+
+                        <tr>
+
+                            <td colspan="7">
+
+                                <div class="empty-state">
+
+                                    <h3>Loading jobs...</h3>
+
+                                    <p>Please wait.</p>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+
+    <!-- =========================================
+         VIEW JOB MODAL
+    ========================================== -->
+
+    <div class="modal"
+         id="viewJobModal">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+
+                <h2>Job Details</h2>
+
+                <button class="close-btn"
+                        onclick="closeViewModal()">
+
+                    &times;
+
+                </button>
+
+            </div>
+
+
+            <div class="modal-body">
+
+                <div class="detail">
+
+                    <label>Job Title</label>
+
+                    <p id="viewJobTitle"></p>
+
+                </div>
+
+
+                <div class="detail">
+
+                    <label>Company</label>
+
+                    <p id="viewCompany"></p>
+
+                </div>
+
+
+                <div class="detail">
+
+                    <label>Location</label>
+
+                    <p id="viewLocation"></p>
+
+                </div>
+
+
+                <div class="detail">
+
+                    <label>Job Type</label>
+
+                    <p id="viewJobType"></p>
+
+                </div>
+
+
+                <div class="detail">
+
+                    <label>Salary</label>
+
+                    <p id="viewSalary"></p>
+
+                </div>
+
+
+                <div class="detail">
+
+                    <label>Employer</label>
+
+                    <p id="viewEmployer"></p>
+
+                </div>
+
+
+                <div class="detail">
+
+                    <label>Description</label>
+
+                    <p id="viewDescription"></p>
+
+                </div>
+
+
+                <div class="detail">
+
+                    <label>Requirements</label>
+
+                    <p id="viewRequirements"></p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =========================================
+         DELETE CONFIRMATION MODAL
+    ========================================== -->
+
+    <div class="modal"
+         id="deleteModal">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+
+                <h2>Delete Job</h2>
+
+                <button class="close-btn"
+                        onclick="closeDeleteModal()">
+
+                    &times;
+
+                </button>
+
+            </div>
+
+
+            <div class="modal-body">
+
+                <div class="detail">
+
+                    <label>Job</label>
+
+                    <p id="deleteJobTitle"></p>
+
+                </div>
+
+
+                <p style="color:#475569; line-height:1.6;">
+
+                    Are you sure you want to delete this job?
+                    This action cannot be undone.
+
+                </p>
+
+            </div>
+
+
+            <div class="modal-actions">
+
+                <button class="cancel-btn"
+                        onclick="closeDeleteModal()">
+
+                    Cancel
+
+                </button>
+
+
+                <button class="confirm-delete"
+                        onclick="confirmDeleteJob()">
+
+                    Delete Job
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =========================================
+         JAVASCRIPT
+    ========================================== -->
+
+    <script>
+
+        // =========================================
+        // AUTHENTICATION
+        // =========================================
+
+        const token =
+            localStorage.getItem("token");
+
+        const role =
+            localStorage.getItem("role");
+
+
+        if (!token || role !== "ADMIN") {
+
+            alert("Access denied. Admin only.");
+
+            window.location.href =
+                "login.html";
+
+        }
+
+
+
+        // =========================================
+        // VARIABLES
+        // =========================================
+
+        let allJobs = [];
+
+        let selectedJobId = null;
+
+
+
+        // =========================================
+        // LOAD JOBS
+        // =========================================
+
+        async function loadJobs() {
+
+            try {
+
+                const response =
+                    await fetch("/admin/jobs", {
+
+                        method: "GET",
+
+                        headers: {
+
+                            "Authorization":
+                                "Bearer " + token
+
+                        }
+
+                    });
+
+
+                if (!response.ok) {
+
+                    if (response.status === 403) {
+
+                        alert(
+                            "Access denied. Admin only."
+                        );
+
+                        return;
+
+                    }
+
+                    throw new Error(
+                        "Failed to load jobs."
+                    );
+
+                }
+
+
+                allJobs =
+                    await response.json();
+
+
+                displayJobs(allJobs);
+
+            }
+
+            catch (error) {
+
+                console.error(error);
+
+                document.getElementById(
+                    "jobsTableBody"
+                ).innerHTML = `
+
+                    <tr>
+
+                        <td colspan="7">
+
+                            <div class="empty-state">
+
+                                <h3>Unable to load jobs</h3>
+
+                                <p>
+                                    Please check the server
+                                    connection and try again.
+                                </p>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+                `;
+
+            }
+
+        }
+
+
+
+        // =========================================
+        // DISPLAY JOBS
+        // =========================================
+
+        function displayJobs(jobs) {
+
+            const tableBody =
+                document.getElementById(
+                    "jobsTableBody"
+                );
+
+            document.getElementById(
+                "jobCount"
+            ).textContent =
+                jobs.length +
+                (jobs.length === 1
+                    ? " Job"
+                    : " Jobs");
+
+
+            if (jobs.length === 0) {
+
+                tableBody.innerHTML = `
+
+                    <tr>
+
+                        <td colspan="7">
+
+                            <div class="empty-state">
+
+                                <h3>No jobs found</h3>
+
+                                <p>
+                                    There are no jobs matching
+                                    your search.
+                                </p>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+                `;
+
+                return;
+
+            }
+
+
+            tableBody.innerHTML =
+                jobs.map(job => `
+
+                    <tr>
+
+                        <td>
+
+                            <div class="job-title">
+
+                                ${escapeHtml(
+                                    job.jobTitle || "-"
+                                )}
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+
+                            <div class="company">
+
+                                ${escapeHtml(
+                                    job.company || "-"
+                                )}
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+
+                            ${escapeHtml(
+                                job.location || "-"
+                            )}
+
+                        </td>
+
+
+                        <td>
+
+                            <span class="job-type">
+
+                                ${escapeHtml(
+                                    job.jobType || "-"
+                                )}
+
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <div class="employer">
+
+                                ${escapeHtml(
+                                    job.employerUsername || "-"
+                                )}
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+
+                            ${formatDate(job.postedAt)}
+
+                        </td>
+
+
+                        <td>
+
+                            <div class="actions">
+
+                                <button
+                                    class="view-btn"
+                                    onclick="viewJob(${job.id})">
+
+                                    View
+
+                                </button>
+
+
+                                <button
+                                    class="delete-btn"
+                                    onclick="openDeleteModal(
+                                        ${job.id},
+                                        '${escapeJs(
+                                            job.jobTitle || "this job"
+                                        )}'
+                                    )">
+
+                                    Delete
+
+                                </button>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+                `).join("");
+
+        }
+
+
+
+        // =========================================
+        // VIEW JOB
+        // =========================================
+
+        function viewJob(id) {
+
+            const job =
+                allJobs.find(
+                    item => item.id === id
+                );
+
+
+            if (!job) {
+
+                return;
+
+            }
+
+
+            document.getElementById(
+                "viewJobTitle"
+            ).textContent =
+                job.jobTitle || "-";
+
+
+            document.getElementById(
+                "viewCompany"
+            ).textContent =
+                job.company || "-";
+
+
+            document.getElementById(
+                "viewLocation"
+            ).textContent =
+                job.location || "-";
+
+
+            document.getElementById(
+                "viewJobType"
+            ).textContent =
+                job.jobType || "-";
+
+
+            document.getElementById(
+                "viewSalary"
+            ).textContent =
+                job.salary || "-";
+
+
+            document.getElementById(
+                "viewEmployer"
+            ).textContent =
+                job.employerUsername || "-";
+
+
+            document.getElementById(
+                "viewDescription"
+            ).textContent =
+                job.description || "-";
+
+
+            document.getElementById(
+                "viewRequirements"
+            ).textContent =
+                job.requirements || "-";
+
+
+            document.getElementById(
+                "viewJobModal"
+            ).style.display =
+                "flex";
+
+        }
+
+
+
+        // =========================================
+        // CLOSE VIEW MODAL
+        // =========================================
+
+        function closeViewModal() {
+
+            document.getElementById(
+                "viewJobModal"
+            ).style.display =
+                "none";
+
+        }
+
+
+
+        // =========================================
+        // OPEN DELETE MODAL
+        // =========================================
+
+        function openDeleteModal(
+            id,
+            title
+        ) {
+
+            selectedJobId = id;
+
+
+            document.getElementById(
+                "deleteJobTitle"
+            ).textContent =
+                title;
+
+
+            document.getElementById(
+                "deleteModal"
+            ).style.display =
+                "flex";
+
+        }
+
+
+
+        // =========================================
+        // CLOSE DELETE MODAL
+        // =========================================
+
+        function closeDeleteModal() {
+
+            selectedJobId = null;
+
+
+            document.getElementById(
+                "deleteModal"
+            ).style.display =
+                "none";
+
+        }
+
+
+
+        // =========================================
+        // CONFIRM DELETE
+        // =========================================
+
+        async function confirmDeleteJob() {
+
+            if (!selectedJobId) {
+
+                return;
+
+            }
+
+
+            try {
+
+                const response =
+                    await fetch(
+                        "/admin/jobs/" +
+                        selectedJobId,
+                        {
+
+                            method: "DELETE",
+
+                            headers: {
+
+                                "Authorization":
+                                    "Bearer " + token
+
+                            }
+
+                        }
+                    );
+
+
+                if (!response.ok) {
+
+                    const message =
+                        await response.text();
+
+                    alert(
+                        message ||
+                        "Unable to delete job."
+                    );
+
+                    return;
+
+                }
+
+
+                alert(
+                    "Job deleted successfully."
+                );
+
+
+                closeDeleteModal();
+
+
+                await loadJobs();
+
+            }
+
+            catch (error) {
+
+                console.error(error);
+
+                alert(
+                    "An error occurred while deleting the job."
+                );
+
+            }
+
+        }
+
+
+
+        // =========================================
+        // SEARCH
+        // =========================================
+
+        document.getElementById(
+            "searchInput"
+        ).addEventListener(
+            "input",
+            function () {
+
+                const search =
+                    this.value
+                        .toLowerCase()
+                        .trim();
+
+
+                const filteredJobs =
+                    allJobs.filter(job =>
+
+                        (job.jobTitle || "")
+                            .toLowerCase()
+                            .includes(search)
+
+                        ||
+
+                        (job.company || "")
+                            .toLowerCase()
+                            .includes(search)
+
+                        ||
+
+                        (job.location || "")
+                            .toLowerCase()
+                            .includes(search)
+
+                        ||
+
+                        (job.employerUsername || "")
+                            .toLowerCase()
+                            .includes(search)
+
+                    );
+
+
+                displayJobs(filteredJobs);
+
+            }
+        );
+
+
+
+        // =========================================
+        // FORMAT DATE
+        // =========================================
+
+        function formatDate(dateValue) {
+
+            if (!dateValue) {
+
+                return "-";
+
+            }
+
+
+            const date =
+                new Date(dateValue);
+
+
+            if (isNaN(date.getTime())) {
+
+                return "-";
+
+            }
+
+
+            return date.toLocaleDateString(
+                "en-NG",
+                {
+                    day: "2-digit",
+                    month: "short",
+                    year: "numeric"
+                }
+            );
+
+        }
+
+
+
+        // =========================================
+        // HTML SECURITY
+        // =========================================
+
+        function escapeHtml(value) {
+
+            return String(value)
+
+                .replace(/&/g, "&amp;")
+
+                .replace(/</g, "&lt;")
+
+                .replace(/>/g, "&gt;")
+
+                .replace(/"/g, "&quot;")
+
+                .replace(/'/g, "&#039;");
+
+        }
+
+
+        function escapeJs(value) {
+
+            return String(value)
+
+                .replace(/\\/g, "\\\\")
+
+                .replace(/'/g, "\\'")
+
+                .replace(/"/g, '\\"')
+
+                .replace(/\n/g, "\\n")
+
+                .replace(/\r/g, "\\r");
+
+        }
+
+
+
+        // =========================================
+        // CLOSE MODALS WHEN CLICKING OUTSIDE
+        // =========================================
+
+        window.addEventListener(
+            "click",
+            function (event) {
+
+                const viewModal =
+                    document.getElementById(
+                        "viewJobModal"
+                    );
+
+                const deleteModal =
+                    document.getElementById(
+                        "deleteModal"
+                    );
+
+
+                if (event.target === viewModal) {
+
+                    closeViewModal();
+
+                }
+
+
+                if (event.target === deleteModal) {
+
+                    closeDeleteModal();
+
+                }
+
+            }
+        );
+
+
+
+        // =========================================
+        // ESC KEY
+        // =========================================
+
+        document.addEventListener(
+            "keydown",
+            function (event) {
+
+                if (event.key === "Escape") {
+
+                    closeViewModal();
+
+                    closeDeleteModal();
+
+                }
+
+            }
+        );
+
+
+
+        // =========================================
+        // START
+        // =========================================
+
+        loadJobs();
+
+    </script>
+
+</body>
+
+</html>

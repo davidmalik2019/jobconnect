@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Application Details - JobConnect</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <!-- =========================================
+         HEADER
+    ========================================== -->
+
+    <header>
+        <nav class="navbar">
+
+            <div class="logo">
+                JobConnect
+            </div>
+
+            <ul class="nav-links">
+
+                <li>
+                    <a href="job-seeker-dashboard.html">
+                        Dashboard
+                    </a>
+                </li>
+
+                <li>
+                    <a href="jobs.html">
+                        Jobs
+                    </a>
+                </li>
+
+                <li>
+                    <a href="my-applications.html">
+                        My Applications
+                    </a>
+                </li>
+
+                <li>
+                    <a href="profile.html">
+                        Profile
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" id="logoutBtn">
+                        Logout
+                    </a>
+                </li>
+
+            </ul>
+
+        </nav>
+    </header>
+
+
+    <!-- =========================================
+         MAIN CONTENT
+    ========================================== -->
+
+    <main class="application-details-page">
+
+        <section class="application-details-section">
+
+            <div class="application-details-header">
+
+                <div>
+
+                    <p class="section-small-title">
+                        MY APPLICATION
+                    </p>
+
+                    <h1>
+                        Application Details
+                    </h1>
+
+                    <p>
+                        View the details and current status
+                        of your job application.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- Loading -->
+
+            <div id="applicationLoading"
+                 class="application-loading">
+
+                Loading application details...
+
+            </div>
+
+
+            <!-- Error -->
+
+            <div id="applicationError"
+                 class="application-error"
+                 style="display: none;">
+
+                Unable to load application details.
+
+            </div>
+
+
+            <!-- Application Details -->
+
+            <div id="applicationDetails"
+                 class="application-details-card"
+                 style="display: none;">
+
+
+                <!-- Job Information -->
+
+                <div class="application-details-top">
+
+                    <div class="application-job-icon">
+
+                        <span id="jobInitial">
+                            J
+                        </span>
+
+                    </div>
+
+                    <div>
+
+                        <h2 id="jobTitle">
+                            Job Title
+                        </h2>
+
+                        <p>
+                            Application Status:
+                            <strong id="applicationStatus">
+                                Pending
+                            </strong>
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Details Grid -->
+
+                <div class="application-details-grid">
+
+
+                    <div class="detail-item">
+
+                        <span class="detail-label">
+                            Applicant Name
+                        </span>
+
+                        <strong id="fullName">
+                            -
+                        </strong>
+
+                    </div>
+
+
+                    <div class="detail-item">
+
+                        <span class="detail-label">
+                            Username
+                        </span>
+
+                        <strong id="username">
+                            -
+                        </strong>
+
+                    </div>
+
+
+                    <div class="detail-item">
+
+                        <span class="detail-label">
+                            Email
+                        </span>
+
+                        <strong id="email">
+                            -
+                        </strong>
+
+                    </div>
+
+
+                    <div class="detail-item">
+
+                        <span class="detail-label">
+                            Phone
+                        </span>
+
+                        <strong id="phone">
+                            -
+                        </strong>
+
+                    </div>
+
+
+                    <div class="detail-item">
+
+                        <span class="detail-label">
+                            Application Date
+                        </span>
+
+                        <strong id="appliedAt">
+                            -
+                        </strong>
+
+                    </div>
+
+
+                    <div class="detail-item">
+
+                        <span class="detail-label">
+                            Application ID
+                        </span>
+
+                        <strong id="applicationId">
+                            -
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Cover Letter -->
+
+                <div class="cover-letter-section">
+
+                    <h3>
+                        Cover Letter
+                    </h3>
+
+                    <div id="coverLetter"
+                         class="cover-letter-content">
+
+                        -
+
+                    </div>
+
+                </div>
+
+
+                <!-- Status Message -->
+
+                <div id="statusMessage"
+                     class="application-status-message">
+
+                </div>
+				<!-- =========================================
+				     APPLICATION STATUS TIMELINE
+				========================================== -->
+
+				<div class="application-timeline-section">
+
+				    <h3>
+				        Application Progress
+				    </h3>
+
+				    <div class="application-timeline">
+
+				        <!-- SUBMITTED -->
+
+				        <div class="timeline-item completed">
+
+				            <div class="timeline-icon">
+				                ✓
+				            </div>
+
+				            <div class="timeline-content">
+
+				                <h4>
+				                    Application Submitted
+				                </h4>
+
+				                <p>
+				                    Your application has been successfully submitted.
+				                </p>
+
+				            </div>
+
+				        </div>
+
+
+				        <!-- UNDER REVIEW -->
+
+				        <div id="reviewTimelineItem"
+				             class="timeline-item">
+
+				            <div class="timeline-icon">
+				                2
+				            </div>
+
+				            <div class="timeline-content">
+
+				                <h4>
+				                    Under Review
+				                </h4>
+
+				                <p>
+				                    Your application is being reviewed by the employer.
+				                </p>
+
+				            </div>
+
+				        </div>
+
+
+				        <!-- FINAL DECISION -->
+
+				        <div id="decisionTimelineItem"
+				             class="timeline-item">
+
+				            <div id="decisionTimelineIcon"
+				                 class="timeline-icon">
+				                3
+				            </div>
+
+				            <div class="timeline-content">
+
+				                <h4 id="decisionTimelineTitle">
+				                    Decision Pending
+				                </h4>
+
+				                <p id="decisionTimelineText">
+				                    The employer has not made a final decision yet.
+				                </p>
+
+				            </div>
+
+				        </div>
+
+				    </div>
+
+				</div>
+
+                <!-- Buttons -->
+
+                <div class="application-details-actions">
+
+                    <a href="my-applications.html"
+                       class="back-applications-btn">
+
+                        ← Back to My Applications
+
+                    </a>
+
+                    <a href="jobs.html"
+                       class="find-jobs-btn">
+
+                        Find More Jobs
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =========================================
+         FOOTER
+    ========================================== -->
+
+    <footer>
+
+        <p>
+            &copy; 2026 JobConnect.
+            All Rights Reserved.
+        </p>
+
+    </footer>
+
+
+    <!-- =========================================
+         JAVASCRIPT
+    ========================================== -->
+
+    <script>
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            function () {
+
+                const token =
+                    localStorage.getItem("token");
+
+                const username =
+                    localStorage.getItem("username");
+
+
+                // =========================================
+                // CHECK LOGIN
+                // =========================================
+
+                if (!token) {
+
+                    window.location.href =
+                        "login.html";
+
+                    return;
+
+                }
+
+
+                // =========================================
+                // LOGOUT
+                // =========================================
+
+                const logoutBtn =
+                    document.getElementById(
+                        "logoutBtn"
+                    );
+
+                if (logoutBtn) {
+
+                    logoutBtn.addEventListener(
+                        "click",
+                        function (event) {
+
+                            event.preventDefault();
+
+                            localStorage.removeItem(
+                                "token"
+                            );
+
+                            localStorage.removeItem(
+                                "username"
+                            );
+
+                            localStorage.removeItem(
+                                "role"
+                            );
+
+                            window.location.href =
+                                "login.html";
+
+                        }
+                    );
+
+                }
+
+
+                // =========================================
+                // GET APPLICATION ID FROM URL
+                // =========================================
+
+                const urlParams =
+                    new URLSearchParams(
+                        window.location.search
+                    );
+
+                const applicationId =
+                    urlParams.get("id");
+
+
+                if (!applicationId) {
+
+                    showError(
+                        "No application ID was provided."
+                    );
+
+                    return;
+
+                }
+
+
+                // =========================================
+                // LOAD APPLICATION
+                // =========================================
+
+                loadApplication(
+                    applicationId,
+                    token,
+                    username
+                );
+
+            }
+        );
+
+
+        // =========================================
+        // LOAD APPLICATION DETAILS
+        // =========================================
+
+        async function loadApplication(
+            applicationId,
+            token,
+            username
+        ) {
+
+            try {
+
+                const response =
+                    await fetch(
+                        "/applications/" +
+                        applicationId,
+                        {
+                            method: "GET",
+
+                            headers: {
+                                "Authorization":
+                                    "Bearer " + token
+                            }
+                        }
+                    );
+
+
+                if (!response.ok) {
+
+                    if (
+                        response.status === 403 ||
+                        response.status === 401
+                    ) {
+
+                        showError(
+                            "You are not authorized to view this application."
+                        );
+
+                    }
+                    else if (
+                        response.status === 404
+                    ) {
+
+                        showError(
+                            "Application not found."
+                        );
+
+                    }
+                    else {
+
+                        showError(
+                            "Unable to load application details."
+                        );
+
+                    }
+
+                    return;
+
+                }
+
+
+                const application =
+                    await response.json();
+
+
+                // =========================================
+                // DISPLAY APPLICATION
+                // =========================================
+
+                document.getElementById(
+                    "jobTitle"
+                ).textContent =
+                    application.jobTitle ||
+                    "Job Application";
+
+
+                document.getElementById(
+                    "fullName"
+                ).textContent =
+                    application.fullName ||
+                    "-";
+
+
+                document.getElementById(
+                    "username"
+                ).textContent =
+                    application.username ||
+                    "-";
+
+
+                document.getElementById(
+                    "email"
+                ).textContent =
+                    application.email ||
+                    "-";
+
+
+                document.getElementById(
+                    "phone"
+                ).textContent =
+                    application.phone ||
+                    "-";
+
+
+                document.getElementById(
+                    "applicationId"
+                ).textContent =
+                    application.id ||
+                    "-";
+
+
+                document.getElementById(
+                    "appliedAt"
+                ).textContent =
+                    formatApplicationDate(
+                        application.appliedAt
+                    );
+
+
+                document.getElementById(
+                    "coverLetter"
+                ).textContent =
+                    application.coverLetter ||
+                    "No cover letter provided.";
+
+
+                // =========================================
+                // JOB INITIAL
+                // =========================================
+
+                const jobTitle =
+                    application.jobTitle ||
+                    "Job";
+
+
+                document.getElementById(
+                    "jobInitial"
+                ).textContent =
+                    jobTitle
+                        .charAt(0)
+                        .toUpperCase();
+
+
+                // =========================================
+                // STATUS
+                // =========================================
+
+                const status =
+                    (
+                        application.status ||
+                        "Pending"
+                    ).toUpperCase();
+
+
+                const statusElement =
+                    document.getElementById(
+                        "applicationStatus"
+                    );
+
+
+                statusElement.textContent =
+                    status;
+
+
+                statusElement.className = "";
+
+
+                if (status === "ACCEPTED") {
+
+                    statusElement.classList.add(
+                        "status-accepted"
+                    );
+
+                }
+                else if (
+                    status === "REJECTED"
+                ) {
+
+                    statusElement.classList.add(
+                        "status-rejected"
+                    );
+
+                }
+                else {
+
+                    statusElement.classList.add(
+                        "status-pending"
+                    );
+
+                }
+
+
+                // =========================================
+                // STATUS MESSAGE
+                // =========================================
+
+                const statusMessage =
+                    document.getElementById(
+                        "statusMessage"
+                    );
+
+
+					if (status === "ACCEPTED") {
+
+					    statusMessage.textContent =
+					        "Congratulations! Your application has been accepted.";
+
+					    statusMessage.className =
+					        "application-status-message status-message-accepted";
+
+
+					    // =========================================
+					    // ACCEPTED TIMELINE
+					    // =========================================
+
+					    document.getElementById(
+					        "reviewTimelineItem"
+					    ).classList.add("completed");
+
+					    document.getElementById(
+					        "reviewTimelineItem"
+					    ).querySelector(".timeline-icon")
+					        .textContent = "✓";
+
+
+					    const decisionItem =
+					        document.getElementById(
+					            "decisionTimelineItem"
+					        );
+
+					    decisionItem.classList.add(
+					        "accepted"
+					    );
+
+
+					    document.getElementById(
+					        "decisionTimelineIcon"
+					    ).textContent = "✓";
+
+
+					    document.getElementById(
+					        "decisionTimelineTitle"
+					    ).textContent =
+					        "Application Accepted";
+
+
+					    document.getElementById(
+					        "decisionTimelineText"
+					    ).textContent =
+					        "Congratulations! The employer has accepted your application.";
+
+					}
+					else if (status === "REJECTED") {
+
+					    statusMessage.textContent =
+					        "Unfortunately, your application was not successful this time.";
+
+					    statusMessage.className =
+					        "application-status-message status-message-rejected";
+
+
+					    // =========================================
+					    // REJECTED TIMELINE
+					    // =========================================
+
+					    document.getElementById(
+					        "reviewTimelineItem"
+					    ).classList.add("completed");
+
+					    document.getElementById(
+					        "reviewTimelineItem"
+					    ).querySelector(".timeline-icon")
+					        .textContent = "✓";
+
+
+					    const decisionItem =
+					        document.getElementById(
+					            "decisionTimelineItem"
+					        );
+
+					    decisionItem.classList.add(
+					        "rejected"
+					    );
+
+
+					    document.getElementById(
+					        "decisionTimelineIcon"
+					    ).textContent = "✕";
+
+
+					    document.getElementById(
+					        "decisionTimelineTitle"
+					    ).textContent =
+					        "Application Rejected";
+
+
+					    document.getElementById(
+					        "decisionTimelineText"
+					    ).textContent =
+					        "Unfortunately, the employer did not select your application.";
+
+					}
+					else {
+
+					    statusMessage.textContent =
+					        "Your application is currently being reviewed.";
+
+					    statusMessage.className =
+					        "application-status-message status-message-pending";
+
+
+					    // =========================================
+					    // PENDING TIMELINE
+					    // =========================================
+
+					    document.getElementById(
+					        "reviewTimelineItem"
+					    ).classList.add("active");
+
+
+					    document.getElementById(
+					        "reviewTimelineItem"
+					    ).querySelector(".timeline-icon")
+					        .textContent = "●";
+
+
+					    document.getElementById(
+					        "decisionTimelineItem"
+					    ).classList.add("active");
+
+					}
+                // =========================================
+                // SHOW PAGE
+                // =========================================
+
+                document.getElementById(
+                    "applicationLoading"
+                ).style.display =
+                    "none";
+
+
+                document.getElementById(
+                    "applicationDetails"
+                ).style.display =
+                    "block";
+
+
+            }
+            catch (error) {
+
+                console.error(
+                    "Application details error:",
+                    error
+                );
+
+                showError(
+                    "Unable to connect to the server."
+                );
+
+            }
+
+        }
+
+
+        // =========================================
+        // SHOW ERROR
+        // =========================================
+
+        function showError(message) {
+
+            document.getElementById(
+                "applicationLoading"
+            ).style.display =
+                "none";
+
+
+            const errorElement =
+                document.getElementById(
+                    "applicationError"
+                );
+
+
+            errorElement.textContent =
+                message;
+
+
+            errorElement.style.display =
+                "block";
+
+        }
+
+
+        // =========================================
+        // FORMAT DATE
+        // =========================================
+
+        function formatApplicationDate(
+            dateString
+        ) {
+
+            if (!dateString) {
+
+                return "Date not available";
+
+            }
+
+
+            const date =
+                new Date(dateString);
+
+
+            return date.toLocaleDateString(
+                "en-NG",
+                {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric"
+                }
+            );
+
+        }
+
+    </script>
+
+</body>
+</html>

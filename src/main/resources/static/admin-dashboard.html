@@ -1,0 +1,1236 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>JobConnect | Admin Dashboard</title>
+
+    <link rel="stylesheet"
+          href="css/style.css">
+
+
+    <style>
+
+        /* ==================================================
+           ADMIN DASHBOARD
+        ================================================== */
+
+        .admin-dashboard {
+            padding: 50px 20px;
+            background-color: #f8fafc;
+            min-height: calc(100vh - 140px);
+        }
+
+
+        .admin-section {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+
+        /* ==================================================
+           ADMIN HEADER
+        ================================================== */
+
+        .admin-header {
+            margin-bottom: 30px;
+        }
+
+
+        .admin-header h1 {
+            color: #0b1f3a;
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+
+        .admin-header p {
+            color: #64748b;
+            font-size: 15px;
+            margin: 0;
+        }
+
+
+        /* ==================================================
+           STATISTICS
+        ================================================== */
+
+        .admin-stats {
+            display: grid;
+
+            grid-template-columns:
+                repeat(5, 1fr);
+
+            gap: 18px;
+
+            margin-bottom: 35px;
+        }
+
+
+        .admin-stat-card {
+            background: white;
+
+            padding: 22px;
+
+            border-radius: 12px;
+
+            border: 1px solid #e2e8f0;
+
+            box-shadow:
+                0 3px 12px rgba(15, 23, 42, 0.07);
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 15px;
+
+            transition: 0.2s ease;
+        }
+
+
+        .admin-stat-card:hover {
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 6px 18px rgba(15, 23, 42, 0.10);
+        }
+
+
+        .admin-stat-icon {
+            font-size: 30px;
+
+            width: 52px;
+            height: 52px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            background: #eff6ff;
+
+            border-radius: 10px;
+
+            flex-shrink: 0;
+        }
+
+
+        .admin-stat-card h3 {
+            margin: 0 0 5px;
+
+            color: #475569;
+
+            font-size: 13px;
+
+            font-weight: 600;
+        }
+
+
+        .admin-stat-card p {
+            margin: 0;
+
+            color: #0b1f3a;
+
+            font-size: 27px;
+
+            font-weight: 700;
+        }
+
+
+        /* ==================================================
+           MANAGEMENT SECTION
+        ================================================== */
+
+        .admin-actions {
+            margin-bottom: 35px;
+        }
+
+
+        .admin-actions h2 {
+            color: #0b1f3a;
+
+            font-size: 24px;
+
+            margin-bottom: 8px;
+        }
+
+
+        .admin-actions-subtitle {
+            color: #64748b;
+
+            font-size: 15px;
+
+            margin-top: 0;
+
+            margin-bottom: 22px;
+        }
+
+
+        .admin-action-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 18px;
+        }
+
+
+        .admin-action-card {
+            background: white;
+
+            padding: 22px;
+
+            border-radius: 12px;
+
+            border: 1px solid #e2e8f0;
+
+            box-shadow:
+                0 3px 12px rgba(15, 23, 42, 0.07);
+
+            display: flex;
+
+            align-items: flex-start;
+
+            gap: 16px;
+
+            text-decoration: none;
+
+            transition: 0.2s ease;
+        }
+
+
+        .admin-action-card:hover {
+            transform: translateY(-3px);
+
+            border-color: #bfdbfe;
+
+            box-shadow:
+                0 7px 20px rgba(15, 23, 42, 0.10);
+        }
+
+
+        .admin-action-card > span {
+            font-size: 27px;
+
+            width: 48px;
+            height: 48px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            background: #eff6ff;
+
+            border-radius: 10px;
+
+            flex-shrink: 0;
+        }
+
+
+        .admin-action-card h3 {
+            margin: 2px 0 7px;
+
+            color: #0b1f3a;
+
+            font-size: 17px;
+
+            font-weight: 700;
+        }
+
+
+        .admin-action-card p {
+            margin: 0;
+
+            color: #64748b;
+
+            font-size: 13px;
+
+            line-height: 1.5;
+        }
+
+
+        /* ==================================================
+           ADMIN INFORMATION
+        ================================================== */
+
+        .admin-info-card {
+            background: white;
+
+            padding: 25px;
+
+            border-radius: 12px;
+
+            border: 1px solid #e2e8f0;
+
+            box-shadow:
+                0 3px 12px rgba(15, 23, 42, 0.07);
+
+            margin-bottom: 25px;
+        }
+
+
+        .admin-info-card h2 {
+            color: #0b1f3a;
+
+            font-size: 21px;
+
+            margin-top: 0;
+
+            margin-bottom: 10px;
+        }
+
+
+        .admin-info-card > p {
+            color: #64748b;
+
+            font-size: 14px;
+
+            line-height: 1.7;
+
+            margin-bottom: 20px;
+        }
+
+
+        .admin-info-details {
+            display: flex;
+
+            gap: 35px;
+
+            flex-wrap: wrap;
+
+            padding-top: 15px;
+
+            border-top: 1px solid #e2e8f0;
+        }
+
+
+        .admin-info-details div {
+            color: #475569;
+
+            font-size: 14px;
+        }
+
+
+        .admin-info-details strong {
+            color: #0b1f3a;
+
+            margin-right: 6px;
+        }
+
+
+        #adminUsername {
+            color: #2563eb;
+
+            font-weight: 600;
+        }
+
+
+        /* ==================================================
+           MESSAGE
+        ================================================== */
+
+        #adminDashboardMessage {
+            text-align: center;
+
+            font-size: 14px;
+
+            color: #64748b;
+        }
+
+
+        /* ==================================================
+           RESPONSIVE
+        ================================================== */
+
+        @media (max-width: 1000px) {
+
+            .admin-stats {
+                grid-template-columns:
+                    repeat(3, 1fr);
+            }
+
+
+            .admin-action-grid {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+        }
+
+
+        @media (max-width: 700px) {
+
+            .admin-dashboard {
+                padding: 35px 12px;
+            }
+
+
+            .admin-header h1 {
+                font-size: 28px;
+            }
+
+
+            .admin-stats {
+                grid-template-columns:
+                    repeat(2, 1fr);
+
+                gap: 12px;
+            }
+
+
+            .admin-stat-card {
+                padding: 18px;
+
+                gap: 10px;
+            }
+
+
+            .admin-stat-icon {
+                width: 45px;
+                height: 45px;
+
+                font-size: 25px;
+            }
+
+
+            .admin-stat-card p {
+                font-size: 24px;
+            }
+
+
+            .admin-action-grid {
+                grid-template-columns: 1fr;
+            }
+
+
+            .admin-info-details {
+                flex-direction: column;
+
+                gap: 12px;
+            }
+
+        }
+
+
+        @media (max-width: 480px) {
+
+            .admin-stats {
+                grid-template-columns: 1fr;
+            }
+
+
+            .admin-stat-card {
+                padding: 20px;
+            }
+
+
+            .admin-actions h2 {
+                font-size: 22px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ==================================================
+     HEADER
+================================================== -->
+
+<header>
+
+    <nav class="navbar">
+
+
+        <div class="logo">
+
+            Job<span>Connect</span>
+
+        </div>
+
+
+        <ul class="nav-links">
+
+
+            <li>
+
+                <a href="index.html">
+                    Home
+                </a>
+
+            </li>
+
+
+            <li>
+
+                <a href="jobs.html">
+                    Jobs
+                </a>
+
+            </li>
+
+
+            <li>
+
+                <a href="admin-dashboard.html">
+                    Dashboard
+                </a>
+
+            </li>
+
+
+            <li>
+
+                <a href="profile.html">
+                    Profile
+                </a>
+
+            </li>
+
+
+            <li>
+
+                <a href="#"
+                   id="logoutBtn">
+
+                    Logout
+
+                </a>
+
+            </li>
+
+
+        </ul>
+
+
+    </nav>
+
+</header>
+
+
+
+<!-- ==================================================
+     MAIN ADMIN DASHBOARD
+================================================== -->
+
+<main class="admin-dashboard">
+
+
+    <section class="admin-section">
+
+
+        <!-- ==================================================
+             HEADER
+        ================================================== -->
+
+        <div class="admin-header">
+
+
+            <h1>
+                Admin Dashboard
+            </h1>
+
+
+            <p>
+                Manage and monitor the JobConnect platform.
+            </p>
+
+
+        </div>
+
+
+
+        <!-- ==================================================
+             STATISTICS
+        ================================================== -->
+
+        <div class="admin-stats">
+
+
+            <!-- TOTAL USERS -->
+
+            <div class="admin-stat-card">
+
+
+                <div class="admin-stat-icon">
+                    👥
+                </div>
+
+
+                <div>
+
+                    <h3>
+                        Total Users
+                    </h3>
+
+                    <p id="totalUsers">
+                        --
+                    </p>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- JOB SEEKERS -->
+
+            <div class="admin-stat-card">
+
+
+                <div class="admin-stat-icon">
+                    👤
+                </div>
+
+
+                <div>
+
+                    <h3>
+                        Job Seekers
+                    </h3>
+
+                    <p id="totalJobSeekers">
+                        --
+                    </p>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- EMPLOYERS -->
+
+            <div class="admin-stat-card">
+
+
+                <div class="admin-stat-icon">
+                    🏢
+                </div>
+
+
+                <div>
+
+                    <h3>
+                        Employers
+                    </h3>
+
+                    <p id="totalEmployers">
+                        --
+                    </p>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- TOTAL JOBS -->
+
+            <div class="admin-stat-card">
+
+
+                <div class="admin-stat-icon">
+                    💼
+                </div>
+
+
+                <div>
+
+                    <h3>
+                        Total Jobs
+                    </h3>
+
+                    <p id="totalJobs">
+                        --
+                    </p>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- APPLICATIONS -->
+
+            <div class="admin-stat-card">
+
+
+                <div class="admin-stat-icon">
+                    📋
+                </div>
+
+
+                <div>
+
+                    <h3>
+                        Applications
+                    </h3>
+
+                    <p id="totalApplications">
+                        --
+                    </p>
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- ==================================================
+             MANAGEMENT
+        ================================================== -->
+
+        <section class="admin-actions">
+
+
+            <h2>
+                Management
+            </h2>
+
+
+            <p class="admin-actions-subtitle">
+                Manage users, jobs and applications across the JobConnect platform.
+            </p>
+
+
+            <div class="admin-action-grid">
+
+
+                <!-- MANAGE USERS -->
+
+                <a href="admin-users.html"
+                   class="admin-action-card">
+
+
+                    <span>
+                        👥
+                    </span>
+
+
+                    <div>
+
+                        <h3>
+                            Manage Users
+                        </h3>
+
+
+                        <p>
+                            View users and manage their roles.
+                        </p>
+
+                    </div>
+
+
+                </a>
+
+
+
+                <!-- MANAGE JOBS -->
+
+                <a href="admin-jobs.html"
+                   class="admin-action-card">
+
+
+                    <span>
+                        💼
+                    </span>
+
+
+                    <div>
+
+                        <h3>
+                            Manage Jobs
+                        </h3>
+
+
+                        <p>
+                            View and manage jobs posted on JobConnect.
+                        </p>
+
+                    </div>
+
+
+                </a>
+
+
+
+                <!-- MANAGE APPLICATIONS -->
+
+                <a href="admin-applications.html"
+                   class="admin-action-card">
+
+
+                    <span>
+                        📋
+                    </span>
+
+
+                    <div>
+
+                        <h3>
+                            Manage Applications
+                        </h3>
+
+
+                        <p>
+                            Review and monitor submitted applications.
+                        </p>
+
+                    </div>
+
+
+                </a>
+
+
+
+                <!-- VIEW CANDIDATES -->
+
+                <a href="candidates.html"
+                   class="admin-action-card">
+
+
+                    <span>
+                        👤
+                    </span>
+
+
+                    <div>
+
+                        <h3>
+                            View Candidates
+                        </h3>
+
+
+                        <p>
+                            View registered job seekers.
+                        </p>
+
+                    </div>
+
+
+                </a>
+
+
+
+                <!-- VIEW JOBS -->
+
+                <a href="jobs.html"
+                   class="admin-action-card">
+
+
+                    <span>
+                        🔎
+                    </span>
+
+
+                    <div>
+
+                        <h3>
+                            View Jobs
+                        </h3>
+
+
+                        <p>
+                            Browse jobs available on the platform.
+                        </p>
+
+                    </div>
+
+
+                </a>
+
+
+
+                <!-- ADMIN PROFILE -->
+
+                <a href="profile.html"
+                   class="admin-action-card">
+
+
+                    <span>
+                        ⚙️
+                    </span>
+
+
+                    <div>
+
+                        <h3>
+                            Admin Profile
+                        </h3>
+
+
+                        <p>
+                            View administrator account information.
+                        </p>
+
+                    </div>
+
+
+                </a>
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- ==================================================
+             ADMIN INFORMATION
+        ================================================== -->
+
+        <section class="admin-info-card">
+
+
+            <h2>
+                Administrator
+            </h2>
+
+
+            <p>
+                Welcome to the JobConnect administration area.
+                From here, you can monitor users, jobs and
+                applications across the platform.
+            </p>
+
+
+            <div class="admin-info-details">
+
+
+                <div>
+
+                    <strong>
+                        Username:
+                    </strong>
+
+                    <span id="adminUsername">
+                        --
+                    </span>
+
+                </div>
+
+
+                <div>
+
+                    <strong>
+                        Role:
+                    </strong>
+
+                    <span>
+                        Administrator
+                    </span>
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <p id="adminDashboardMessage">
+        </p>
+
+
+    </section>
+
+
+</main>
+
+
+
+<!-- ==================================================
+     FOOTER
+================================================== -->
+
+<footer>
+
+    <p>
+        © 2026 JobConnect. All Rights Reserved.
+    </p>
+
+</footer>
+
+
+
+<!-- ==================================================
+     MAIN JAVASCRIPT
+================================================== -->
+
+<script src="js/app.js"></script>
+
+
+<!-- ==================================================
+     ADMIN DASHBOARD JAVASCRIPT
+================================================== -->
+
+<script>
+
+
+    // ==================================================
+    // AUTHENTICATION
+    // ==================================================
+
+    const token =
+        localStorage.getItem("token");
+
+
+    const username =
+        localStorage.getItem("username");
+
+
+    const role =
+        localStorage.getItem("role");
+
+
+
+    // ==================================================
+    // ADMIN SECURITY CHECK
+    // ==================================================
+
+    if (!token || role !== "ADMIN") {
+
+        document.body.innerHTML = `
+
+            <div style="
+                min-height:100vh;
+                display:flex;
+                align-items:center;
+                justify-content:center;
+                background:#f8fafc;
+                font-family:Arial,sans-serif;
+                padding:20px;
+                box-sizing:border-box;
+            ">
+
+
+                <div style="
+                    background:white;
+                    padding:40px;
+                    border-radius:14px;
+                    text-align:center;
+                    max-width:450px;
+                    box-shadow:
+                        0 8px 30px rgba(15,23,42,.10);
+                ">
+
+
+                    <h2 style="
+                        color:#0b1f3a;
+                        margin-bottom:10px;
+                    ">
+
+                        Access Denied
+
+                    </h2>
+
+
+                    <p style="
+                        color:#64748b;
+                        margin-bottom:20px;
+                    ">
+
+                        Admin access is required
+                        to view this dashboard.
+
+                    </p>
+
+
+                    <a href="index.html"
+                       style="
+                           display:inline-block;
+                           padding:10px 18px;
+                           background:#2563eb;
+                           color:white;
+                           text-decoration:none;
+                           border-radius:8px;
+                           font-weight:600;
+                       ">
+
+                        Return Home
+
+                    </a>
+
+
+                </div>
+
+
+            </div>
+
+        `;
+
+
+        throw new Error(
+            "Admin access required."
+        );
+
+    }
+
+
+
+    // ==================================================
+    // DISPLAY ADMIN USERNAME
+    // ==================================================
+
+    const adminUsername =
+        document.getElementById(
+            "adminUsername"
+        );
+
+
+    if (adminUsername) {
+
+        adminUsername.textContent =
+            username || "admin";
+
+    }
+
+
+
+    // ==================================================
+    // LOAD ADMIN STATISTICS
+    // ==================================================
+
+    async function loadAdminStatistics() {
+
+
+        try {
+
+
+            const response =
+                await fetch(
+                    "/admin/statistics",
+                    {
+                        method: "GET",
+
+                        headers: {
+                            "Authorization":
+                                "Bearer " + token
+                        }
+                    }
+                );
+
+
+            if (!response.ok) {
+
+                const errorText =
+                    await response.text();
+
+                throw new Error(
+                    errorText ||
+                    "Unable to load statistics."
+                );
+
+            }
+
+
+            const statistics =
+                await response.json();
+
+
+
+            // TOTAL USERS
+
+            document.getElementById(
+                "totalUsers"
+            ).textContent =
+                statistics.totalUsers;
+
+
+
+            // JOB SEEKERS
+
+            document.getElementById(
+                "totalJobSeekers"
+            ).textContent =
+                statistics.totalJobSeekers;
+
+
+
+            // EMPLOYERS
+
+            document.getElementById(
+                "totalEmployers"
+            ).textContent =
+                statistics.totalEmployers;
+
+
+
+            // TOTAL JOBS
+
+            document.getElementById(
+                "totalJobs"
+            ).textContent =
+                statistics.totalJobs;
+
+
+
+            // APPLICATIONS
+
+            document.getElementById(
+                "totalApplications"
+            ).textContent =
+                statistics.totalApplications;
+
+
+        } catch (error) {
+
+
+            console.error(
+                "Admin statistics error:",
+                error
+            );
+
+
+            document.getElementById(
+                "adminDashboardMessage"
+            ).textContent =
+                "Unable to load dashboard statistics.";
+
+
+        }
+
+    }
+
+
+
+    // ==================================================
+    // LOAD DASHBOARD
+    // ==================================================
+
+    loadAdminStatistics();
+
+
+</script>
+
+
+</body>
+
+</html>
+

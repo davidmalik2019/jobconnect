@@ -1,0 +1,1039 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Employer Dashboard - JobConnect</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================================
+         NAVIGATION
+         ========================================= -->
+
+    <header class="dashboard-header">
+
+        <div class="dashboard-logo">
+
+            <a href="index.html">
+                JobConnect
+            </a>
+
+        </div>
+
+
+        <nav>
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="jobs.html">
+                Jobs
+            </a>
+
+            <a href="applications-management.html">
+                Applications
+            </a>
+
+            <a href="profile.html">
+                Profile
+            </a>
+
+            <a href="#" id="logoutBtn">
+                Logout
+            </a>
+
+        </nav>
+
+    </header>
+
+
+
+    <!-- =========================================
+         MAIN DASHBOARD
+         ========================================= -->
+
+    <main class="dashboard-container">
+
+
+        <!-- =====================================
+             WELCOME SECTION
+             ===================================== -->
+
+        <section class="welcome-section">
+
+            <div>
+
+                <p class="welcome-small">
+                    EMPLOYER DASHBOARD
+                </p>
+
+
+                <h1 id="welcomeMessage">
+                    Welcome!
+                </h1>
+
+
+                <p>
+                    Manage your job postings, review applications,
+                    and find the right candidates for your company.
+                </p>
+
+            </div>
+
+
+            <div class="welcome-icon">
+                🏢
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================
+             EMPLOYER STATISTICS
+             ===================================== -->
+
+			 <!-- =====================================
+			      EMPLOYER STATISTICS
+			 ===================================== -->
+
+			 <section class="dashboard-stats">
+
+			     <!-- TOTAL JOBS -->
+
+			     <div class="stat-card">
+
+			         <div class="stat-icon">
+			             💼
+			         </div>
+
+			         <div>
+			             <h3 id="totalJobs">
+			                 0
+			             </h3>
+
+			             <p>
+			                 Total Jobs Posted
+			             </p>
+			         </div>
+
+			     </div>
+
+
+			     <!-- TOTAL APPLICATIONS -->
+
+			     <div class="stat-card">
+
+			         <div class="stat-icon">
+			             📋
+			         </div>
+
+			         <div>
+			             <h3 id="totalApplications">
+			                 0
+			             </h3>
+
+			             <p>
+			                 Total Applications
+			             </p>
+			         </div>
+
+			     </div>
+
+
+			     <!-- PENDING -->
+
+			     <div class="stat-card">
+
+			         <div class="stat-icon">
+			             ⏳
+			         </div>
+
+			         <div>
+			             <h3 id="pendingApplications">
+			                 0
+			             </h3>
+
+			             <p>
+			                 Pending Applications
+			             </p>
+			         </div>
+
+			     </div>
+
+
+			     <!-- ACCEPTED -->
+
+			     <div class="stat-card">
+
+			         <div class="stat-icon">
+			             ✅
+			         </div>
+
+			         <div>
+			             <h3 id="acceptedApplications">
+			                 0
+			             </h3>
+
+			             <p>
+			                 Accepted Candidates
+			             </p>
+			         </div>
+
+			     </div>
+
+
+			     <!-- REJECTED -->
+
+			     <div class="stat-card">
+
+			         <div class="stat-icon">
+			             ❌
+			         </div>
+
+			         <div>
+			             <h3 id="rejectedApplications">
+			                 0
+			             </h3>
+
+			             <p>
+			                 Rejected Applications
+			             </p>
+			         </div>
+
+			     </div>
+
+			 </section>
+
+        <!-- =====================================
+             EMPLOYER ACTIONS
+             ===================================== -->
+
+        <section class="dashboard-section">
+
+
+            <h2>
+                Employer Actions
+            </h2>
+
+
+
+            <div class="action-grid">
+
+
+                <!-- POST JOB -->
+
+                <a href="post-job.html"
+                   class="action-card">
+
+                    <div class="action-icon">
+                        📢
+                    </div>
+
+
+                    <div>
+
+                        <h3>
+                            Post a Job
+                        </h3>
+
+
+                        <p>
+                            Create and publish a new job
+                            opportunity.
+                        </p>
+
+                    </div>
+
+
+                    <span class="arrow">
+                        →
+                    </span>
+
+                </a>
+
+
+
+                <!-- MANAGE JOBS -->
+
+                <a href="manage-jobs.html"
+                   class="action-card">
+
+                    <div class="action-icon">
+                        💼
+                    </div>
+
+
+                    <div>
+
+                        <h3>
+                            Manage Jobs
+                        </h3>
+
+
+                        <p>
+                            View, edit and manage your
+                            posted jobs.
+                        </p>
+
+                    </div>
+
+
+                    <span class="arrow">
+                        →
+                    </span>
+
+                </a>
+
+
+
+                <!-- APPLICATION MANAGEMENT -->
+
+                <a href="applications-management.html"
+                   class="action-card">
+
+                    <div class="action-icon">
+                        📋
+                    </div>
+
+
+                    <div>
+
+                        <h3>
+                            Applications
+                        </h3>
+
+
+                        <p>
+                            Review applications from
+                            job seekers.
+                        </p>
+
+                    </div>
+
+
+                    <span class="arrow">
+                        →
+                    </span>
+
+                </a>
+
+
+
+                <!-- CANDIDATES -->
+
+                <a href="candidates.html"
+                   class="action-card">
+
+                    <div class="action-icon">
+                        👥
+                    </div>
+
+
+                    <div>
+
+                        <h3>
+                            Candidates
+                        </h3>
+
+
+                        <p>
+                            View candidates who applied
+                            for your jobs.
+                        </p>
+
+                    </div>
+
+
+                    <span class="arrow">
+                        →
+                    </span>
+
+                </a>
+
+
+
+                <!-- PROFILE -->
+
+                <a href="profile.html"
+                   class="action-card">
+
+                    <div class="action-icon">
+                        👤
+                    </div>
+
+
+                    <div>
+
+                        <h3>
+                            Company Profile
+                        </h3>
+
+
+                        <p>
+                            Manage your employer profile
+                            information.
+                        </p>
+
+                    </div>
+
+
+                    <span class="arrow">
+                        →
+                    </span>
+
+                </a>
+
+
+
+                <!-- APPLICATION STATUS -->
+
+                <a href="applications-management.html"
+                   class="action-card">
+
+                    <div class="action-icon">
+                        📊
+                    </div>
+
+
+                    <div>
+
+                        <h3>
+                            Application Status
+                        </h3>
+
+
+                        <p>
+                            Track pending, accepted and
+                            rejected applications.
+                        </p>
+
+                    </div>
+
+
+                    <span class="arrow">
+                        →
+                    </span>
+
+                </a>
+
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================
+             GET STARTED
+             ===================================== -->
+
+			 <section class="recent-applications-section">
+
+			     <div class="recent-applications-header">
+
+			         <div>
+			             <p class="section-small-title">
+			                 APPLICATIONS
+			             </p>
+
+			             <h2>
+			                 Recent Applications
+			             </h2>
+
+			             <p>
+			                 Review the latest applications submitted
+			                 by job seekers.
+			             </p>
+			         </div>
+
+			         <a
+			             href="applications-management.html"
+			             class="view-all-applications-btn">
+			             View All Applications →
+			         </a>
+
+			     </div>
+
+			     <div id="recentApplicationsList"
+			          class="recent-applications-list">
+
+			         <div class="recent-loading">
+			             Loading recent applications...
+			         </div>
+
+			     </div>
+
+			 </section>
+        <section class="get-started">
+
+            <div>
+
+                <h2>
+                    Ready to find the right candidate?
+                </h2>
+
+
+                <p>
+                    Post a job and start receiving applications
+                    from qualified job seekers.
+                </p>
+
+            </div>
+
+
+            <a href="post-job.html"
+               class="find-job-btn">
+
+                Post a Job
+
+            </a>
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- =========================================
+         FOOTER
+         ========================================= -->
+
+    <footer class="dashboard-footer">
+
+        <p>
+            &copy; 2026 JobConnect.
+            All Rights Reserved.
+        </p>
+
+    </footer>
+
+
+
+    <!-- =========================================
+         JAVASCRIPT
+         ========================================= -->
+
+		 <script>
+
+		 document.addEventListener(
+		     "DOMContentLoaded",
+		     function () {
+
+		         // =========================================
+		         // GET LOGIN INFORMATION
+		         // =========================================
+
+		         const username =
+		             localStorage.getItem("username");
+
+		         const token =
+		             localStorage.getItem("token");
+
+
+		         // =========================================
+		         // WELCOME MESSAGE
+		         // =========================================
+
+		         const welcomeMessage =
+		             document.getElementById(
+		                 "welcomeMessage"
+		             );
+
+		         if (username) {
+
+		             welcomeMessage.textContent =
+		                 "Welcome, " + username + "!";
+
+		         } else {
+
+		             welcomeMessage.textContent =
+		                 "Welcome to JobConnect!";
+
+		         }
+
+
+		         // =========================================
+		         // CHECK LOGIN
+		         // =========================================
+
+		         if (!token) {
+
+		             window.location.href =
+		                 "login.html";
+
+		             return;
+		         }
+
+
+		         // =========================================
+		         // LOGOUT
+		         // =========================================
+
+		         const logoutBtn =
+		             document.getElementById(
+		                 "logoutBtn"
+		             );
+
+		         if (logoutBtn) {
+
+		             logoutBtn.addEventListener(
+		                 "click",
+		                 function (event) {
+
+		                     event.preventDefault();
+
+		                     localStorage.removeItem(
+		                         "token"
+		                     );
+
+		                     localStorage.removeItem(
+		                         "username"
+		                     );
+
+		                     localStorage.removeItem(
+		                         "role"
+		                     );
+
+		                     window.location.href =
+		                         "login.html";
+		                 }
+		             );
+		         }
+
+
+		         // =========================================
+		         // LOAD DASHBOARD STATISTICS
+		         // =========================================
+
+		         loadDashboardStatistics();
+				 loadRecentApplications();
+				 async function loadRecentApplications() {
+
+				     const token =
+				         localStorage.getItem("token");
+
+				     const recentApplicationsList =
+				         document.getElementById(
+				             "recentApplicationsList"
+				         );
+
+				     if (!token || !recentApplicationsList) {
+				         return;
+				     }
+
+				     try {
+
+				         const response =
+				             await fetch(
+				                 "/applications",
+				                 {
+				                     method: "GET",
+
+				                     headers: {
+				                         "Authorization":
+				                             "Bearer " + token
+				                     }
+				                 }
+				             );
+
+				         if (!response.ok) {
+
+				             throw new Error(
+				                 "Unable to load applications."
+				             );
+
+				         }
+
+				         const applications =
+				             await response.json();
+
+				         if (
+				             !applications ||
+				             applications.length === 0
+				         ) {
+
+				             recentApplicationsList.innerHTML = `
+				                 <div class="recent-empty">
+				                     <h3>No applications yet</h3>
+
+				                     <p>
+				                         Applications from job seekers
+				                         will appear here.
+				                     </p>
+				                 </div>
+				             `;
+
+				             return;
+				         }
+
+				         /*
+				          * Sort newest applications first
+				          */
+				         applications.sort(
+				             function(a, b) {
+
+				                 return new Date(
+				                     b.appliedAt
+				                 ) - new Date(
+				                     a.appliedAt
+				                 );
+
+				             }
+				         );
+
+				         /*
+				          * Show only the 5 most recent
+				          */
+				         const recentApplications =
+				             applications.slice(0, 5);
+
+				         recentApplicationsList.innerHTML = "";
+
+				         recentApplications.forEach(
+				             function(application) {
+
+				                 const applicationCard =
+				                     document.createElement("div");
+
+				                 applicationCard.className =
+				                     "recent-application-card";
+
+				                 const status =
+				                     (
+				                         application.status || "PENDING"
+				                     ).toUpperCase();
+
+				                 let statusClass =
+				                     "status-pending";
+
+				                 if (status === "ACCEPTED") {
+				                     statusClass =
+				                         "status-accepted";
+				                 }
+				                 else if (status === "REJECTED") {
+				                     statusClass =
+				                         "status-rejected";
+				                 }
+
+				                 applicationCard.innerHTML = `
+
+				                     <div class="recent-application-info">
+
+				                         <div class="recent-application-avatar">
+				                             ${
+				                                 application.fullName
+				                                     ? application.fullName
+				                                         .charAt(0)
+				                                         .toUpperCase()
+				                                     : "?"
+				                             }
+				                         </div>
+
+				                         <div>
+
+				                             <h3>
+				                                 ${
+				                                     application.fullName
+				                                     || "Unknown Applicant"
+				                                 }
+				                             </h3>
+
+				                             <p>
+				                                 Applied for:
+				                                 <strong>
+				                                     ${
+				                                         application.jobTitle
+				                                         || "Job"
+				                                     }
+				                                 </strong>
+				                             </p>
+
+				                             <span class="recent-application-date">
+				                                 ${
+				                                     formatApplicationDate(
+				                                         application.appliedAt
+				                                     )
+				                                 }
+				                             </span>
+
+				                         </div>
+
+				                     </div>
+
+				                     <div class="recent-application-right">
+
+				                         <span class="recent-status ${statusClass}">
+				                             ${status}
+				                         </span>
+
+				                         <button
+				                             class="view-recent-application-btn"
+				                             data-id="${application.id}">
+				                             View
+				                         </button>
+
+				                     </div>
+
+				                 `;
+
+				                 recentApplicationsList.appendChild(
+				                     applicationCard
+				                 );
+
+				             }
+				         );
+
+				         /*
+				          * View buttons
+				          */
+				         const viewButtons =
+				             document.querySelectorAll(
+				                 ".view-recent-application-btn"
+				             );
+
+				         viewButtons.forEach(
+				             function(button) {
+
+				                 button.addEventListener(
+				                     "click",
+				                     function() {
+
+				                         const applicationId =
+				                             this.getAttribute(
+				                                 "data-id"
+				                             );
+
+				                         window.location.href =
+				                             "candidate-details.html?id=" +
+				                             applicationId;
+
+				                     }
+				                 );
+
+				             }
+				         );
+
+				     }
+				     catch (error) {
+
+				         console.error(
+				             "Recent applications error:",
+				             error
+				         );
+
+				         recentApplicationsList.innerHTML = `
+				             <div class="recent-error">
+				                 Unable to load recent applications.
+				                 Please try again.
+				             </div>
+				         `;
+
+				     }
+				 }
+
+
+				 function formatApplicationDate(
+				     dateString
+				 ) {
+
+				     if (!dateString) {
+				         return "Date not available";
+				     }
+
+				     const date =
+				         new Date(dateString);
+
+				     return date.toLocaleDateString(
+				         "en-NG",
+				         {
+				             year: "numeric",
+				             month: "long",
+				             day: "numeric"
+				         }
+				     );
+				 }
+
+		     }
+		 );
+
+
+
+		 // =============================================
+		 // LOAD DASHBOARD STATISTICS
+		 // =============================================
+
+		 async function loadDashboardStatistics() {
+
+		     const token =
+		         localStorage.getItem("token");
+
+
+		     try {
+
+		         // =====================================
+		         // LOAD EMPLOYER JOBS
+		         // =====================================
+
+		         const jobsResponse =
+		             await fetch(
+		                 "/jobs/my",
+		                 {
+		                     method: "GET",
+
+		                     headers: {
+		                         "Authorization":
+		                             "Bearer " + token
+		                     }
+		                 }
+		             );
+
+
+		         if (!jobsResponse.ok) {
+
+		             throw new Error(
+		                 "Unable to load jobs."
+		             );
+		         }
+
+
+		         const jobs =
+		             await jobsResponse.json();
+
+
+		         // Display total jobs
+
+		         document.getElementById(
+		             "totalJobs"
+		         ).textContent = jobs.length;
+
+
+
+		         // =====================================
+		         // LOAD APPLICATIONS
+		         // =====================================
+
+		         const applicationsResponse =
+		             await fetch(
+		                 "/applications",
+		                 {
+		                     method: "GET",
+
+		                     headers: {
+		                         "Authorization":
+		                             "Bearer " + token
+		                     }
+		                 }
+		             );
+
+
+		         if (!applicationsResponse.ok) {
+
+		             throw new Error(
+		                 "Unable to load applications."
+		             );
+		         }
+
+
+		         const applications =
+		             await applicationsResponse.json();
+
+
+		         // =====================================
+		         // COUNT APPLICATIONS
+		         // =====================================
+
+		         let pending = 0;
+		         let accepted = 0;
+		         let rejected = 0;
+
+
+		         applications.forEach(
+		             function(application) {
+
+		                 const status =
+		                     (
+		                         application.status || ""
+		                     ).toUpperCase();
+
+
+		                 if (status === "PENDING") {
+
+		                     pending++;
+
+		                 }
+		                 else if (status === "ACCEPTED") {
+
+		                     accepted++;
+
+		                 }
+		                 else if (status === "REJECTED") {
+
+		                     rejected++;
+
+		                 }
+
+		             }
+		         );
+
+
+		         // =====================================
+		         // DISPLAY STATISTICS
+		         // =====================================
+
+		         document.getElementById(
+		             "totalApplications"
+		         ).textContent =
+		             applications.length;
+
+
+		         document.getElementById(
+		             "pendingApplications"
+		         ).textContent =
+		             pending;
+
+
+		         document.getElementById(
+		             "acceptedApplications"
+		         ).textContent =
+		             accepted;
+
+
+		         document.getElementById(
+		             "rejectedApplications"
+		         ).textContent =
+		             rejected;
+
+
+		     }
+		     catch (error) {
+
+		         console.error(
+		             "Dashboard statistics error:",
+		             error
+		         );
+
+		     }
+
+		 }
+
+		 </script>
+</body>
+
+</html>
+

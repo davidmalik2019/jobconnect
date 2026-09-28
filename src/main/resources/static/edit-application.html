@@ -1,0 +1,723 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>JobConnect | Edit Application</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+
+<body>
+
+    <!-- =========================================
+         HEADER
+    ========================================== -->
+
+    <header>
+
+        <nav class="navbar">
+
+            <div class="logo">
+
+                Job<span>Connect</span>
+
+            </div>
+
+
+            <ul class="nav-links">
+
+                <li>
+                    <a href="index.html">
+                        Home
+                    </a>
+                </li>
+
+                <li>
+                    <a href="jobs.html">
+                        Jobs
+                    </a>
+                </li>
+
+                <li>
+                    <a href="my-applications.html">
+                        My Applications
+                    </a>
+                </li>
+
+                <li>
+                    <a href="profile.html">
+                        Profile
+                    </a>
+                </li>
+
+                <li>
+                    <span id="welcomeUser"></span>
+                </li>
+
+                <li id="logoutLink"
+                    style="display: none;">
+
+                    <a href="#"
+                       id="logoutBtn">
+
+                        Logout
+
+                    </a>
+
+                </li>
+
+            </ul>
+
+        </nav>
+
+    </header>
+
+
+
+    <!-- =========================================
+         EDIT APPLICATION SECTION
+    ========================================== -->
+
+    <section class="edit-job-section">
+
+        <div class="edit-job-container">
+
+
+            <!-- PAGE HEADING -->
+
+            <div class="edit-job-header">
+
+                <h1>
+                    Edit Application
+                </h1>
+
+                <p>
+                    Update your application while it is still pending.
+                </p>
+
+            </div>
+
+
+
+            <!-- EDIT FORM -->
+
+            <div class="edit-job-card">
+
+                <form id="editApplicationForm">
+
+
+                    <!-- JOB TITLE -->
+
+                    <div class="form-group">
+
+                        <label for="jobTitle">
+
+                            Job Title
+
+                        </label>
+
+                        <input
+                            type="text"
+                            id="jobTitle"
+                            readonly>
+
+                    </div>
+
+
+
+                    <!-- APPLICATION STATUS -->
+
+                    <div class="form-group">
+
+                        <label for="status">
+
+                            Application Status
+
+                        </label>
+
+                        <input
+                            type="text"
+                            id="status"
+                            readonly>
+
+                    </div>
+
+
+
+                    <!-- FULL NAME -->
+
+                    <div class="form-group">
+
+                        <label for="fullName">
+
+                            Full Name
+
+                        </label>
+
+                        <input
+                            type="text"
+                            id="fullName"
+                            placeholder="Enter your full name"
+                            required>
+
+                    </div>
+
+
+
+                    <!-- EMAIL -->
+
+                    <div class="form-group">
+
+                        <label for="email">
+
+                            Email
+
+                        </label>
+
+                        <input
+                            type="email"
+                            id="email"
+                            placeholder="Enter your email"
+                            required>
+
+                    </div>
+
+
+
+                    <!-- PHONE -->
+
+                    <div class="form-group">
+
+                        <label for="phone">
+
+                            Phone
+
+                        </label>
+
+                        <input
+                            type="text"
+                            id="phone"
+                            placeholder="Enter your phone number"
+                            required>
+
+                    </div>
+
+
+
+                    <!-- COVER LETTER -->
+
+                    <div class="form-group">
+
+                        <label for="coverLetter">
+
+                            Cover Letter
+
+                        </label>
+
+                        <textarea
+                            id="coverLetter"
+                            rows="8"
+                            placeholder="Enter your cover letter"
+                            required></textarea>
+
+                    </div>
+
+
+
+                    <!-- MESSAGE -->
+
+                    <div
+                        id="editApplicationMessage"
+                        class="job-message"
+                        style="display: none;">
+
+                    </div>
+
+
+
+                    <!-- BUTTONS -->
+
+                    <div class="edit-job-buttons">
+
+                        <a
+                            href="my-applications.html"
+                            class="cancel-btn">
+
+                            Cancel
+
+                        </a>
+
+
+                        <button
+                            type="submit"
+                            class="post-job-btn">
+
+                            Save Changes
+
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================================
+         FOOTER
+    ========================================== -->
+
+    <footer>
+
+        <p>
+
+            © 2026 JobConnect. All Rights Reserved.
+
+        </p>
+
+    </footer>
+
+
+
+    <!-- =========================================
+         MAIN JAVASCRIPT
+    ========================================== -->
+
+    <script src="js/app.js"></script>
+
+
+
+    <!-- =========================================
+         EDIT APPLICATION JAVASCRIPT
+    ========================================== -->
+
+    <script>
+
+        // =========================================
+        // GET APPLICATION ID FROM URL
+        // =========================================
+
+        const urlParams =
+            new URLSearchParams(
+                window.location.search
+            );
+
+        const applicationId =
+            urlParams.get("id");
+
+
+
+        // =========================================
+        // FORM ELEMENTS
+        // =========================================
+
+        const editApplicationForm =
+            document.getElementById(
+                "editApplicationForm"
+            );
+
+        const editApplicationMessage =
+            document.getElementById(
+                "editApplicationMessage"
+            );
+
+
+
+        // =========================================
+        // CHECK LOGIN
+        // =========================================
+
+        const token =
+            localStorage.getItem("token");
+
+        const role =
+            localStorage.getItem("role");
+
+
+        if (!token) {
+
+            window.location.href =
+                "login.html";
+
+        }
+
+
+
+        // =========================================
+        // CHECK JOB SEEKER ROLE
+        // =========================================
+
+        if (role !== "JOB_SEEKER") {
+
+            if (editApplicationMessage) {
+
+                editApplicationMessage.style.display =
+                    "block";
+
+                editApplicationMessage.style.color =
+                    "red";
+
+                editApplicationMessage.textContent =
+                    "You are not authorized to edit applications.";
+
+            }
+
+            if (editApplicationForm) {
+
+                editApplicationForm.style.display =
+                    "none";
+
+            }
+
+        }
+
+
+
+        // =========================================
+        // CHECK APPLICATION ID
+        // =========================================
+
+        if (!applicationId) {
+
+            if (editApplicationMessage) {
+
+                editApplicationMessage.style.display =
+                    "block";
+
+                editApplicationMessage.style.color =
+                    "red";
+
+                editApplicationMessage.textContent =
+                    "No application was selected.";
+
+            }
+
+            if (editApplicationForm) {
+
+                editApplicationForm.style.display =
+                    "none";
+
+            }
+
+        }
+
+
+
+        // =========================================
+        // LOAD APPLICATION DETAILS
+        // =========================================
+
+        if (
+            token &&
+            role === "JOB_SEEKER" &&
+            applicationId
+        ) {
+
+            fetch(
+                `/applications/${applicationId}`,
+                {
+                    method: "GET",
+
+                    headers: {
+
+                        "Authorization":
+                            "Bearer " + token
+
+                    }
+
+                }
+            )
+
+            .then(response => {
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        "Unable to load application."
+                    );
+
+                }
+
+                return response.json();
+
+            })
+
+            .then(application => {
+
+                // =================================
+                // CHECK APPLICATION STATUS
+                // =================================
+
+                if (
+                    !application.status ||
+                    application.status.toLowerCase()
+                    !== "pending"
+                ) {
+
+                    editApplicationMessage.style.display =
+                        "block";
+
+                    editApplicationMessage.style.color =
+                        "red";
+
+                    editApplicationMessage.textContent =
+                        "Only Pending applications can be edited.";
+
+                    editApplicationForm.style.display =
+                        "none";
+
+                    return;
+
+                }
+
+
+
+                // =================================
+                // FILL FORM
+                // =================================
+
+                document.getElementById(
+                    "jobTitle"
+                ).value =
+                    application.jobTitle || "";
+
+
+                document.getElementById(
+                    "status"
+                ).value =
+                    application.status || "Pending";
+
+
+                document.getElementById(
+                    "fullName"
+                ).value =
+                    application.fullName || "";
+
+
+                document.getElementById(
+                    "email"
+                ).value =
+                    application.email || "";
+
+
+                document.getElementById(
+                    "phone"
+                ).value =
+                    application.phone || "";
+
+
+                document.getElementById(
+                    "coverLetter"
+                ).value =
+                    application.coverLetter || "";
+
+            })
+
+            .catch(error => {
+
+                console.error(
+                    "Load application error:",
+                    error
+                );
+
+                editApplicationMessage.style.display =
+                    "block";
+
+                editApplicationMessage.style.color =
+                    "red";
+
+                editApplicationMessage.textContent =
+                    "Unable to load application details.";
+
+                editApplicationForm.style.display =
+                    "none";
+
+            });
+
+        }
+
+
+
+        // =========================================
+        // SUBMIT EDIT FORM
+        // =========================================
+
+        if (
+            editApplicationForm &&
+            token &&
+            role === "JOB_SEEKER" &&
+            applicationId
+        ) {
+
+            editApplicationForm.addEventListener(
+                "submit",
+                async function(event) {
+
+                    event.preventDefault();
+
+
+
+                    // =================================
+                    // GET UPDATED VALUES
+                    // =================================
+
+                    const updatedApplication = {
+
+                        fullName:
+                            document.getElementById(
+                                "fullName"
+                            ).value.trim(),
+
+                        email:
+                            document.getElementById(
+                                "email"
+                            ).value.trim(),
+
+                        phone:
+                            document.getElementById(
+                                "phone"
+                            ).value.trim(),
+
+                        coverLetter:
+                            document.getElementById(
+                                "coverLetter"
+                            ).value.trim()
+
+                    };
+
+
+
+                    // =================================
+                    // SEND UPDATE REQUEST
+                    // =================================
+
+                    try {
+
+                        const response =
+                            await fetch(
+                                `/applications/${applicationId}`,
+                                {
+
+                                    method: "PUT",
+
+                                    headers: {
+
+                                        "Content-Type":
+                                            "application/json",
+
+                                        "Authorization":
+                                            "Bearer " +
+                                            token
+
+                                    },
+
+                                    body:
+                                        JSON.stringify(
+                                            updatedApplication
+                                        )
+
+                                }
+                            );
+
+
+
+                        const responseText =
+                            await response.text();
+
+
+
+                        // =================================
+                        // SUCCESS
+                        // =================================
+
+                        if (response.ok) {
+
+                            editApplicationMessage.style.display =
+                                "block";
+
+                            editApplicationMessage.style.color =
+                                "green";
+
+                            editApplicationMessage.textContent =
+                                "Application updated successfully!";
+
+
+                            // Return to My Applications
+
+                            setTimeout(
+                                function() {
+
+                                    window.location.href =
+                                        "my-applications.html";
+
+                                },
+                                1200
+                            );
+
+                        }
+
+
+                        // =================================
+                        // ERROR
+                        // =================================
+
+                        else {
+
+                            editApplicationMessage.style.display =
+                                "block";
+
+                            editApplicationMessage.style.color =
+                                "red";
+
+                            editApplicationMessage.textContent =
+                                responseText ||
+                                "Unable to update application.";
+
+                        }
+
+                    }
+
+                    catch (error) {
+
+                        console.error(
+                            "Edit application error:",
+                            error
+                        );
+
+                        editApplicationMessage.style.display =
+                            "block";
+
+                        editApplicationMessage.style.color =
+                            "red";
+
+                        editApplicationMessage.textContent =
+                            "Unable to connect to the server.";
+
+                    }
+
+                }
+            );
+
+        }
+
+    </script>
+
+</body>
+
+</html>
+

@@ -1,0 +1,2393 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>JobConnect | User Management</title>
+
+    <style>
+
+        /* ==================================================
+           RESET
+        ================================================== */
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f4f7fb;
+            color: #1f2937;
+        }
+
+
+        /* ==================================================
+           HEADER
+        ================================================== */
+
+        .admin-header {
+            background: #0b1f3a;
+            color: white;
+            padding: 18px 30px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            box-shadow:
+                0 3px 10px
+                rgba(0, 0, 0, 0.12);
+        }
+
+        .admin-header h1 {
+            font-size: 22px;
+        }
+
+        .admin-header p {
+            font-size: 13px;
+            margin-top: 4px;
+            color: #cbd5e1;
+        }
+
+        .back-btn {
+            text-decoration: none;
+            background: white;
+            color: #0b1f3a;
+
+            padding: 9px 15px;
+            border-radius: 7px;
+
+            font-size: 13px;
+            font-weight: 600;
+
+            transition: 0.3s;
+        }
+
+        .back-btn:hover {
+            background: #eaf2ff;
+        }
+
+
+        /* ==================================================
+           PAGE CONTAINER
+        ================================================== */
+
+        .page-container {
+            max-width: 1200px;
+            margin: 35px auto;
+            padding: 0 20px;
+        }
+
+
+        /* ==================================================
+           PAGE TITLE
+        ================================================== */
+
+        .page-title {
+            margin-bottom: 25px;
+        }
+
+        .page-title h2 {
+            color: #0b1f3a;
+            font-size: 28px;
+            margin-bottom: 7px;
+        }
+
+        .page-title p {
+            color: #64748b;
+            font-size: 14px;
+        }
+
+
+        /* ==================================================
+           FILTER SECTION
+        ================================================== */
+
+        .filter-section {
+            background: white;
+
+            padding: 20px;
+
+            border-radius: 12px;
+
+            box-shadow:
+                0 4px 15px
+                rgba(0, 0, 0, 0.06);
+
+            margin-bottom: 25px;
+        }
+
+        .filter-grid {
+            display: grid;
+
+            grid-template-columns:
+                1fr 220px;
+
+            gap: 15px;
+        }
+
+        .filter-group label {
+            display: block;
+
+            font-size: 12px;
+            font-weight: 600;
+
+            color: #475569;
+
+            margin-bottom: 7px;
+        }
+
+        .filter-group input,
+        .filter-group select {
+            width: 100%;
+
+            padding: 12px;
+
+            border: 1px solid #d1d5db;
+
+            border-radius: 8px;
+
+            background: white;
+
+            color: #374151;
+
+            font-size: 14px;
+
+            outline: none;
+        }
+
+        .filter-group input:focus,
+        .filter-group select:focus {
+            border-color: #2563eb;
+
+            box-shadow:
+                0 0 0 3px
+                rgba(37, 99, 235, 0.10);
+        }
+
+
+        /* ==================================================
+           USER TABLE
+        ================================================== */
+
+        .users-card {
+            background: white;
+
+            border-radius: 12px;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 4px 15px
+                rgba(0, 0, 0, 0.06);
+        }
+
+        .table-header {
+            padding: 20px;
+
+            border-bottom:
+                1px solid #e5e7eb;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+		.table-header h3 {
+		    color: #0b1f3a;
+		    font-size: 20px;
+		    font-weight: 700;
+		}
+
+		.user-count {
+		    font-size: 14px;
+		    font-weight: 600;
+		    color: #334155;
+
+		    background: #f1f5f9;
+
+		    padding: 7px 12px;
+
+		    border-radius: 20px;
+		}
+
+        .table-wrapper {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background: #f8fafc;
+
+            color: #475569;
+
+            font-size: 12px;
+
+            text-align: left;
+
+            padding: 14px 18px;
+
+            border-bottom:
+                1px solid #e5e7eb;
+
+            white-space: nowrap;
+        }
+
+        td {
+            padding: 15px 18px;
+
+            border-bottom:
+                1px solid #eef2f7;
+
+            font-size: 13px;
+
+            vertical-align: middle;
+        }
+
+        tbody tr:hover {
+            background: #f8fbff;
+        }
+
+
+        /* ==================================================
+           USER NAME
+        ================================================== */
+
+        .user-name {
+            font-weight: 600;
+            color: #0b1f3a;
+        }
+
+        .user-username {
+            display: block;
+
+            margin-top: 3px;
+
+            color: #64748b;
+
+            font-size: 11px;
+        }
+
+
+        /* ==================================================
+           ROLE BADGES
+        ================================================== */
+
+        .role-badge {
+            display: inline-block;
+
+            padding: 5px 9px;
+
+            border-radius: 20px;
+
+            font-size: 10px;
+
+            font-weight: 700;
+
+            letter-spacing: 0.3px;
+        }
+
+        .role-job-seeker {
+            background: #eaf2ff;
+            color: #2563eb;
+        }
+
+        .role-employer {
+            background: #ecfdf5;
+            color: #059669;
+        }
+
+        .role-admin {
+            background: #fef3c7;
+            color: #b45309;
+        }
+
+
+        /* ==================================================
+           ACTION BUTTONS
+        ================================================== */
+
+        .user-action-buttons {
+            display: flex;
+
+            gap: 8px;
+
+            align-items: center;
+
+            flex-wrap: wrap;
+        }
+
+        .view-user-btn,
+        .edit-role-btn {
+            border: none;
+
+            padding: 8px 12px;
+
+            border-radius: 6px;
+
+            cursor: pointer;
+
+            font-size: 12px;
+
+            transition: 0.3s;
+        }
+
+        .view-user-btn {
+            background: #eaf2ff;
+            color: #2563eb;
+        }
+
+        .view-user-btn:hover {
+            background: #dbeafe;
+            transform: translateY(-1px);
+        }
+
+        .edit-role-btn {
+            background: #0b1f3a;
+            color: white;
+        }
+
+        .edit-role-btn:hover {
+            background: #17345f;
+            transform: translateY(-1px);
+        }
+
+
+        /* ==================================================
+           EMPTY STATE
+        ================================================== */
+
+        .empty-state {
+            text-align: center;
+
+            padding: 50px 20px;
+
+            color: #64748b;
+        }
+
+        .empty-state h3 {
+            color: #334155;
+
+            margin-bottom: 8px;
+        }
+
+
+        /* ==================================================
+           USER DETAILS MODAL
+        ================================================== */
+
+        .user-modal {
+            display: none;
+
+            position: fixed;
+
+            inset: 0;
+
+            z-index: 9999;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 20px;
+        }
+
+        .user-modal.show {
+            display: flex;
+        }
+
+        .user-modal-overlay {
+            position: absolute;
+
+            inset: 0;
+
+            background:
+                rgba(15, 23, 42, 0.55);
+
+            backdrop-filter:
+                blur(3px);
+        }
+
+        .user-modal-content {
+            position: relative;
+
+            z-index: 1;
+
+            width: 100%;
+
+            max-width: 520px;
+
+            background: white;
+
+            border-radius: 16px;
+
+            box-shadow:
+                0 20px 50px
+                rgba(0, 0, 0, 0.20);
+
+            padding: 30px;
+
+            animation:
+                modalIn 0.2s ease-out;
+        }
+
+        @keyframes modalIn {
+
+            from {
+                opacity: 0;
+
+                transform:
+                    translateY(10px)
+                    scale(0.98);
+            }
+
+            to {
+                opacity: 1;
+
+                transform:
+                    translateY(0)
+                    scale(1);
+            }
+        }
+
+        .close-modal-btn {
+            position: absolute;
+
+            top: 15px;
+
+            right: 17px;
+
+            width: 34px;
+
+            height: 34px;
+
+            border: none;
+
+            border-radius: 50%;
+
+            background: #f1f5f9;
+
+            color: #475569;
+
+            font-size: 24px;
+
+            cursor: pointer;
+
+            line-height: 1;
+        }
+
+        .close-modal-btn:hover {
+            background: #e2e8f0;
+        }
+
+        .user-modal-header {
+            display: flex;
+
+            align-items: center;
+
+            gap: 15px;
+
+            padding-right: 40px;
+
+            padding-bottom: 24px;
+
+            border-bottom:
+                1px solid #e5e7eb;
+        }
+
+        .user-avatar {
+            width: 58px;
+
+            height: 58px;
+
+            border-radius: 50%;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            background: #eaf2ff;
+
+            color: #2563eb;
+
+            font-weight: 700;
+
+            font-size: 20px;
+
+            flex-shrink: 0;
+        }
+
+        .user-modal-header h2 {
+            margin: 0 0 4px;
+
+            color: #0b1f3a;
+
+            font-size: 22px;
+        }
+
+        .user-modal-header p {
+            margin: 0;
+
+            color: #6b7280;
+
+            font-size: 13px;
+        }
+
+
+        /* ==================================================
+           USER DETAILS
+        ================================================== */
+
+        .user-details-grid {
+            display: grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap: 15px;
+
+            padding: 25px 0;
+        }
+
+        .user-detail-item {
+            padding: 14px;
+
+            background: #f8fafc;
+
+            border-radius: 9px;
+
+            border:
+                1px solid #e5e7eb;
+        }
+
+        .user-detail-item span {
+            display: block;
+
+            font-size: 11px;
+
+            text-transform: uppercase;
+
+            letter-spacing: 0.4px;
+
+            color: #6b7280;
+
+            margin-bottom: 5px;
+        }
+
+        .user-detail-item strong {
+            font-size: 13px;
+
+            color: #0b1f3a;
+
+            word-break: break-word;
+        }
+
+        .modal-close-action {
+            width: 100%;
+
+            border: none;
+
+            padding: 12px;
+
+            border-radius: 8px;
+
+            background: #0b1f3a;
+
+            color: white;
+
+            cursor: pointer;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+            transition: 0.3s;
+        }
+
+        .modal-close-action:hover {
+            background: #17345f;
+        }
+
+
+        /* ==================================================
+           EDIT ROLE MODAL
+        ================================================== */
+
+        .edit-role-user-name {
+            padding: 20px 0 10px;
+        }
+
+        .edit-role-user-name span {
+            display: block;
+
+            font-size: 11px;
+
+            text-transform: uppercase;
+
+            letter-spacing: 0.4px;
+
+            color: #6b7280;
+
+            margin-bottom: 5px;
+        }
+
+        .edit-role-user-name strong {
+            display: block;
+
+            font-size: 18px;
+
+            color: #0b1f3a;
+        }
+
+        .edit-role-current {
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            padding: 14px 15px;
+
+            margin: 10px 0 20px;
+
+            background: #f8fafc;
+
+            border:
+                1px solid #e5e7eb;
+
+            border-radius: 9px;
+        }
+
+        .edit-role-current span {
+            font-size: 13px;
+
+            color: #6b7280;
+        }
+
+        .edit-role-current strong {
+            font-size: 12px;
+
+            color: #2563eb;
+        }
+
+        .edit-role-form {
+            margin-bottom: 24px;
+        }
+
+        .edit-role-form label {
+            display: block;
+
+            margin-bottom: 8px;
+
+            font-size: 13px;
+
+            font-weight: 600;
+
+            color: #374151;
+        }
+
+        .edit-role-form select {
+            width: 100%;
+
+            box-sizing: border-box;
+
+            padding: 12px;
+
+            border:
+                1px solid #d1d5db;
+
+            border-radius: 8px;
+
+            background: white;
+
+            color: #374151;
+
+            font-size: 14px;
+
+            outline: none;
+
+            cursor: pointer;
+        }
+
+        .edit-role-form select:focus {
+            border-color: #2563eb;
+
+            box-shadow:
+                0 0 0 3px
+                rgba(37, 99, 235, 0.10);
+        }
+
+        .edit-role-actions {
+            display: flex;
+
+            gap: 10px;
+        }
+
+        .cancel-role-btn,
+        .save-role-btn {
+            flex: 1;
+
+            border: none;
+
+            padding: 12px;
+
+            border-radius: 8px;
+
+            cursor: pointer;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+            transition: 0.3s;
+        }
+
+        .cancel-role-btn {
+            background: #f1f5f9;
+
+            color: #475569;
+        }
+
+        .cancel-role-btn:hover {
+            background: #e2e8f0;
+        }
+
+        .save-role-btn {
+            background: #2563eb;
+
+            color: white;
+        }
+
+        .save-role-btn:hover {
+            background: #1d4ed8;
+        }
+
+
+        /* ==================================================
+           MODAL BODY LOCK
+        ================================================== */
+
+        body.modal-open {
+            overflow: hidden;
+        }
+
+
+        /* ==================================================
+           LOADING
+        ================================================== */
+
+        .loading {
+            text-align: center;
+
+            padding: 40px;
+
+            color: #64748b;
+
+            font-size: 14px;
+        }
+
+
+        /* ==================================================
+           MOBILE
+        ================================================== */
+
+        @media (max-width: 700px) {
+
+            .admin-header {
+                flex-direction: column;
+
+                align-items: flex-start;
+
+                gap: 15px;
+            }
+
+            .filter-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .user-details-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .user-modal-content {
+                padding: 22px;
+            }
+
+            .edit-role-actions {
+                flex-direction: column;
+            }
+
+        }
+
+        @media (max-width: 600px) {
+
+            .page-container {
+                margin: 25px auto;
+
+                padding:
+                    0 12px;
+            }
+
+            .page-title h2 {
+                font-size: 24px;
+            }
+
+            th,
+            td {
+                padding:
+                    12px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ==================================================
+     ADMIN HEADER
+================================================== -->
+
+<header class="admin-header">
+
+    <div>
+
+        <h1>
+            JobConnect Admin
+        </h1>
+
+        <p>
+            User Management
+        </p>
+
+    </div>
+
+    <a
+        href="admin-dashboard.html"
+        class="back-btn">
+
+        ← Back to Dashboard
+
+    </a>
+
+</header>
+
+
+
+<!-- ==================================================
+     PAGE
+================================================== -->
+
+<main class="page-container">
+
+
+    <!-- PAGE TITLE -->
+
+    <div class="page-title">
+
+        <h2>
+            User Management
+        </h2>
+
+        <p>
+            View and manage JobConnect users.
+        </p>
+
+    </div>
+
+
+
+    <!-- ==================================================
+         FILTER SECTION
+    ================================================== -->
+
+    <section class="filter-section">
+
+        <div class="filter-grid">
+
+
+            <!-- SEARCH -->
+
+            <div class="filter-group">
+
+                <label for="searchUsers">
+                    Search Users
+                </label>
+
+                <input
+                    type="text"
+                    id="searchUsers"
+                    placeholder="Search by name, username or email...">
+
+            </div>
+
+
+            <!-- ROLE FILTER -->
+
+            <div class="filter-group">
+
+                <label for="roleFilter">
+                    Filter by Role
+                </label>
+
+                <select id="roleFilter">
+
+                    <option value="ALL">
+                        All Roles
+                    </option>
+
+                    <option value="JOB_SEEKER">
+                        Job Seekers
+                    </option>
+
+                    <option value="EMPLOYER">
+                        Employers
+                    </option>
+
+                    <option value="ADMIN">
+                        Administrators
+                    </option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ==================================================
+         USERS TABLE
+    ================================================== -->
+
+    <section class="users-card">
+
+
+        <div class="table-header">
+
+            <h3>
+                Registered Users
+            </h3>
+
+            <span
+                class="user-count"
+                id="userCount">
+
+                0 users
+
+            </span>
+
+        </div>
+
+
+        <div class="table-wrapper">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            User
+                        </th>
+
+                        <th>
+                            Email
+                        </th>
+
+                        <th>
+                            Phone
+                        </th>
+
+                        <th>
+                            Role
+                        </th>
+
+                        <th>
+                            Actions
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="usersTableBody">
+
+                    <tr>
+
+                        <td
+                            colspan="5"
+                            class="loading">
+
+                            Loading users...
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+
+<!-- ==================================================
+     USER DETAILS MODAL
+================================================== -->
+
+<div
+    id="userModal"
+    class="user-modal">
+
+
+    <div
+        class="user-modal-overlay"
+        id="userModalOverlay">
+    </div>
+
+
+    <div class="user-modal-content">
+
+
+        <button
+            type="button"
+            class="close-modal-btn"
+            id="closeUserModal">
+
+            &times;
+
+        </button>
+
+
+        <div class="user-modal-header">
+
+
+            <div
+                class="user-avatar"
+                id="modalAvatar">
+
+                JD
+
+            </div>
+
+
+            <div>
+
+                <h2 id="modalFullName">
+
+                    User Name
+
+                </h2>
+
+
+                <p id="modalUsername">
+
+                    @username
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="user-details-grid">
+
+
+            <div class="user-detail-item">
+
+                <span>
+                    Full Name
+                </span>
+
+                <strong id="modalName">
+                    -
+                </strong>
+
+            </div>
+
+
+            <div class="user-detail-item">
+
+                <span>
+                    Username
+                </span>
+
+                <strong id="modalUsernameValue">
+                    -
+                </strong>
+
+            </div>
+
+
+            <div class="user-detail-item">
+
+                <span>
+                    Email
+                </span>
+
+                <strong id="modalEmail">
+                    -
+                </strong>
+
+            </div>
+
+
+            <div class="user-detail-item">
+
+                <span>
+                    Phone
+                </span>
+
+                <strong id="modalPhone">
+                    -
+                </strong>
+
+            </div>
+
+
+            <div class="user-detail-item">
+
+                <span>
+                    Role
+                </span>
+
+                <strong
+                    id="modalRole"
+                    class="role-badge">
+
+                    -
+
+                </strong>
+
+            </div>
+
+        </div>
+
+
+
+        <button
+            type="button"
+            class="modal-close-action"
+            id="closeUserModalBtn">
+
+            Close
+
+        </button>
+
+    </div>
+
+</div>
+
+
+
+<!-- ==================================================
+     EDIT USER ROLE MODAL
+     
+     IMPORTANT:
+     This modal is OUTSIDE the user details modal.
+================================================== -->
+
+<div
+    id="editRoleModal"
+    class="user-modal">
+
+
+    <div
+        class="user-modal-overlay"
+        id="editRoleModalOverlay">
+    </div>
+
+
+    <div class="user-modal-content">
+
+
+        <button
+            type="button"
+            class="close-modal-btn"
+            id="closeEditRoleModal">
+
+            &times;
+
+        </button>
+
+
+        <div class="user-modal-header">
+
+
+            <div
+                class="user-avatar"
+                id="editRoleAvatar">
+
+                JD
+
+            </div>
+
+
+            <div>
+
+                <h2>
+                    Edit User Role
+                </h2>
+
+
+                <p id="editRoleUsername">
+
+                    @username
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- USER NAME -->
+
+        <div class="edit-role-user-name">
+
+            <span>
+                User
+            </span>
+
+            <strong id="editRoleFullName">
+
+                User Name
+
+            </strong>
+
+        </div>
+
+
+
+        <!-- CURRENT ROLE -->
+
+        <div class="edit-role-current">
+
+            <span>
+                Current Role
+            </span>
+
+            <strong id="currentUserRole">
+
+                JOB_SEEKER
+
+            </strong>
+
+        </div>
+
+
+
+        <!-- ROLE SELECT -->
+
+        <div class="edit-role-form">
+
+            <label for="newUserRole">
+
+                Change Role
+
+            </label>
+
+
+            <select id="newUserRole">
+
+                <option value="JOB_SEEKER">
+
+                    Job Seeker
+
+                </option>
+
+
+                <option value="EMPLOYER">
+
+                    Employer
+
+                </option>
+
+            </select>
+
+        </div>
+
+
+
+        <!-- ACTIONS -->
+
+        <div class="edit-role-actions">
+
+
+            <button
+                type="button"
+                class="cancel-role-btn"
+                id="cancelEditRole">
+
+                Cancel
+
+            </button>
+
+
+            <button
+                type="button"
+                class="save-role-btn"
+                id="saveUserRole">
+
+                Save Changes
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- ==================================================
+     JAVASCRIPT
+================================================== -->
+
+<script>
+
+
+/* ==================================================
+   GLOBAL VARIABLES
+================================================== */
+
+let allUsers = [];
+
+let selectedUserId = null;
+
+
+
+/* ==================================================
+   GET TOKEN
+================================================== */
+
+const token =
+    localStorage.getItem("token");
+
+
+
+/* ==================================================
+   LOAD USERS
+================================================== */
+
+function loadUsers() {
+
+    if (!token) {
+
+        alert(
+            "You are not logged in."
+        );
+
+        window.location.href =
+            "login.html";
+
+        return;
+
+    }
+
+
+    fetch(
+        "/admin/users",
+        {
+            method: "GET",
+
+            headers: {
+
+                "Authorization":
+                    "Bearer " + token
+
+            }
+        }
+    )
+
+    .then(response => {
+
+        if (response.status === 403) {
+
+            throw new Error(
+                "Access denied. Admin only."
+            );
+
+        }
+
+
+        if (response.status === 401) {
+
+            throw new Error(
+                "Your session has expired. Please login again."
+            );
+
+        }
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Failed to load users."
+            );
+
+        }
+
+
+        return response.json();
+
+    })
+
+    .then(users => {
+
+        allUsers = users;
+
+        displayUsers(allUsers);
+
+    })
+
+    .catch(error => {
+
+        console.error(error);
+
+        document.getElementById(
+            "usersTableBody"
+        ).innerHTML = `
+
+            <tr>
+
+                <td
+                    colspan="5"
+                    class="empty-state">
+
+                    <h3>
+                        Unable to load users
+                    </h3>
+
+                    <p>
+                        ${error.message}
+                    </p>
+
+                </td>
+
+            </tr>
+
+        `;
+
+    });
+
+}
+
+
+
+/* ==================================================
+   DISPLAY USERS
+================================================== */
+
+function displayUsers(users) {
+
+    const tableBody =
+        document.getElementById(
+            "usersTableBody"
+        );
+
+
+    const userCount =
+        document.getElementById(
+            "userCount"
+        );
+
+
+    userCount.textContent =
+        users.length +
+        (users.length === 1
+            ? " user"
+            : " users");
+
+
+    if (users.length === 0) {
+
+        tableBody.innerHTML = `
+
+            <tr>
+
+                <td
+                    colspan="5"
+                    class="empty-state">
+
+                    <h3>
+                        No users found
+                    </h3>
+
+                    <p>
+                        Try changing your search or filter.
+                    </p>
+
+                </td>
+
+            </tr>
+
+        `;
+
+        return;
+
+    }
+
+
+    tableBody.innerHTML =
+        users.map(user => {
+
+
+            let roleClass =
+                "role-job-seeker";
+
+
+            if (user.role === "EMPLOYER") {
+
+                roleClass =
+                    "role-employer";
+
+            }
+
+
+            if (user.role === "ADMIN") {
+
+                roleClass =
+                    "role-admin";
+
+            }
+
+
+            let roleLabel =
+                user.role;
+
+
+            if (user.role === "JOB_SEEKER") {
+
+                roleLabel =
+                    "JOB SEEKER";
+
+            }
+
+
+            return `
+
+                <tr>
+
+                    <td>
+
+                        <div class="user-name">
+
+                            ${escapeHtml(
+                                user.fullName ?? "-"
+                            )}
+
+                        </div>
+
+
+                        <span
+                            class="user-username">
+
+                            @${escapeHtml(
+                                user.username ?? "-"
+                            )}
+
+                        </span>
+
+                    </td>
+
+
+                    <td>
+
+                        ${escapeHtml(
+                            user.email ?? "-"
+                        )}
+
+                    </td>
+
+
+                    <td>
+
+                        ${escapeHtml(
+                            user.phone ?? "-"
+                        )}
+
+                    </td>
+
+
+                    <td>
+
+                        <span
+                            class="role-badge ${roleClass}">
+
+                            ${roleLabel}
+
+                        </span>
+
+                    </td>
+
+
+                    <td>
+
+                        <div
+                            class="user-action-buttons">
+
+
+                            <button
+                                type="button"
+                                class="view-user-btn"
+                                onclick="viewUser('${escapeJs(
+                                    user.username
+                                )}')">
+
+                                View
+
+                            </button>
+
+
+                            <button
+                                type="button"
+                                class="edit-role-btn"
+                                onclick="editUserRole(${user.id})">
+
+                                Edit Role
+
+                            </button>
+
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+            `;
+
+        }).join("");
+
+}
+
+
+
+/* ==================================================
+   VIEW USER
+================================================== */
+
+window.viewUser =
+function(username) {
+
+    const user =
+        allUsers.find(
+            u =>
+                u.username === username
+        );
+
+
+    if (!user) {
+
+        return;
+
+    }
+
+
+    document.getElementById(
+        "modalFullName"
+    ).textContent =
+        user.fullName ?? "-";
+
+
+    document.getElementById(
+        "modalUsername"
+    ).textContent =
+        "@" +
+        (user.username ?? "-");
+
+
+    document.getElementById(
+        "modalName"
+    ).textContent =
+        user.fullName ?? "-";
+
+
+    document.getElementById(
+        "modalUsernameValue"
+    ).textContent =
+        user.username ?? "-";
+
+
+    document.getElementById(
+        "modalEmail"
+    ).textContent =
+        user.email ?? "-";
+
+
+    document.getElementById(
+        "modalPhone"
+    ).textContent =
+        user.phone ?? "-";
+
+
+    const roleElement =
+        document.getElementById(
+            "modalRole"
+        );
+
+
+    roleElement.textContent =
+        user.role ?? "-";
+
+
+    roleElement.className =
+        "role-badge";
+
+
+    if (user.role === "JOB_SEEKER") {
+
+        roleElement.classList.add(
+            "role-job-seeker"
+        );
+
+    }
+    else if (user.role === "EMPLOYER") {
+
+        roleElement.classList.add(
+            "role-employer"
+        );
+
+    }
+    else if (user.role === "ADMIN") {
+
+        roleElement.classList.add(
+            "role-admin"
+        );
+
+    }
+
+
+    const avatar =
+        document.getElementById(
+            "modalAvatar"
+        );
+
+
+    const name =
+        user.fullName ??
+        user.username ??
+        "U";
+
+
+    avatar.textContent =
+        name
+            .split(" ")
+            .map(part =>
+                part.charAt(0)
+            )
+            .join("")
+            .substring(0, 2)
+            .toUpperCase();
+
+
+    document.getElementById(
+        "userModal"
+    ).classList.add("show");
+
+
+    document.body.classList.add(
+        "modal-open"
+    );
+
+};
+
+
+
+/* ==================================================
+   CLOSE USER MODAL
+================================================== */
+
+function closeUserModal() {
+
+    document.getElementById(
+        "userModal"
+    ).classList.remove("show");
+
+
+    document.body.classList.remove(
+        "modal-open"
+    );
+
+}
+
+
+document.getElementById(
+    "closeUserModal"
+).addEventListener(
+    "click",
+    closeUserModal
+);
+
+
+document.getElementById(
+    "closeUserModalBtn"
+).addEventListener(
+    "click",
+    closeUserModal
+);
+
+
+document.getElementById(
+    "userModalOverlay"
+).addEventListener(
+    "click",
+    closeUserModal
+);
+
+
+
+/* ==================================================
+   EDIT USER ROLE
+================================================== */
+
+window.editUserRole =
+function(userId) {
+
+    const user =
+        allUsers.find(
+            u =>
+                u.id === userId
+        );
+
+
+    if (!user) {
+
+        return;
+
+    }
+
+
+    selectedUserId =
+        user.id;
+
+
+    /*
+       ADMIN ROLE CANNOT BE CHANGED
+    */
+
+    if (user.role === "ADMIN") {
+
+        alert(
+            "Administrator role cannot be changed."
+        );
+
+        selectedUserId = null;
+
+        return;
+
+    }
+
+
+    document.getElementById(
+        "editRoleFullName"
+    ).textContent =
+        user.fullName ?? "-";
+
+
+    document.getElementById(
+        "editRoleUsername"
+    ).textContent =
+        "@" +
+        (user.username ?? "-");
+
+
+    document.getElementById(
+        "currentUserRole"
+    ).textContent =
+        user.role ?? "-";
+
+
+    const avatar =
+        document.getElementById(
+            "editRoleAvatar"
+        );
+
+
+    const name =
+        user.fullName ??
+        user.username ??
+        "U";
+
+
+    avatar.textContent =
+        name
+            .split(" ")
+            .map(part =>
+                part.charAt(0)
+            )
+            .join("")
+            .substring(0, 2)
+            .toUpperCase();
+
+
+    const roleSelect =
+        document.getElementById(
+            "newUserRole"
+        );
+
+
+    roleSelect.value =
+        user.role === "EMPLOYER"
+            ? "EMPLOYER"
+            : "JOB_SEEKER";
+
+
+    document.getElementById(
+        "editRoleModal"
+    ).classList.add("show");
+
+
+    document.body.classList.add(
+        "modal-open"
+    );
+
+};
+
+
+
+/* ==================================================
+   CLOSE EDIT ROLE MODAL
+================================================== */
+
+function closeEditRoleModal() {
+
+    document.getElementById(
+        "editRoleModal"
+    ).classList.remove("show");
+
+
+    document.body.classList.remove(
+        "modal-open"
+    );
+
+
+    selectedUserId = null;
+
+}
+
+
+document.getElementById(
+    "closeEditRoleModal"
+).addEventListener(
+    "click",
+    closeEditRoleModal
+);
+
+
+document.getElementById(
+    "cancelEditRole"
+).addEventListener(
+    "click",
+    closeEditRoleModal
+);
+
+
+document.getElementById(
+    "editRoleModalOverlay"
+).addEventListener(
+    "click",
+    closeEditRoleModal
+);
+
+
+
+/* ==================================================
+   SEARCH USERS
+================================================== */
+
+document.getElementById(
+    "searchUsers"
+).addEventListener(
+    "input",
+    applyFilters
+);
+
+
+
+/* ==================================================
+   ROLE FILTER
+================================================== */
+
+document.getElementById(
+    "roleFilter"
+).addEventListener(
+    "change",
+    applyFilters
+);
+
+
+
+/* ==================================================
+   APPLY SEARCH + FILTER
+================================================== */
+
+function applyFilters() {
+
+    const search =
+        document.getElementById(
+            "searchUsers"
+        ).value
+        .toLowerCase()
+        .trim();
+
+
+    const role =
+        document.getElementById(
+            "roleFilter"
+        ).value;
+
+
+    const filteredUsers =
+        allUsers.filter(user => {
+
+
+            const matchesSearch =
+
+                (user.fullName ?? "")
+                    .toLowerCase()
+                    .includes(search)
+
+                ||
+
+                (user.username ?? "")
+                    .toLowerCase()
+                    .includes(search)
+
+                ||
+
+                (user.email ?? "")
+                    .toLowerCase()
+                    .includes(search);
+
+
+            const matchesRole =
+
+                role === "ALL"
+                ||
+                user.role === role;
+
+
+            return (
+                matchesSearch &&
+                matchesRole
+            );
+
+        });
+
+
+    displayUsers(
+        filteredUsers
+    );
+
+}
+
+
+
+/* ==================================================
+   ESCAPE HTML
+================================================== */
+
+function escapeHtml(value) {
+
+    return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+
+}
+
+
+
+/* ==================================================
+   ESCAPE JAVASCRIPT
+================================================== */
+
+function escapeJs(value) {
+
+    return String(value)
+        .replace(/\\/g, "\\\\")
+        .replace(/'/g, "\\'");
+
+}
+
+
+
+/* ==================================================
+   ESC KEY
+================================================== */
+
+document.addEventListener(
+    "keydown",
+    function(event) {
+
+        if (
+            event.key === "Escape"
+        ) {
+
+            const userModal =
+                document.getElementById(
+                    "userModal"
+                );
+
+
+            const editModal =
+                document.getElementById(
+                    "editRoleModal"
+                );
+
+
+            if (
+                editModal.classList.contains(
+                    "show"
+                )
+            ) {
+
+                closeEditRoleModal();
+
+            }
+            else if (
+                userModal.classList.contains(
+                    "show"
+                )
+            ) {
+
+                closeUserModal();
+
+            }
+
+        }
+
+    }
+);
+
+
+
+/* ==================================================
+   SAVE USER ROLE
+================================================== */
+
+document.getElementById(
+    "saveUserRole"
+).addEventListener(
+    "click",
+    function() {
+
+        // Make sure a user is selected
+
+        if (!selectedUserId) {
+
+            alert("No user selected.");
+
+            return;
+        }
+
+
+        // Get JWT token
+
+        const token =
+            localStorage.getItem("token");
+
+
+        // Get selected role
+
+        const newRole =
+            document.getElementById(
+                "newUserRole"
+            ).value;
+
+
+        // Disable button while saving
+
+        const saveButton =
+            document.getElementById(
+                "saveUserRole"
+            );
+
+
+        saveButton.disabled = true;
+
+        saveButton.textContent =
+            "Saving...";
+
+
+        // Send update to Spring Boot
+
+        fetch(
+            "/admin/users/" +
+            selectedUserId +
+            "/role",
+            {
+
+                method: "PUT",
+
+                headers: {
+
+                    "Authorization":
+                        "Bearer " + token,
+
+                    "Content-Type":
+                        "application/json"
+
+                },
+
+                body: JSON.stringify({
+
+                    role: newRole
+
+                })
+
+            }
+        )
+
+        .then(response => {
+
+            if (response.status === 403) {
+
+                throw new Error(
+                    "Access denied. Admin only."
+                );
+            }
+
+
+            if (response.status === 401) {
+
+                throw new Error(
+                    "Your session has expired. Please login again."
+                );
+            }
+
+
+            if (!response.ok) {
+
+                return response.text()
+                    .then(message => {
+
+                        throw new Error(
+                            message ||
+                            "Failed to update user role."
+                        );
+
+                    });
+
+            }
+
+
+            return response.json();
+
+        })
+
+        .then(updatedUser => {
+
+            // Update user inside allUsers
+
+            const index =
+                allUsers.findIndex(
+                    user =>
+                        user.id ===
+                        updatedUser.id
+                );
+
+
+            if (index !== -1) {
+
+                allUsers[index] =
+                    updatedUser;
+
+            }
+
+
+            // Refresh the table
+
+            applyFilters();
+
+
+            // Close modal
+
+            closeEditRoleModal();
+
+
+            // Success message
+
+            alert(
+                "User role updated successfully."
+            );
+
+        })
+
+        .catch(error => {
+
+            console.error(
+                "Role update error:",
+                error
+            );
+
+
+            alert(
+                error.message
+            );
+
+        })
+
+        .finally(() => {
+
+            // Restore button
+
+            saveButton.disabled =
+                false;
+
+            saveButton.textContent =
+                "Save Changes";
+
+        });
+
+    }
+);
+
+
+/* ==================================================
+   START
+================================================== */
+
+loadUsers();
+
+
+</script>
+
+</body>
+
+</html>

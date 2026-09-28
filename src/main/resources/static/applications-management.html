@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>Manage Applications - JobConnect</title>
+
+<link rel="stylesheet"
+      href="css/style.css">
+
+
+</head>
+
+<body>
+
+
+<!-- =========================================
+     NAVIGATION
+     ========================================= -->
+
+<header>
+
+    <nav class="navbar">
+
+        <div class="logo">
+
+            JobConnect
+
+        </div>
+
+
+        <ul class="nav-links">
+
+            <li>
+
+                <a href="index.html">
+                    Home
+                </a>
+
+            </li>
+
+
+            <li>
+
+                <a href="jobs.html">
+                    Jobs
+                </a>
+
+            </li>
+
+
+            <li>
+
+                <a href="applications-management.html">
+                    Applications
+                </a>
+
+            </li>
+
+
+            <li>
+
+                <a href="profile.html">
+                    Profile
+                </a>
+
+            </li>
+
+
+            <li>
+
+                <a href="#" id="logoutBtn">
+                    Logout
+                </a>
+
+            </li>
+
+        </ul>
+
+    </nav>
+
+</header>
+
+
+
+<!-- =========================================
+     APPLICATION MANAGEMENT
+     ========================================= -->
+
+<main class="applications-management">
+
+    <section class="management-section">
+
+
+        <h1>
+
+            Application Management
+
+        </h1>
+
+
+        <p class="management-intro">
+
+            Review and manage job applications.
+
+        </p>
+
+
+
+        <!-- =========================================
+             LOADING MESSAGE
+             ========================================= -->
+
+        <p id="managementLoading">
+
+            Loading applications...
+
+        </p>
+
+
+
+        <!-- =========================================
+             APPLICATIONS CONTAINER
+             IMPORTANT:
+             This ID must match app.js
+             ========================================= -->
+
+        <div
+
+            id="applicationsManagementList"
+
+            class="management-applications-list">
+
+        </div>
+
+
+
+        <!-- =========================================
+             NO APPLICATIONS
+             ========================================= -->
+
+        <p
+
+            id="noManagementApplications"
+
+            style="display: none;">
+
+            No applications found.
+
+        </p>
+
+
+    </section>
+
+</main>
+
+
+
+<!-- =========================================
+     FOOTER
+     ========================================= -->
+
+<footer>
+
+    <p>
+
+        &copy; 2026 JobConnect.
+        All Rights Reserved.
+
+    </p>
+
+</footer>
+
+
+
+<!-- =========================================
+     JAVASCRIPT
+     ========================================= -->
+
+<script src="js/app.js"></script>
+
+
+</body>
+
+</html>

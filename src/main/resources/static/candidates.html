@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>JobConnect | Candidates</title>
+
+    <link rel="stylesheet"
+          href="css/style.css">
+
+</head>
+
+<body>
+
+    <!-- =========================================
+         HEADER
+    ========================================== -->
+
+    <header>
+
+        <nav class="navbar">
+
+            <div class="logo">
+
+                Job<span>Connect</span>
+
+            </div>
+
+
+            <ul class="nav-links">
+
+                <li>
+
+                    <a href="employer-dashboard.html">
+                        Dashboard
+                    </a>
+
+                </li>
+
+
+                <li>
+
+                    <a href="jobs.html">
+                        Jobs
+                    </a>
+
+                </li>
+
+
+                <li>
+
+                    <a href="post-job.html">
+                        Post Job
+                    </a>
+
+                </li>
+
+
+                <li>
+
+                    <a href="manage-jobs.html">
+                        Manage Jobs
+                    </a>
+
+                </li>
+
+
+                <li>
+
+                    <a href="applications-management.html">
+                        Applications
+                    </a>
+
+                </li>
+
+
+                <li>
+
+                    <a href="candidates.html"
+                       class="active">
+
+                        Candidates
+
+                    </a>
+
+                </li>
+
+
+                <li>
+
+                    <a href="profile.html">
+                        Profile
+                    </a>
+
+                </li>
+
+
+                <li>
+
+                    <span id="welcomeUser"></span>
+
+                </li>
+
+
+                <li id="logoutLink"
+                    style="display: none;">
+
+                    <a href="#"
+                       id="logoutBtn">
+
+                        Logout
+
+                    </a>
+
+                </li>
+
+            </ul>
+
+        </nav>
+
+    </header>
+
+
+    <!-- =========================================
+         CANDIDATES SECTION
+    ========================================== -->
+
+    <section class="candidates-section">
+
+        <div class="candidates-container">
+
+
+            <!-- PAGE HEADER -->
+
+            <div class="candidates-header">
+
+                <h1>
+                    Candidates
+                </h1>
+
+                <p>
+
+                    Review and manage candidates who have
+                    applied for your jobs.
+
+                </p>
+
+            </div>
+
+
+            <!-- MESSAGE -->
+
+            <div
+                id="candidatesMessage"
+                class="candidates-message"
+                style="display: none;">
+
+            </div>
+
+
+            <!-- CANDIDATES LIST -->
+
+            <div
+                id="candidatesList"
+                class="candidates-list">
+
+                <div class="candidates-loading">
+
+                    Loading candidates...
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================================
+         FOOTER
+    ========================================== -->
+
+    <footer>
+
+        <p>
+
+            © 2026 JobConnect. All Rights Reserved.
+
+        </p>
+
+    </footer>
+
+
+    <!-- =========================================
+         MAIN JAVASCRIPT
+    ========================================== -->
+
+    <script src="js/app.js"></script>
+
+
+    <!-- =========================================
+         CANDIDATES JAVASCRIPT
+    ========================================== -->
+
+    <script>
+
+
+        // =========================================
+        // ELEMENTS
+        // =========================================
+
+        const candidatesList =
+            document.getElementById(
+                "candidatesList"
+            );
+
+
+        const candidatesMessage =
+            document.getElementById(
+                "candidatesMessage"
+            );
+
+
+        // =========================================
+        // LOGIN INFORMATION
+        // =========================================
+
+        const token =
+            localStorage.getItem("token");
+
+
+        const role =
+            localStorage.getItem("role");
+
+
+        // =========================================
+        // CHECK LOGIN
+        // =========================================
+
+        if (!token) {
+
+            window.location.href =
+                "login.html";
+
+        }
+
+
+        // =========================================
+        // CHECK EMPLOYER ROLE
+        // =========================================
+
+        if (
+            token &&
+            role !== "EMPLOYER" &&
+            role !== "ADMIN"
+        ) {
+
+            candidatesList.innerHTML = `
+
+                <div class="candidates-loading">
+
+                    You are not authorized to view candidates.
+
+                </div>
+
+            `;
+
+        }
+
+
+        // =========================================
+        // LOAD CANDIDATES
+        // =========================================
+
+        async function loadCandidates() {
+
+            if (
+                !token ||
+                (
+                    role !== "EMPLOYER" &&
+                    role !== "ADMIN"
+                )
+            ) {
+
+                return;
+
+            }
+
+
+            try {
+
+                const response =
+                    await fetch(
+                        "/applications",
+                        {
+                            method: "GET",
+
+                            headers: {
+
+                                "Authorization":
+                                    "Bearer " + token
+
+                            }
+
+                        }
+                    );
+
+
+                if (!response.ok) {
+
+                    if (response.status === 403) {
+
+                        throw new Error(
+                            "You are not authorized to view candidates."
+                        );
+
+                    }
+
+
+                    throw new Error(
+                        "Unable to load candidates."
+                    );
+
+                }
+
+
+                const applications =
+                    await response.json();
+
+
+                displayCandidates(
+                    applications
+                );
+
+
+            }
+
+            catch (error) {
+
+                console.error(
+                    "Candidates error:",
+                    error
+                );
+
+
+                candidatesList.innerHTML = `
+
+                    <div class="candidates-loading">
+
+                        Unable to load candidates.
+                        Please try again.
+
+                    </div>
+
+                `;
+
+            }
+
+        }
+
+
+        // =========================================
+        // DISPLAY CANDIDATES
+        // =========================================
+
+        function displayCandidates(
+            applications
+        ) {
+
+
+            // =====================================
+            // NO CANDIDATES
+            // =====================================
+
+            if (
+                !applications ||
+                applications.length === 0
+            ) {
+
+                candidatesList.innerHTML = `
+
+                    <div class="no-candidates">
+
+                        <h3>
+                            No Candidates Yet
+                        </h3>
+
+                        <p>
+
+                            No candidates have applied
+                            for your jobs yet.
+
+                        </p>
+
+                    </div>
+
+                `;
+
+                return;
+
+            }
+
+
+            // =====================================
+            // CLEAR EXISTING CANDIDATES
+            // =====================================
+
+            candidatesList.innerHTML = "";
+
+
+            // =====================================
+            // CREATE CANDIDATE CARDS
+            // =====================================
+
+            applications.forEach(
+                function(application) {
+
+
+                    // =================================
+                    // CREATE CARD
+                    // =================================
+
+                    const candidateCard =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    candidateCard.className =
+                        "candidate-card";
+
+
+                    // =================================
+                    // CREATE MAIN CARD CONTENT
+                    // =================================
+
+                    candidateCard.innerHTML = `
+
+                        <div class="candidate-header">
+
+
+                            <div>
+
+                                <h2>
+
+                                    ${
+                                        application.fullName ||
+                                        "Unknown Applicant"
+                                    }
+
+                                </h2>
+
+
+                                <p class="candidate-job">
+
+                                    Applied for:
+
+                                    <strong>
+
+                                        ${
+                                            application.jobTitle ||
+                                            "Job"
+                                        }
+
+                                    </strong>
+
+                                </p>
+
+                            </div>
+
+
+                            <span class="candidate-status
+                                ${getStatusClass(application.status)}">
+
+                                ${
+                                    application.status ||
+                                    "Pending"
+                                }
+
+                            </span>
+
+                        </div>
+
+
+                        <div class="candidate-details">
+
+
+                            <p>
+
+                                <strong>
+                                    Email:
+                                </strong>
+
+                                ${
+                                    application.email ||
+                                    "Not provided"
+                                }
+
+                            </p>
+
+
+                            <p>
+
+                                <strong>
+                                    Phone:
+                                </strong>
+
+                                ${
+                                    application.phone ||
+                                    "Not provided"
+                                }
+
+                            </p>
+
+
+                            <p>
+
+                                <strong>
+                                    Applied:
+                                </strong>
+
+                                ${
+                                    formatCandidateDate(
+                                        application.appliedAt
+                                    )
+                                }
+
+                            </p>
+
+
+                        </div>
+
+
+                        <div class="candidate-cover-letter">
+
+
+                            <strong>
+
+                                Cover Letter
+
+                            </strong>
+
+
+                            <p>
+
+                                ${
+                                    application.coverLetter ||
+                                    "No cover letter provided."
+                                }
+
+                            </p>
+
+
+                        </div>
+
+
+                        <div class="candidate-actions">
+
+
+                            <button
+                                type="button"
+                                class="view-candidate-btn"
+                                data-id="${application.id}">
+
+                                View
+
+                            </button>
+
+
+                        </div>
+
+                    `;
+
+
+                    // =================================
+                    // ADD ACCEPT / REJECT ONLY
+                    // FOR PENDING APPLICATIONS
+                    // =================================
+
+                    const status =
+                        application.status
+                            ? application.status.toLowerCase()
+                            : "pending";
+
+
+                    if (status === "pending") {
+
+
+                        const candidateActions =
+                            candidateCard.querySelector(
+                                ".candidate-actions"
+                            );
+
+
+                        // =============================
+                        // ACCEPT BUTTON
+                        // =============================
+
+                        const acceptButton =
+                            document.createElement(
+                                "button"
+                            );
+
+
+                        acceptButton.type =
+                            "button";
+
+
+                        acceptButton.className =
+                            "accept-candidate-btn";
+
+
+                        acceptButton.setAttribute(
+                            "data-id",
+                            application.id
+                        );
+
+
+                        acceptButton.textContent =
+                            "Accept";
+
+
+                        candidateActions.appendChild(
+                            acceptButton
+                        );
+
+
+                        // =============================
+                        // REJECT BUTTON
+                        // =============================
+
+                        const rejectButton =
+                            document.createElement(
+                                "button"
+                            );
+
+
+                        rejectButton.type =
+                            "button";
+
+
+                        rejectButton.className =
+                            "reject-candidate-btn";
+
+
+                        rejectButton.setAttribute(
+                            "data-id",
+                            application.id
+                        );
+
+
+                        rejectButton.textContent =
+                            "Reject";
+
+
+                        candidateActions.appendChild(
+                            rejectButton
+                        );
+
+                    }
+
+
+                    // =================================
+                    // ADD CARD TO PAGE
+                    // =================================
+
+                    candidatesList.appendChild(
+                        candidateCard
+                    );
+
+                }
+            );
+
+
+            // =====================================
+            // VIEW CANDIDATE BUTTONS
+            // =====================================
+
+            const viewButtons =
+                document.querySelectorAll(
+                    ".view-candidate-btn"
+                );
+
+
+            viewButtons.forEach(
+                function(button) {
+
+                    button.addEventListener(
+                        "click",
+                        function() {
+
+                            const applicationId =
+                                this.getAttribute(
+                                    "data-id"
+                                );
+
+
+                            window.location.href =
+                                "candidate-details.html?id=" +
+                                applicationId;
+
+                        }
+                    );
+
+                }
+            );
+
+
+            // =====================================
+            // ACCEPT BUTTONS
+            // =====================================
+
+            const acceptButtons =
+                document.querySelectorAll(
+                    ".accept-candidate-btn"
+                );
+
+
+            acceptButtons.forEach(
+                function(button) {
+
+                    button.addEventListener(
+                        "click",
+                        function() {
+
+                            const applicationId =
+                                this.getAttribute(
+                                    "data-id"
+                                );
+
+
+                            updateApplicationStatus(
+                                applicationId,
+                                "accept"
+                            );
+
+                        }
+                    );
+
+                }
+            );
+
+
+            // =====================================
+            // REJECT BUTTONS
+            // =====================================
+
+            const rejectButtons =
+                document.querySelectorAll(
+                    ".reject-candidate-btn"
+                );
+
+
+            rejectButtons.forEach(
+                function(button) {
+
+                    button.addEventListener(
+                        "click",
+                        function() {
+
+                            const applicationId =
+                                this.getAttribute(
+                                    "data-id"
+                                );
+
+
+                            updateApplicationStatus(
+                                applicationId,
+                                "reject"
+                            );
+
+                        }
+                    );
+
+                }
+            );
+
+        }
+
+
+        // =========================================
+        // UPDATE APPLICATION STATUS
+        // =========================================
+
+        async function updateApplicationStatus(
+            applicationId,
+            action
+        ) {
+
+
+            const confirmed =
+                confirm(
+
+                    action === "accept"
+
+                        ? "Are you sure you want to accept this candidate?"
+
+                        : "Are you sure you want to reject this candidate?"
+
+                );
+
+
+            if (!confirmed) {
+
+                return;
+
+            }
+
+
+            try {
+
+
+                const response =
+                    await fetch(
+                        `/applications/${applicationId}/${action}`,
+                        {
+
+                            method: "PUT",
+
+                            headers: {
+
+                                "Authorization":
+                                    "Bearer " + token
+
+                            }
+
+                        }
+                    );
+
+
+                const message =
+                    await response.text();
+
+
+                if (response.ok) {
+
+
+                    candidatesMessage.style.display =
+                        "block";
+
+
+                    candidatesMessage.style.color =
+                        "green";
+
+
+                    candidatesMessage.textContent =
+
+                        action === "accept"
+
+                            ? "Candidate accepted successfully."
+
+                            : "Candidate rejected successfully.";
+
+
+                    loadCandidates();
+
+                }
+
+
+                else {
+
+
+                    candidatesMessage.style.display =
+                        "block";
+
+
+                    candidatesMessage.style.color =
+                        "red";
+
+
+                    candidatesMessage.textContent =
+                        message ||
+                        "Unable to update application.";
+
+                }
+
+
+            }
+
+            catch (error) {
+
+
+                console.error(
+                    "Status update error:",
+                    error
+                );
+
+
+                candidatesMessage.style.display =
+                    "block";
+
+
+                candidatesMessage.style.color =
+                    "red";
+
+
+                candidatesMessage.textContent =
+                    "Unable to connect to the server.";
+
+            }
+
+        }
+
+
+        // =========================================
+        // STATUS CLASS
+        // =========================================
+
+        function getStatusClass(status) {
+
+
+            if (!status) {
+
+                return "status-pending";
+
+            }
+
+
+            const normalizedStatus =
+                status.toLowerCase();
+
+
+            if (
+                normalizedStatus === "accepted"
+            ) {
+
+                return "status-accepted";
+
+            }
+
+
+            if (
+                normalizedStatus === "rejected"
+            ) {
+
+                return "status-rejected";
+
+            }
+
+
+            return "status-pending";
+
+        }
+
+
+        // =========================================
+        // FORMAT DATE
+        // =========================================
+
+        function formatCandidateDate(
+            dateString
+        ) {
+
+
+            if (!dateString) {
+
+                return "Not available";
+
+            }
+
+
+            const date =
+                new Date(dateString);
+
+
+            return date.toLocaleDateString(
+                "en-NG",
+                {
+
+                    year: "numeric",
+
+                    month: "long",
+
+                    day: "numeric"
+
+                }
+            );
+
+        }
+
+
+        // =========================================
+        // LOAD DATA
+        // =========================================
+
+        loadCandidates();
+
+
+    </script>
+
+
+</body>
+
+</html>

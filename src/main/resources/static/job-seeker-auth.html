@@ -1,0 +1,342 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>JobConnect | Job Seeker</title>
+
+    <link rel="stylesheet"
+          href="css/style.css">
+
+    <style>
+
+        /* ==================================================
+           JOB SEEKER AUTHENTICATION PAGE
+        ================================================== */
+
+        .auth-choice-page {
+
+            min-height: calc(100vh - 140px);
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            padding: 50px 20px;
+
+            background: #f5f7fa;
+        }
+
+
+        .auth-choice-container {
+
+            width: 100%;
+            max-width: 850px;
+
+            text-align: center;
+        }
+
+
+        .auth-choice-container h1 {
+
+            color: #0b1f3a;
+
+            margin-bottom: 10px;
+
+        }
+
+
+        .auth-choice-container > p {
+
+            color: #666;
+
+            margin-bottom: 35px;
+
+        }
+
+
+        .auth-choice-cards {
+
+            display: flex;
+
+            justify-content: center;
+
+            gap: 30px;
+
+            flex-wrap: wrap;
+        }
+
+
+        .auth-choice-card {
+
+            background: white;
+
+            width: 350px;
+
+            padding: 35px 30px;
+
+            border-radius: 10px;
+
+            box-shadow:
+                0 5px 18px rgba(0, 0, 0, 0.10);
+
+            text-align: center;
+        }
+
+
+        .auth-choice-icon {
+
+            font-size: 45px;
+
+            margin-bottom: 15px;
+        }
+
+
+        .auth-choice-card h2 {
+
+            color: #0b1f3a;
+
+            margin-bottom: 12px;
+        }
+
+
+        .auth-choice-card p {
+
+            color: #666;
+
+            line-height: 1.6;
+
+            min-height: 50px;
+
+            margin-bottom: 25px;
+        }
+
+
+        .auth-choice-button {
+
+            display: inline-block;
+
+            padding: 12px 28px;
+
+            border-radius: 6px;
+
+            text-decoration: none;
+
+            font-weight: bold;
+
+            background: #0b1f3a;
+
+            color: white;
+
+            transition: 0.2s;
+        }
+
+
+        .auth-choice-button:hover {
+
+            background: #12345f;
+
+        }
+
+
+        .back-home {
+
+            display: inline-block;
+
+            margin-top: 30px;
+
+            color: #0b1f3a;
+
+            text-decoration: none;
+
+            font-weight: bold;
+        }
+
+
+        .back-home:hover {
+
+            text-decoration: underline;
+
+        }
+
+
+        /* ==================================================
+           MOBILE
+        ================================================== */
+
+        @media (max-width: 700px) {
+
+            .auth-choice-card {
+
+                width: 100%;
+
+                max-width: 380px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- ==================================================
+         HEADER
+    ================================================== -->
+
+    <header>
+
+        <nav class="navbar">
+
+            <div class="logo">
+                Job<span>Connect</span>
+            </div>
+
+            <ul class="nav-links">
+
+                <li>
+                    <a href="index.html">
+                        Home
+                    </a>
+                </li>
+
+                <li>
+                    <a href="jobs.html">
+                        Jobs
+                    </a>
+                </li>
+
+                <li>
+                    <a href="about.html">
+                        About
+                    </a>
+                </li>
+
+            </ul>
+
+        </nav>
+
+    </header>
+
+
+    <!-- ==================================================
+         MAIN CONTENT
+    ================================================== -->
+
+    <main class="auth-choice-page">
+
+        <div class="auth-choice-container">
+
+            <h1>
+                Job Seeker
+            </h1>
+
+            <p>
+                Find opportunities and take the next step
+                in your career.
+            </p>
+
+
+            <div class="auth-choice-cards">
+
+
+                <!-- ==================================================
+                     LOGIN
+                ================================================== -->
+
+                <div class="auth-choice-card">
+
+                    <div class="auth-choice-icon">
+                        🔐
+                    </div>
+
+                    <h2>
+                        Login
+                    </h2>
+
+                    <p>
+                        Already have a JobConnect account?
+                        Login to continue.
+                    </p>
+
+					<a href="login.html?role=JOB_SEEKER"
+					   class="auth-choice-button">
+					    Login
+					</a>
+                </div>
+
+
+                <!-- ==================================================
+                     REGISTER
+                ================================================== -->
+
+                <div class="auth-choice-card">
+
+                    <div class="auth-choice-icon">
+                        📝
+                    </div>
+
+                    <h2>
+                        Register
+                    </h2>
+
+                    <p>
+                        Don't have an account?
+                        Create your JobConnect account.
+                    </p>
+
+                    <a href="register.html"
+                       class="auth-choice-button">
+
+                        Register
+
+                    </a>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- ==================================================
+                 BACK TO HOME
+            ================================================== -->
+
+            <a href="index.html"
+               class="back-home">
+
+                ← Back to JobConnect Home
+
+            </a>
+
+        </div>
+
+    </main>
+
+
+    <!-- ==================================================
+         FOOTER
+    ================================================== -->
+
+    <footer>
+
+        <p>
+            © 2026 JobConnect. All Rights Reserved.
+        </p>
+
+    </footer>
+
+
+</body>
+
+</html>

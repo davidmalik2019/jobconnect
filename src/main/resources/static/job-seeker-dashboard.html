@@ -1,0 +1,1133 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>JobConnect - Job Seeker Dashboard</title>
+
+<link rel="stylesheet"
+      href="css/style.css">
+
+</head>
+
+<body>
+
+
+<!-- =========================
+     NAVIGATION
+========================== -->
+
+<header class="dashboard-header">
+
+    <div class="dashboard-logo">
+
+        <a href="index.html">
+            JobConnect
+        </a>
+
+    </div>
+
+
+    <nav>
+
+        <a href="index.html">
+            Home
+        </a>
+
+        <a href="jobs.html">
+            Jobs
+        </a>
+
+        <a href="my-applications.html">
+            My Applications
+        </a>
+
+        <a href="profile.html">
+            Profile
+        </a>
+
+        <a href="#" id="logoutBtn">
+            Logout
+        </a>
+
+    </nav>
+
+</header>
+
+
+
+<!-- =========================
+     MAIN DASHBOARD
+========================== -->
+
+<main class="dashboard-container">
+
+
+    <!-- =========================
+         WELCOME SECTION
+    ========================== -->
+
+    <section class="welcome-section">
+
+        <div>
+
+            <p class="welcome-small">
+                WELCOME BACK
+            </p>
+
+            <h1 id="welcomeMessage">
+                Welcome!
+            </h1>
+
+            <p>
+                Find your next opportunity and manage your
+                job applications from your dashboard.
+            </p>
+
+        </div>
+
+
+        <div class="welcome-icon">
+            💼
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================
+         LIVE DASHBOARD STATISTICS
+    ========================== -->
+
+    <section class="dashboard-stats">
+
+
+        <!-- AVAILABLE JOBS -->
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                💼
+            </div>
+
+            <div>
+
+                <h3 id="availableJobs">
+                    0
+                </h3>
+
+                <p>
+                    Available Jobs
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- TOTAL APPLICATIONS -->
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                📋
+            </div>
+
+            <div>
+
+                <h3 id="totalApplications">
+                    0
+                </h3>
+
+                <p>
+                    My Applications
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- PENDING APPLICATIONS -->
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                ⏳
+            </div>
+
+            <div>
+
+                <h3 id="pendingApplications">
+                    0
+                </h3>
+
+                <p>
+                    Pending Applications
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ACCEPTED APPLICATIONS -->
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                ✅
+            </div>
+
+            <div>
+
+                <h3 id="acceptedApplications">
+                    0
+                </h3>
+
+                <p>
+                    Accepted Applications
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- REJECTED APPLICATIONS -->
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                ❌
+            </div>
+
+            <div>
+
+                <h3 id="rejectedApplications">
+                    0
+                </h3>
+
+                <p>
+                    Rejected Applications
+                </p>
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =========================
+         RECENT APPLICATIONS
+    ========================== -->
+
+    <section class="recent-applications-section">
+
+
+        <div class="recent-applications-header">
+
+            <div>
+
+                <p class="section-small-title">
+                    APPLICATIONS
+                </p>
+
+                <h2>
+                    Recent Applications
+                </h2>
+
+                <p>
+                    Track the latest jobs you have applied for.
+                </p>
+
+            </div>
+
+
+            <a
+                href="my-applications.html"
+                class="view-all-applications-btn">
+
+                View All Applications →
+
+            </a>
+
+        </div>
+
+
+
+        <div
+            id="recentApplicationsList"
+            class="recent-applications-list">
+
+            <div class="recent-loading">
+
+                Loading recent applications...
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =========================
+         QUICK ACTIONS
+    ========================== -->
+
+    <section class="dashboard-section">
+
+        <h2>
+            Quick Actions
+        </h2>
+
+
+        <div class="action-grid">
+
+
+            <!-- FIND JOBS -->
+
+            <a
+                href="jobs.html"
+                class="action-card">
+
+                <div class="action-icon">
+                    🔎
+                </div>
+
+                <div>
+
+                    <h3>
+                        Find Jobs
+                    </h3>
+
+                    <p>
+                        Search for available jobs and
+                        discover new opportunities.
+                    </p>
+
+                </div>
+
+                <span class="arrow">
+                    →
+                </span>
+
+            </a>
+
+
+
+            <!-- MY APPLICATIONS -->
+
+            <a
+                href="my-applications.html"
+                class="action-card">
+
+                <div class="action-icon">
+                    📄
+                </div>
+
+                <div>
+
+                    <h3>
+                        My Applications
+                    </h3>
+
+                    <p>
+                        View and track the jobs you have
+                        applied for.
+                    </p>
+
+                </div>
+
+                <span class="arrow">
+                    →
+                </span>
+
+            </a>
+
+
+
+            <!-- MY PROFILE -->
+
+            <a
+                href="profile.html"
+                class="action-card">
+
+                <div class="action-icon">
+                    👤
+                </div>
+
+                <div>
+
+                    <h3>
+                        My Profile
+                    </h3>
+
+                    <p>
+                        Update your personal and
+                        professional information.
+                    </p>
+
+                </div>
+
+                <span class="arrow">
+                    →
+                </span>
+
+            </a>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================
+         GET STARTED
+    ========================== -->
+
+    <section class="get-started">
+
+        <div>
+
+            <h2>
+                Ready to find your next job?
+            </h2>
+
+            <p>
+                Explore available opportunities and take
+                the next step in your career.
+            </p>
+
+        </div>
+
+
+        <a
+            href="jobs.html"
+            class="find-job-btn">
+
+            Find Jobs
+
+        </a>
+
+    </section>
+
+
+</main>
+
+
+
+<!-- =========================
+     FOOTER
+========================== -->
+
+<footer class="dashboard-footer">
+
+    <p>
+
+        © 2026 JobConnect.
+        All Rights Reserved.
+
+    </p>
+
+</footer>
+
+
+
+<!-- =========================
+     JOB SEEKER DASHBOARD JAVASCRIPT
+========================== -->
+
+<script>
+
+    document.addEventListener(
+        "DOMContentLoaded",
+        function () {
+
+
+            // =========================================
+            // GET LOGIN INFORMATION
+            // =========================================
+
+            const username =
+                localStorage.getItem("username");
+
+            const token =
+                localStorage.getItem("token");
+
+
+            // =========================================
+            // WELCOME MESSAGE
+            // =========================================
+
+            const welcomeMessage =
+                document.getElementById(
+                    "welcomeMessage"
+                );
+
+
+            if (username) {
+
+                welcomeMessage.textContent =
+                    "Welcome, " + username + "!";
+
+            }
+            else {
+
+                welcomeMessage.textContent =
+                    "Welcome to JobConnect!";
+
+            }
+
+
+            // =========================================
+            // CHECK LOGIN
+            // =========================================
+
+            if (!token) {
+
+                window.location.href =
+                    "login.html";
+
+                return;
+
+            }
+
+
+            // =========================================
+            // LOGOUT
+            // =========================================
+
+            const logoutBtn =
+                document.getElementById(
+                    "logoutBtn"
+                );
+
+
+            if (logoutBtn) {
+
+                logoutBtn.addEventListener(
+                    "click",
+                    function (event) {
+
+                        event.preventDefault();
+
+
+                        localStorage.removeItem(
+                            "token"
+                        );
+
+                        localStorage.removeItem(
+                            "username"
+                        );
+
+                        localStorage.removeItem(
+                            "role"
+                        );
+
+
+                        window.location.href =
+                            "login.html";
+
+                    }
+                );
+
+            }
+
+
+            // =========================================
+            // LOAD DASHBOARD
+            // =========================================
+
+            loadJobSeekerDashboard();
+
+            loadRecentApplications();
+
+        }
+
+    );
+
+
+
+    // ==================================================
+    // LOAD JOB SEEKER DASHBOARD STATISTICS
+    // ==================================================
+
+    async function loadJobSeekerDashboard() {
+
+
+        const token =
+            localStorage.getItem("token");
+
+
+        try {
+
+
+            // =========================================
+            // LOAD AVAILABLE JOBS
+            // =========================================
+
+            const jobsResponse =
+                await fetch(
+                    "/jobs",
+                    {
+                        method: "GET"
+                    }
+                );
+
+
+            if (!jobsResponse.ok) {
+
+                throw new Error(
+                    "Unable to load jobs."
+                );
+
+            }
+
+
+            const jobs =
+                await jobsResponse.json();
+
+
+            const availableJobs =
+                document.getElementById(
+                    "availableJobs"
+                );
+
+
+            if (availableJobs) {
+
+                availableJobs.textContent =
+                    jobs.length;
+
+            }
+
+
+
+            // =========================================
+            // LOAD MY APPLICATIONS
+            // =========================================
+
+            const applicationsResponse =
+                await fetch(
+                    "/applications/my",
+                    {
+                        method: "GET",
+
+                        headers: {
+
+                            "Authorization":
+                                "Bearer " + token
+
+                        }
+
+                    }
+                );
+
+
+            if (!applicationsResponse.ok) {
+
+                throw new Error(
+                    "Unable to load applications."
+                );
+
+            }
+
+
+            const applications =
+                await applicationsResponse.json();
+
+
+
+            // =========================================
+            // COUNT APPLICATION STATUSES
+            // =========================================
+
+            let pending =
+                0;
+
+            let accepted =
+                0;
+
+            let rejected =
+                0;
+
+
+            applications.forEach(
+                function (application) {
+
+
+                    const status =
+                        (
+                            application.status ||
+                            ""
+                        ).toUpperCase();
+
+
+                    if (
+                        status === "PENDING"
+                    ) {
+
+                        pending++;
+
+                    }
+                    else if (
+                        status === "ACCEPTED"
+                    ) {
+
+                        accepted++;
+
+                    }
+                    else if (
+                        status === "REJECTED"
+                    ) {
+
+                        rejected++;
+
+                    }
+
+                }
+            );
+
+
+
+            // =========================================
+            // DISPLAY TOTAL APPLICATIONS
+            // =========================================
+
+            document.getElementById(
+                "totalApplications"
+            ).textContent =
+                applications.length;
+
+
+
+            // =========================================
+            // DISPLAY PENDING
+            // =========================================
+
+            document.getElementById(
+                "pendingApplications"
+            ).textContent =
+                pending;
+
+
+
+            // =========================================
+            // DISPLAY ACCEPTED
+            // =========================================
+
+            document.getElementById(
+                "acceptedApplications"
+            ).textContent =
+                accepted;
+
+
+
+            // =========================================
+            // DISPLAY REJECTED
+            // =========================================
+
+            document.getElementById(
+                "rejectedApplications"
+            ).textContent =
+                rejected;
+
+
+        }
+        catch (error) {
+
+
+            console.error(
+                "Job seeker dashboard error:",
+                error
+            );
+
+        }
+
+    }
+
+
+
+    // ==================================================
+    // LOAD RECENT APPLICATIONS
+    // ==================================================
+
+    async function loadRecentApplications() {
+
+
+        const token =
+            localStorage.getItem("token");
+
+
+        const recentApplicationsList =
+            document.getElementById(
+                "recentApplicationsList"
+            );
+
+
+        if (
+            !token ||
+            !recentApplicationsList
+        ) {
+
+            return;
+
+        }
+
+
+        try {
+
+
+            const response =
+                await fetch(
+                    "/applications/my",
+                    {
+                        method: "GET",
+
+                        headers: {
+
+                            "Authorization":
+                                "Bearer " + token
+
+                        }
+
+                    }
+                );
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    "Unable to load applications."
+                );
+
+            }
+
+
+            const applications =
+                await response.json();
+
+
+
+            // =========================================
+            // NO APPLICATIONS
+            // =========================================
+
+            if (
+                !applications ||
+                applications.length === 0
+            ) {
+
+                recentApplicationsList.innerHTML = `
+
+                    <div class="recent-empty">
+
+                        <h3>
+                            No applications yet
+                        </h3>
+
+                        <p>
+                            Start applying for jobs
+                            to see your applications here.
+                        </p>
+
+                    </div>
+
+                `;
+
+                return;
+
+            }
+
+
+
+            // =========================================
+            // SORT NEWEST FIRST
+            // =========================================
+
+            applications.sort(
+                function (a, b) {
+
+                    return new Date(
+                        b.appliedAt
+                    ) - new Date(
+                        a.appliedAt
+                    );
+
+                }
+            );
+
+
+
+            // =========================================
+            // SHOW ONLY FIVE RECENT APPLICATIONS
+            // =========================================
+
+            const recentApplications =
+                applications.slice(
+                    0,
+                    5
+                );
+
+
+            recentApplicationsList.innerHTML =
+                "";
+
+
+
+            // =========================================
+            // DISPLAY APPLICATIONS
+            // =========================================
+
+            recentApplications.forEach(
+                function (application) {
+
+
+                    const card =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    card.className =
+                        "recent-application-card";
+
+
+                    const status =
+                        (
+                            application.status ||
+                            "PENDING"
+                        ).toUpperCase();
+
+
+                    let statusClass =
+                        "status-pending";
+
+
+                    if (
+                        status === "ACCEPTED"
+                    ) {
+
+                        statusClass =
+                            "status-accepted";
+
+                    }
+                    else if (
+                        status === "REJECTED"
+                    ) {
+
+                        statusClass =
+                            "status-rejected";
+
+                    }
+
+
+
+                    const applicantName =
+                        application.fullName ||
+                        "Job Seeker";
+
+
+                    const firstLetter =
+                        applicantName
+                            .charAt(0)
+                            .toUpperCase();
+
+
+
+                    card.innerHTML = `
+
+                        <div class="recent-application-info">
+
+                            <div
+                                class="recent-application-avatar">
+
+                                ${firstLetter}
+
+                            </div>
+
+
+                            <div>
+
+                                <h3>
+
+                                    ${
+                                        application.jobTitle ||
+                                        "Job Application"
+                                    }
+
+                                </h3>
+
+
+                                <p>
+
+                                    Application Status:
+
+                                    <strong>
+                                        ${status}
+                                    </strong>
+
+                                </p>
+
+
+                                <span
+                                    class="recent-application-date">
+
+                                    ${
+                                        formatApplicationDate(
+                                            application.appliedAt
+                                        )
+                                    }
+
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="recent-application-right">
+
+                            <span
+                                class="recent-status ${statusClass}">
+
+                                ${status}
+
+                            </span>
+
+
+                            <button
+                                class="view-recent-application-btn"
+                                data-id="${application.id}">
+
+                                View
+
+                            </button>
+
+                        </div>
+
+                    `;
+
+
+                    recentApplicationsList.appendChild(
+                        card
+                    );
+
+                }
+            );
+
+
+
+            // =========================================
+            // VIEW BUTTONS
+            // =========================================
+
+			const viewButtons =
+			    document.querySelectorAll(
+			        ".view-recent-application-btn"
+			    );
+
+			viewButtons.forEach(
+			    function (button) {
+			        button.addEventListener(
+			            "click",
+			            function () {
+
+			                const applicationId =
+			                    this.getAttribute(
+			                        "data-id"
+			                    );
+
+			                window.location.href =
+			                    "application-details.html?id=" +
+			                    applicationId;
+			            }
+			        );
+			    }
+			);
+
+        }
+        catch (error) {
+
+
+            console.error(
+                "Recent applications error:",
+                error
+            );
+
+
+            recentApplicationsList.innerHTML = `
+
+                <div class="recent-error">
+
+                    Unable to load recent applications.
+
+                    Please try again.
+
+                </div>
+
+            `;
+
+        }
+
+    }
+
+
+
+    // ==================================================
+    // FORMAT APPLICATION DATE
+    // ==================================================
+
+    function formatApplicationDate(
+        dateString
+    ) {
+
+
+        if (!dateString) {
+
+            return "Date not available";
+
+        }
+
+
+        const date =
+            new Date(
+                dateString
+            );
+
+
+        return date.toLocaleDateString(
+            "en-NG",
+            {
+                year: "numeric",
+                month: "long",
+                day: "numeric"
+            }
+        );
+
+    }
+
+</script>
+
+
+</body>
+
+</html>

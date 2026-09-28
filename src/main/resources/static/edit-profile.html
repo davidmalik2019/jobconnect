@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>JobConnect | Edit Profile</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+    <!-- NAVIGATION BAR -->
+
+    <header>
+
+        <nav class="navbar">
+
+            <div class="logo">
+                Job<span>Connect</span>
+            </div>
+
+            <ul class="nav-links">
+
+                <li>
+                    <a href="index.html">Home</a>
+                </li>
+
+                <li>
+                    <a href="jobs.html">Jobs</a>
+                </li>
+
+                <li>
+                    <a href="about.html">About</a>
+                </li>
+
+                <li>
+                    <span id="welcomeUser"></span>
+                </li>
+
+                <li>
+                    <a href="profile.html">Profile</a>
+                </li>
+
+                <li id="applicationsLink" style="display: none;">
+                    <a href="my-applications.html">My Applications</a>
+                </li>
+
+                <li>
+                    <a href="#" id="logoutBtn">Logout</a>
+                </li>
+
+            </ul>
+
+        </nav>
+
+    </header>
+
+
+    <!-- EDIT PROFILE SECTION -->
+
+    <section class="profile-section">
+
+        <div class="profile-container">
+
+            <div class="profile-header">
+
+                <div class="profile-icon">
+                    ✏️
+                </div>
+
+                <h1>Edit Profile</h1>
+
+                <p>Update your JobConnect account information</p>
+
+            </div>
+
+
+            <!-- EDIT PROFILE FORM -->
+
+            <form id="editProfileForm">
+
+                <div class="profile-item">
+
+                    <strong>Username</strong>
+
+                    <input
+                        type="text"
+                        id="username"
+                        readonly
+                    >
+
+                </div>
+
+
+                <div class="profile-item">
+
+                    <strong>Full Name</strong>
+
+                    <input
+                        type="text"
+                        id="fullName"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="profile-item">
+
+                    <strong>Email</strong>
+
+                    <input
+                        type="email"
+                        id="email"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="profile-item">
+
+                    <strong>Phone</strong>
+
+                    <input
+                        type="text"
+                        id="phone"
+                    >
+
+                </div>
+
+
+                <div class="profile-item">
+
+                    <strong>Role</strong>
+
+                    <input
+                        type="text"
+                        id="role"
+                        readonly
+                    >
+
+                </div>
+
+
+                <!-- MESSAGE -->
+
+                <div id="profileMessage"></div>
+
+
+                <!-- BUTTONS -->
+
+                <div style="margin-top: 20px;">
+
+                    <button
+                        type="submit"
+                        id="saveProfileBtn">
+                        Save Changes
+                    </button>
+
+                    <a
+                        href="profile.html"
+                        style="margin-left: 10px;">
+                        Cancel
+                    </a>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </section>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <p>
+            © 2026 JobConnect. All Rights Reserved.
+        </p>
+
+    </footer>
+
+
+    <script src="js/app.js"></script>
+
+
+    <script>
+
+        // =========================================
+        // CHECK LOGIN
+        // =========================================
+
+        const token = localStorage.getItem("token");
+
+        if (!token) {
+
+            window.location.href = "login.html";
+
+        }
+
+
+        // =========================================
+        // LOAD CURRENT USER
+        // =========================================
+
+        async function loadProfile() {
+
+            try {
+
+                const response = await fetch(
+                    "http://localhost:8080/users/me",
+                    {
+                        method: "GET",
+
+                        headers: {
+                            "Authorization": "Bearer " + token
+                        }
+                    }
+                );
+
+
+                if (!response.ok) {
+
+                    throw new Error("Unable to load profile.");
+
+                }
+
+
+                const user = await response.json();
+
+
+                document.getElementById("username").value =
+                    user.username;
+
+                document.getElementById("fullName").value =
+                    user.fullName;
+
+                document.getElementById("email").value =
+                    user.email;
+
+                document.getElementById("phone").value =
+                    user.phone || "";
+
+                document.getElementById("role").value =
+                    user.role;
+
+
+                // Welcome message
+
+                const welcomeUser =
+                    document.getElementById("welcomeUser");
+
+                if (welcomeUser) {
+
+                    welcomeUser.textContent =
+                        "Welcome, " + user.username;
+
+                }
+
+
+                // Show My Applications only for Job Seekers
+
+                if (user.role === "JOB_SEEKER") {
+
+                    const applicationsLink =
+                        document.getElementById("applicationsLink");
+
+                    if (applicationsLink) {
+
+                        applicationsLink.style.display = "block";
+
+                    }
+
+                }
+
+            } catch (error) {
+
+                console.error(error);
+
+                document.getElementById("profileMessage").textContent =
+                    "Unable to load your profile.";
+
+            }
+
+        }
+
+
+        // =========================================
+        // UPDATE PROFILE
+        // =========================================
+
+        document.getElementById("editProfileForm")
+            .addEventListener("submit", async function(event) {
+
+                event.preventDefault();
+
+
+                const fullName =
+                    document.getElementById("fullName").value.trim();
+
+                const email =
+                    document.getElementById("email").value.trim();
+
+                const phone =
+                    document.getElementById("phone").value.trim();
+
+
+                const message =
+                    document.getElementById("profileMessage");
+
+                const saveButton =
+                    document.getElementById("saveProfileBtn");
+
+
+                message.textContent =
+                    "Saving changes...";
+
+
+                saveButton.disabled = true;
+
+
+                try {
+
+                    const response = await fetch(
+                        "http://localhost:8080/users/me",
+                        {
+                            method: "PUT",
+
+                            headers: {
+                                "Content-Type": "application/json",
+                                "Authorization": "Bearer " + token
+                            },
+
+                            body: JSON.stringify({
+
+                                fullName: fullName,
+
+                                email: email,
+
+                                phone: phone
+
+                            })
+                        }
+                    );
+
+
+                    const result =
+                        await response.json();
+
+
+                    if (!response.ok) {
+
+                        message.textContent =
+                            result;
+
+                        saveButton.disabled = false;
+
+                        return;
+
+                    }
+
+
+                    message.textContent =
+                        "Profile updated successfully.";
+
+
+                    // Update stored username if needed
+
+                    if (result.username) {
+
+                        localStorage.setItem(
+                            "username",
+                            result.username
+                        );
+
+                    }
+
+
+                    // Return to profile after short delay
+
+                    setTimeout(function() {
+
+                        window.location.href =
+                            "profile.html";
+
+                    }, 1000);
+
+
+                } catch (error) {
+
+                    console.error(error);
+
+                    message.textContent =
+                        "Unable to update profile.";
+
+                    saveButton.disabled = false;
+
+                }
+
+            });
+
+
+        // =========================================
+        // LOGOUT
+        // =========================================
+
+        const logoutBtn =
+            document.getElementById("logoutBtn");
+
+        if (logoutBtn) {
+
+            logoutBtn.addEventListener("click", function(event) {
+
+                event.preventDefault();
+
+                localStorage.removeItem("token");
+                localStorage.removeItem("username");
+                localStorage.removeItem("role");
+
+                window.location.href =
+                    "login.html";
+
+            });
+
+        }
+
+
+        // Load profile
+
+        loadProfile();
+
+    </script>
+
+</body>
+
+</html>

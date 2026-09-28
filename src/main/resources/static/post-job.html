@@ -1,0 +1,528 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Post a Job - JobConnect</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================================
+         NAVIGATION
+         ========================================= -->
+
+    <header class="dashboard-header">
+
+        <div class="dashboard-logo">
+
+            <a href="index.html">
+                JobConnect
+            </a>
+
+        </div>
+
+
+        <nav>
+
+            <a href="employer-dashboard.html">
+                Dashboard
+            </a>
+
+            <a href="jobs.html">
+                Jobs
+            </a>
+
+            <a href="applications-management.html">
+                Applications
+            </a>
+
+            <a href="profile.html">
+                Profile
+            </a>
+
+            <a href="#" id="logoutBtn">
+                Logout
+            </a>
+
+        </nav>
+
+    </header>
+
+
+
+    <!-- =========================================
+         POST JOB
+         ========================================= -->
+
+    <main class="post-job-container">
+
+
+        <section class="post-job-card">
+
+
+            <div class="post-job-heading">
+
+                <p class="welcome-small">
+                    EMPLOYER
+                </p>
+
+                <h1>
+                    Post a New Job
+                </h1>
+
+                <p>
+                    Create a job opportunity and connect with
+                    qualified job seekers.
+                </p>
+
+            </div>
+
+
+
+            <!-- =====================================
+                 SUCCESS / ERROR MESSAGE
+                 ===================================== -->
+
+            <div id="jobMessage"
+                 class="job-message"
+                 style="display: none;">
+            </div>
+
+
+
+            <!-- =====================================
+                 JOB FORM
+                 ===================================== -->
+
+            <form id="postJobForm">
+
+
+                <!-- Job Title -->
+
+                <div class="form-group">
+
+                    <label for="jobTitle">
+                        Job Title
+                    </label>
+
+                    <input
+                        type="text"
+                        id="jobTitle"
+                        name="jobTitle"
+                        placeholder="e.g. Frontend Developer"
+                        required>
+
+                </div>
+
+
+
+                <!-- Company -->
+
+                <div class="form-group">
+
+                    <label for="company">
+                        Company Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="company"
+                        name="company"
+                        placeholder="Enter company name"
+                        required>
+
+                </div>
+
+
+
+                <!-- Location -->
+
+                <div class="form-group">
+
+                    <label for="location">
+                        Location
+                    </label>
+
+                    <input
+                        type="text"
+                        id="location"
+                        name="location"
+                        placeholder="e.g. Abuja, Nigeria"
+                        required>
+
+                </div>
+
+
+
+                <!-- Job Type -->
+
+                <div class="form-group">
+
+                    <label for="jobType">
+                        Job Type
+                    </label>
+
+                    <select id="jobType"
+                            name="jobType"
+                            required>
+
+                        <option value="">
+                            Select job type
+                        </option>
+
+                        <option value="Full-time">
+                            Full-time
+                        </option>
+
+                        <option value="Part-time">
+                            Part-time
+                        </option>
+
+                        <option value="Contract">
+                            Contract
+                        </option>
+
+                        <option value="Internship">
+                            Internship
+                        </option>
+
+                        <option value="Remote">
+                            Remote
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <!-- Salary -->
+
+                <div class="form-group">
+
+                    <label for="salary">
+                        Salary
+                    </label>
+
+                    <input
+                        type="text"
+                        id="salary"
+                        name="salary"
+                        placeholder="e.g. ₦250,000 - ₦400,000">
+
+                </div>
+
+
+
+                <!-- Job Description -->
+
+                <div class="form-group">
+
+                    <label for="description">
+                        Job Description
+                    </label>
+
+                    <textarea
+                        id="description"
+                        name="description"
+                        rows="6"
+                        placeholder="Describe the job, responsibilities and duties..."
+                        required></textarea>
+
+                </div>
+
+
+
+                <!-- Requirements -->
+
+                <div class="form-group">
+
+                    <label for="requirements">
+                        Job Requirements
+                    </label>
+
+                    <textarea
+                        id="requirements"
+                        name="requirements"
+                        rows="6"
+                        placeholder="List the skills, qualifications and experience required..."
+                        required></textarea>
+
+                </div>
+
+
+
+                <!-- =====================================
+                     BUTTONS
+                     ===================================== -->
+
+                <div class="form-buttons">
+
+                    <a href="employer-dashboard.html"
+                       class="cancel-btn">
+
+                        Cancel
+
+                    </a>
+
+
+                    <button type="submit"
+                            class="post-job-btn">
+
+                        Post Job
+
+                    </button>
+
+                </div>
+
+
+            </form>
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- =========================================
+         FOOTER
+         ========================================= -->
+
+    <footer class="dashboard-footer">
+
+        <p>
+            &copy; 2026 JobConnect.
+            All Rights Reserved.
+        </p>
+
+    </footer>
+
+
+
+    <!-- =========================================
+         JAVASCRIPT
+         ========================================= -->
+
+    <script>
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            function () {
+
+
+                const form =
+                    document.getElementById(
+                        "postJobForm"
+                    );
+
+
+                const message =
+                    document.getElementById(
+                        "jobMessage"
+                    );
+
+
+                // =====================================
+                // SUBMIT FORM
+                // =====================================
+
+                form.addEventListener(
+                    "submit",
+                    async function (event) {
+
+                        event.preventDefault();
+
+
+                        const token =
+                            localStorage.getItem(
+                                "token"
+                            );
+
+
+                        if (!token) {
+
+                            message.style.display =
+                                "block";
+
+                            message.textContent =
+                                "You are not logged in. Please login again.";
+
+                            return;
+
+                        }
+
+
+                        const job = {
+
+                            jobTitle:
+                                document.getElementById(
+                                    "jobTitle"
+                                ).value,
+
+                            company:
+                                document.getElementById(
+                                    "company"
+                                ).value,
+
+                            location:
+                                document.getElementById(
+                                    "location"
+                                ).value,
+
+                            jobType:
+                                document.getElementById(
+                                    "jobType"
+                                ).value,
+
+                            salary:
+                                document.getElementById(
+                                    "salary"
+                                ).value,
+
+                            description:
+                                document.getElementById(
+                                    "description"
+                                ).value,
+
+                            requirements:
+                                document.getElementById(
+                                    "requirements"
+                                ).value
+
+                        };
+
+
+                        try {
+
+
+                            const response =
+                                await fetch(
+                                    "/jobs",
+                                    {
+
+                                        method: "POST",
+
+                                        headers: {
+
+                                            "Content-Type":
+                                                "application/json",
+
+                                            "Authorization":
+                                                "Bearer " + token
+
+                                        },
+
+                                        body:
+                                            JSON.stringify(job)
+
+                                    }
+                                );
+
+
+                            const result =
+                                await response.text();
+
+
+                            if (response.ok) {
+
+
+                                message.style.display =
+                                    "block";
+
+
+                                message.textContent =
+                                    "Job posted successfully!";
+
+
+                                form.reset();
+
+
+                            } else {
+
+
+                                message.style.display =
+                                    "block";
+
+
+                                message.textContent =
+                                    result ||
+                                    "Failed to post job.";
+
+                            }
+
+
+                        } catch (error) {
+
+
+                            message.style.display =
+                                "block";
+
+
+                            message.textContent =
+                                "Unable to connect to the server.";
+
+                            console.error(error);
+
+                        }
+
+                    }
+                );
+
+
+
+                // =====================================
+                // LOGOUT
+                // =====================================
+
+                const logoutBtn =
+                    document.getElementById(
+                        "logoutBtn"
+                    );
+
+
+                logoutBtn.addEventListener(
+                    "click",
+                    function (event) {
+
+                        event.preventDefault();
+
+
+                        localStorage.removeItem(
+                            "token"
+                        );
+
+
+                        localStorage.removeItem(
+                            "username"
+                        );
+
+
+                        window.location.href =
+                            "login.html";
+
+                    }
+                );
+
+            }
+        );
+
+    </script>
+
+
+</body>
+
+</html>
+

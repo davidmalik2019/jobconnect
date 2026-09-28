@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>JobConnect | Find Jobs</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+    <!-- NAVIGATION BAR -->
+
+    <header>
+
+        <nav class="navbar">
+
+            <div class="logo">
+
+                Job<span>Connect</span>
+
+            </div>
+
+            <ul class="nav-links">
+
+                <li>
+                    <a href="index.html">Home</a>
+                </li>
+
+                <li>
+                    <a href="jobs.html">Jobs</a>
+                </li>
+
+                <li>
+                   <a href="about.html">About</a>
+                </li>
+
+                <li>
+                    <span id="welcomeUser"></span>
+                </li>
+
+                <li id="profileLink" style="display: none;">
+
+                    <a href="profile.html">Profile</a>
+
+                </li>
+				<li id="applicationsLink" style="display: none;">
+
+				    <a href="my-applications.html">My Applications</a>
+
+				</li>
+
+                <li id="logoutLink" style="display: none;">
+
+                    <a href="#" id="logoutBtn">Logout</a>
+
+                </li>
+
+                <li id="loginLink">
+
+                    <a href="login.html">Login</a>
+
+                </li>
+
+                <li id="registerLink">
+
+                    <a href="register.html" class="register-btn">
+
+                        Register
+
+                    </a>
+
+                </li>
+
+            </ul>
+
+        </nav>
+
+    </header>
+
+
+    <!-- JOBS PAGE -->
+
+    <section class="jobs-section">
+
+        <div class="jobs-container">
+
+            <div class="jobs-header">
+
+                <h1>Find Your Next Opportunity</h1>
+
+                <p>
+
+                    Explore job opportunities and find a role that matches
+                    your skills and career goals.
+
+                </p>
+
+            </div>
+
+
+            <!-- JOB SEARCH -->
+
+            <div class="job-search">
+
+                <input
+                    type="text"
+                    id="jobSearch"
+                    placeholder="Search by job title, skill, or keyword"
+                >
+
+                <button id="searchBtn">
+
+                    Search Jobs
+
+                </button>
+
+            </div>
+
+
+            <!-- JOB LIST -->
+
+			<div id="jobsList" class="jobs-list">
+
+			    <p id="noJobsFound"
+			       style="display: none; text-align: center;">
+			        No Jobs Found
+			    </p>
+
+			</div>
+
+        </div>
+
+    </section>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <p>
+
+            © 2026 JobConnect. All Rights Reserved.
+
+        </p>
+
+    </footer>
+
+
+    <script src="js/app.js"></script>
+
+</body>
+
+</html>

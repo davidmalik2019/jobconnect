@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>JobConnect | My Applications</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+
+        .applications-section {
+            padding: 40px 20px;
+            min-height: 70vh;
+        }
+
+        .applications-container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .applications-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .applications-header h1 {
+            margin-bottom: 10px;
+        }
+
+        .application-card {
+            background: #ffffff;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.10);
+            border-left: 5px solid #1e3a8a;
+        }
+
+        .application-card h2 {
+            margin-top: 0;
+            margin-bottom: 8px;
+        }
+
+        .application-company {
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .application-info {
+            margin: 8px 0;
+        }
+
+        .application-status {
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .status-pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .status-accepted {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-rejected {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .application-actions {
+            margin-top: 20px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .application-actions button {
+            padding: 10px 18px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .edit-btn {
+            background: #1e3a8a;
+            color: white;
+        }
+
+        .withdraw-btn {
+            background: #dc3545;
+            color: white;
+        }
+
+        .application-message {
+            text-align: center;
+            padding: 30px;
+        }
+
+        .cover-letter {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 6px;
+            margin-top: 15px;
+            white-space: pre-wrap;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <!-- NAVIGATION BAR -->
+
+    <header>
+
+        <nav class="navbar">
+
+            <div class="logo">
+                Job<span>Connect</span>
+            </div>
+
+            <ul class="nav-links">
+
+                <li>
+                    <a href="index.html">Home</a>
+                </li>
+
+                <li>
+                    <a href="jobs.html">Jobs</a>
+                </li>
+
+                <li>
+                    <a href="about.html">About</a>
+                </li>
+
+                <li>
+                    <span id="welcomeUser"></span>
+                </li>
+
+                <li id="profileLink" style="display: none;">
+                    <a href="profile.html">Profile</a>
+                </li>
+
+                <li id="applicationsLink" style="display: none;">
+                    <a href="my-applications.html">My Applications</a>
+                </li>
+
+                <li id="logoutLink" style="display: none;">
+                    <a href="#" id="logoutBtn">Logout</a>
+                </li>
+
+                <li id="loginLink">
+                    <a href="login.html">Login</a>
+                </li>
+
+                <li id="registerLink">
+                    <a href="register.html" class="register-btn">
+                        Register
+                    </a>
+                </li>
+
+            </ul>
+
+        </nav>
+
+    </header>
+
+
+    <!-- MY APPLICATIONS SECTION -->
+
+    <section class="applications-section">
+
+        <div class="applications-container">
+
+            <div class="applications-header">
+
+                <h1>My Applications</h1>
+
+                <p>
+                    Track the jobs you have applied for and monitor your application status.
+                </p>
+
+            </div>
+
+
+            <!-- APPLICATIONS LIST -->
+
+            <div id="applicationsList">
+
+                <p id="applicationsLoading" class="application-message">
+                    Loading your applications...
+                </p>
+
+            </div>
+
+
+            <!-- NO APPLICATIONS -->
+
+            <p id="noApplications"
+               class="application-message"
+               style="display: none;">
+
+                You have not applied for any jobs yet.
+
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <p>
+            © 2026 JobConnect. All Rights Reserved.
+        </p>
+
+    </footer>
+
+
+    <script src="js/app.js"></script>
+
+
+    <!-- MY APPLICATIONS JAVASCRIPT -->
+
+    <script>
+
+        document.addEventListener("DOMContentLoaded", function () {
+
+            const token = localStorage.getItem("token");
+            const role = localStorage.getItem("role");
+
+            const applicationsList =
+                document.getElementById("applicationsList");
+
+            const applicationsLoading =
+                document.getElementById("applicationsLoading");
+
+            const noApplications =
+                document.getElementById("noApplications");
+
+
+            // ==================================================
+            // AUTHENTICATION CHECK
+            // ==================================================
+
+            if (!token) {
+
+                window.location.href = "login.html";
+
+                return;
+            }
+
+
+            // ==================================================
+            // JOB SEEKER CHECK
+            // ==================================================
+
+            if (role !== "JOB_SEEKER") {
+
+                applicationsList.innerHTML = `
+                    <div class="application-message">
+                        <h3>Access Denied</h3>
+                        <p>
+                            My Applications is available to Job Seekers only.
+                        </p>
+                    </div>
+                `;
+
+                return;
+            }
+
+
+            // ==================================================
+            // LOAD MY APPLICATIONS
+            // ==================================================
+
+            fetch("/applications/my", {
+
+                method: "GET",
+
+                headers: {
+                    "Authorization": "Bearer " + token
+                }
+
+            })
+
+            .then(async response => {
+
+                if (!response.ok) {
+
+                    const errorText =
+                        await response.text();
+
+                    throw new Error(
+                        errorText || "Unable to load applications."
+                    );
+                }
+
+                return response.json();
+
+            })
+
+            .then(applications => {
+
+                applicationsLoading.style.display = "none";
+
+
+                // ==================================================
+                // NO APPLICATIONS
+                // ==================================================
+
+                if (!applications || applications.length === 0) {
+
+                    noApplications.style.display = "block";
+
+                    return;
+                }
+
+
+                // ==================================================
+                // DISPLAY APPLICATIONS
+                // ==================================================
+
+                applicationsList.innerHTML = "";
+
+
+                applications.forEach(application => {
+
+                    const card =
+                        document.createElement("div");
+
+                    card.className = "application-card";
+
+
+                    // STATUS
+
+                    const status =
+                        application.status || "Pending";
+
+                    let statusClass =
+                        "status-pending";
+
+                    if (status.toLowerCase() === "accepted") {
+
+                        statusClass =
+                            "status-accepted";
+
+                    } else if (
+                        status.toLowerCase() === "rejected"
+                    ) {
+
+                        statusClass =
+                            "status-rejected";
+                    }
+
+
+                    // DATE
+
+                    let appliedDate = "Not available";
+
+                    if (application.appliedAt) {
+
+                        appliedDate =
+                            new Date(
+                                application.appliedAt
+                            ).toLocaleString("en-NG");
+                    }
+
+
+                    // ==================================================
+                    // CARD CONTENT
+                    // ==================================================
+
+                    card.innerHTML = `
+
+                        <h2>
+                            ${application.jobTitle || "Job Application"}
+                        </h2>
+
+                        <p class="application-info">
+                            <strong>Name:</strong>
+                            ${application.fullName || "Not provided"}
+                        </p>
+
+                        <p class="application-info">
+                            <strong>Email:</strong>
+                            ${application.email || "Not provided"}
+                        </p>
+
+                        <p class="application-info">
+                            <strong>Phone:</strong>
+                            ${application.phone || "Not provided"}
+                        </p>
+
+                        <p class="application-info">
+                            <strong>Application Date:</strong>
+                            ${appliedDate}
+                        </p>
+
+                        <div>
+                            <strong>Status:</strong>
+
+                            <span class="application-status ${statusClass}">
+                                ${status}
+                            </span>
+                        </div>
+
+                        <div class="cover-letter">
+
+                            <strong>Cover Letter:</strong>
+
+                            <br><br>
+
+                            ${application.coverLetter || "No cover letter provided."}
+
+                        </div>
+
+                        <div class="application-actions"
+                             id="actions-${application.id}">
+                        </div>
+
+                    `;
+
+
+                    applicationsList.appendChild(card);
+
+
+                    // ==================================================
+                    // ACTION BUTTONS
+                    // ==================================================
+
+                    const actions =
+                        document.getElementById(
+                            `actions-${application.id}`
+                        );
+
+
+                    // Only Pending applications can be edited
+                    // or withdrawn.
+
+                    if (status.toLowerCase() === "pending") {
+
+                        const editButton =
+                            document.createElement("button");
+
+                        editButton.textContent =
+                            "Edit Application";
+
+                        editButton.className =
+                            "edit-btn";
+
+                        editButton.onclick = function () {
+
+                            window.location.href =
+                                "edit-application.html?id="
+                                + application.id;
+
+                        };
+
+
+                        const withdrawButton =
+                            document.createElement("button");
+
+                        withdrawButton.textContent =
+                            "Withdraw Application";
+
+                        withdrawButton.className =
+                            "withdraw-btn";
+
+                        withdrawButton.onclick = function () {
+
+                            withdrawApplication(
+                                application.id
+                            );
+
+                        };
+
+
+                        actions.appendChild(editButton);
+
+                        actions.appendChild(withdrawButton);
+                    }
+
+                });
+
+            })
+
+            .catch(error => {
+
+                console.error(
+                    "Error loading applications:",
+                    error
+                );
+
+                applicationsLoading.style.display = "none";
+
+                applicationsList.innerHTML = `
+
+                    <div class="application-message">
+
+                        <h3>Unable to load applications</h3>
+
+                        <p>
+                            ${error.message}
+                        </p>
+
+                    </div>
+
+                `;
+
+            });
+
+
+            // ==================================================
+            // WITHDRAW APPLICATION
+            // ==================================================
+
+            window.withdrawApplication =
+                function (applicationId) {
+
+                    const confirmed =
+                        confirm(
+                            "Are you sure you want to withdraw this application?"
+                        );
+
+
+                    if (!confirmed) {
+                        return;
+                    }
+
+
+                    fetch(
+                        "/applications/"
+                        + applicationId
+                        + "/withdraw",
+                        {
+
+                            method: "DELETE",
+
+                            headers: {
+                                "Authorization":
+                                    "Bearer " + token
+                            }
+
+                        }
+                    )
+
+                    .then(async response => {
+
+                        if (!response.ok) {
+
+                            const errorText =
+                                await response.text();
+
+                            throw new Error(
+                                errorText ||
+                                "Unable to withdraw application."
+                            );
+                        }
+
+                    })
+
+                    .then(() => {
+
+                        alert(
+                            "Application withdrawn successfully."
+                        );
+
+                        window.location.reload();
+
+                    })
+
+                    .catch(error => {
+
+                        console.error(
+                            "Withdraw error:",
+                            error
+                        );
+
+                        alert(
+                            error.message ||
+                            "Unable to withdraw application."
+                        );
+
+                    });
+
+                };
+
+        });
+
+    </script>
+
+</body>
+
+</html>
