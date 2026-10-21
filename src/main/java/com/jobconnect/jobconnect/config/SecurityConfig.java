@@ -210,7 +210,15 @@ public class SecurityConfig {
                 // EVERYTHING ELSE
                 // =========================================
                 .requestMatchers("/admin/**").hasRole("ADMIN")
-                .anyRequest().authenticated()
+
+             // Swagger UI and OpenAPI documentation
+             .requestMatchers(
+                 "/swagger-ui.html",
+                 "/swagger-ui/**",
+                 "/v3/api-docs/**"
+             ).permitAll()
+
+             .anyRequest().authenticated()
             )
             .exceptionHandling(exception -> exception
             	    .authenticationEntryPoint(jwtAuthenticationEntryPoint)

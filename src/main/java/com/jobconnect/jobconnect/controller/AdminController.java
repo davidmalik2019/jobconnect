@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.jobconnect.jobconnect.Application;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import com.jobconnect.jobconnect.Job;
 import com.jobconnect.jobconnect.dto.AdminRoleUpdateRequest;
 import com.jobconnect.jobconnect.dto.AdminStatisticsResponse;
@@ -55,6 +56,7 @@ public class AdminController {
     // =========================================
 
     @GetMapping("/statistics")
+    @SecurityRequirement(name = "bearerAuth")
     public ResponseEntity<?> getStatistics(
             Authentication authentication) {
 
@@ -140,9 +142,9 @@ public class AdminController {
     // =========================================
 
     @GetMapping("/users")
+    @SecurityRequirement(name = "bearerAuth")
     public ResponseEntity<?> getAllUsers(
             Authentication authentication) {
-
         // Check ADMIN role
 
         if (!authentication.getAuthorities()
@@ -192,6 +194,7 @@ public class AdminController {
     // =========================================
 
     @PutMapping("/users/{id}/role")
+    @SecurityRequirement(name = "bearerAuth")
     public ResponseEntity<?> updateUserRole(
 
             @PathVariable Long id,
@@ -306,6 +309,7 @@ public class AdminController {
  // =========================================
 
  @GetMapping("/jobs")
+ @SecurityRequirement(name = "bearerAuth")
  public ResponseEntity<?> getAllJobs(
          Authentication authentication) {
 
@@ -339,6 +343,7 @@ public class AdminController {
  // =========================================
 
  @GetMapping("/jobs/{id}")
+ @SecurityRequirement(name = "bearerAuth")
  public ResponseEntity<?> getAdminJobById(
 
          @PathVariable Long id,
@@ -378,6 +383,7 @@ public class AdminController {
  // =========================================
 
  @DeleteMapping("/jobs/{id}")
+ @SecurityRequirement(name = "bearerAuth")
  public ResponseEntity<?> deleteAdminJob(
 
          @PathVariable Long id,
@@ -426,7 +432,8 @@ public class AdminController {
 //ADMIN ONLY
 //=========================================
 
-@GetMapping("/applications")
+ @GetMapping("/applications")
+ @SecurityRequirement(name = "bearerAuth")
 public ResponseEntity<?> getAllApplications(
       Authentication authentication) {
 
@@ -453,6 +460,7 @@ public ResponseEntity<?> getAllApplications(
 //=========================================
 
 @GetMapping("/applications/{id}")
+@SecurityRequirement(name = "bearerAuth")
 public ResponseEntity<?> getAdminApplicationById(
       @PathVariable Long id,
       Authentication authentication) {
@@ -484,6 +492,7 @@ public ResponseEntity<?> getAdminApplicationById(
 //=========================================
 
 @DeleteMapping("/applications/{id}")
+@SecurityRequirement(name = "bearerAuth")
 public ResponseEntity<?> deleteAdminApplication(
       @PathVariable Long id,
       Authentication authentication) {

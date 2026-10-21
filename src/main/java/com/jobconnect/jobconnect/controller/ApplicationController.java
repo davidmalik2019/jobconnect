@@ -13,6 +13,8 @@ import com.jobconnect.jobconnect.Job;
 import com.jobconnect.jobconnect.repository.ApplicationRepository;
 import com.jobconnect.jobconnect.repository.JobRepository;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+
 @RestController
 @RequestMapping("/applications")
 @CrossOrigin
@@ -28,7 +30,7 @@ public class ApplicationController {
     // =========================================
     // SUBMIT APPLICATION
     // =========================================
-
+    @SecurityRequirement(name = "bearerAuth")
     @PostMapping
     public Application submitApplication(
             @RequestBody Application application,
@@ -122,7 +124,7 @@ public class ApplicationController {
     // =========================================
     // GET APPLICATIONS
     // =========================================
-
+    @SecurityRequirement(name = "bearerAuth")
     @GetMapping
     public List<Application> getAllApplications(
             Authentication authentication) {
@@ -166,6 +168,7 @@ public class ApplicationController {
     // =========================================
 
     @GetMapping("/my")
+    @SecurityRequirement(name = "bearerAuth")
     public List<Application> getMyApplications(
             Authentication authentication) {
 
@@ -182,6 +185,7 @@ public class ApplicationController {
     // =========================================
 
     @GetMapping("/{id}")
+    @SecurityRequirement(name = "bearerAuth")
     public Application getApplicationById(
             @PathVariable Long id,
             Authentication authentication) {
@@ -215,6 +219,7 @@ public class ApplicationController {
  // =========================================
 
  @PutMapping("/{id}")
+ @SecurityRequirement(name = "bearerAuth")
  public Application editApplication(
          @PathVariable Long id,
          @RequestBody Application updatedApplication,
@@ -292,6 +297,7 @@ public class ApplicationController {
 //=========================================
 
 @DeleteMapping("/{id}/withdraw")
+@SecurityRequirement(name = "bearerAuth")
 public void withdrawApplication(
       @PathVariable Long id,
       Authentication authentication) {
@@ -345,6 +351,7 @@ public void withdrawApplication(
     // =========================================
 
 @PutMapping("/{id}/accept")
+@SecurityRequirement(name = "bearerAuth")
 public Application acceptApplication(
         @PathVariable Long id,
         Authentication authentication) {
@@ -384,6 +391,7 @@ public Application acceptApplication(
     // =========================================
 
 @PutMapping("/{id}/reject")
+@SecurityRequirement(name = "bearerAuth")
 public Application rejectApplication(
         @PathVariable Long id,
         Authentication authentication) {

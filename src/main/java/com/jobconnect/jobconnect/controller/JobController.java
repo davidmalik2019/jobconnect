@@ -4,6 +4,8 @@ package com.jobconnect.jobconnect.controller;
 import com.jobconnect.jobconnect.Job;
 import com.jobconnect.jobconnect.repository.JobRepository;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
@@ -25,7 +27,7 @@ public class JobController {
     // =========================================
     // POST A NEW JOB
     // =========================================
-
+    @SecurityRequirement(name = "bearerAuth")
     @PostMapping
     public ResponseEntity<?> createJob(
             @RequestBody Job job,
@@ -56,8 +58,7 @@ public class JobController {
     // =========================================
     // GET ALL JOBS
     // =========================================
-
-    @GetMapping
+     @GetMapping
     public ResponseEntity<List<Job>> getAllJobs() {
 
         List<Job> jobs =
@@ -72,7 +73,7 @@ public class JobController {
     // =========================================
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getJobById(
+   public ResponseEntity<?> getJobById(
             @PathVariable Long id) {
 
         return jobRepository
@@ -87,7 +88,7 @@ public class JobController {
     // =========================================
     // GET JOBS POSTED BY CURRENT EMPLOYER
     // =========================================
-
+    @SecurityRequirement(name = "bearerAuth")
     @GetMapping("/my")
     public ResponseEntity<List<Job>> getMyJobs(
             Authentication authentication) {
@@ -113,6 +114,7 @@ public class JobController {
  // ==============================================
 
  @PutMapping("/{id}")
+ @SecurityRequirement(name = "bearerAuth")
  public ResponseEntity<?> updateJob(
          @PathVariable Long id,
          @RequestBody Job updatedJob,
@@ -176,6 +178,7 @@ public class JobController {
              );
  }
     @DeleteMapping("/{id}")
+    @SecurityRequirement(name = "bearerAuth")
     public ResponseEntity<?> deleteJob(
             @PathVariable Long id,
             Authentication authentication) {
