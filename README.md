@@ -137,10 +137,11 @@ For local development, create the database and configure the connection using yo
 
 Install:
 
-- Java JDK
+- Java JDK compatible with the project
 - MySQL Server
-- Maven, if not using the Maven Wrapper
 - Git
+
+Maven does not need to be installed separately when using the Maven Wrapper included in this repository.
 
 ### 1. Clone the repository
 
@@ -151,38 +152,51 @@ cd jobconnect
 
 ### 2. Configure MySQL
 
-Create the database named `jobconnect_db` if that matches your local configuration.
+Create the `jobconnect_db` database if that matches your application configuration.
 
-Configure the database URL, username, password, and other required application settings in your local configuration. Do not commit private credentials.
+Configure your local database URL, username, password, and any required JWT settings. Keep private credentials in your local configuration or environment variables. Never commit real passwords or secrets to GitHub.
 
 ### 3. Start the application
 
-From the project root, run:
+**Windows (Command Prompt):**
 
-```bash
-mvn spring-boot:run
+```bat
+mvnw.cmd spring-boot:run
 ```
 
-Alternatively, build the application:
+**Linux or macOS:**
 
 ```bash
-mvn clean package
+chmod +x mvnw
+./mvnw spring-boot:run
 ```
 
-Then run the generated JAR from the `target` directory, using the actual filename produced by the build:
+Ensure MySQL is running and the application configuration is correct before starting the application.
+
+### 4. Build the application
+
+**Windows:**
+
+```bat
+mvnw.cmd clean package
+```
+
+**Linux or macOS:**
 
 ```bash
-java -jar target/jobconnect-0.0.1-SNAPSHOT.jar
+./mvnw clean package
 ```
 
-Ensure the database is running and the application configuration is correct before starting the application.
+The packaged JAR will be generated in the `target` directory. Its exact filename depends on the project version and build configuration.
 
-### 4. Open the application
+### 5. Open the API documentation
 
-The default local address is:
+Once the application starts, open:
 
-- Application: http://localhost:8080
-- Swagger UI: http://localhost:8080/swagger-ui/index.html
+- **Application/API server:** http://localhost:8080
+- **Swagger UI:** http://localhost:8080/swagger-ui/index.html
+
+Use Swagger UI to inspect endpoints and test requests. Protected endpoints require the appropriate authentication token and permissions.
 
 ## Testing and Verification
 
